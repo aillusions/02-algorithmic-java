@@ -38,4 +38,20 @@ public class SortingTests {
         System.out.println("Sorted array: " + Arrays.toString(arr));
         Assert.assertEquals("[11, 12, 22, 25, 34, 64, 90]", Arrays.toString(arr));
     }
+
+    @Test
+    public void radixSort() {
+        int arr[] = {64, 34, 25, 12, 22, 11, 90};
+        RadixSort.radixSort(arr);
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+        Assert.assertEquals("[11, 12, 22, 25, 34, 64, 90]", Arrays.toString(arr));
+    }
+
+    @Test
+    public void bucketSort() {
+        int arr[] = {64, 34, 25, 12, 22, 11, 90};
+        BucketSort.bucketSort(arr);
+        System.out.println("Sorted array: " + Arrays.toString(arr));
+        Assert.assertEquals("[11, 12, 22, 25, 34, 64, 90]", Arrays.toString(arr));
+    }
 }
