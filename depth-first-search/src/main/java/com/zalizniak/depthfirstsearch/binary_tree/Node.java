@@ -1,10 +1,13 @@
-package com.zalizniak.depthfirstsearch;
+package com.zalizniak.depthfirstsearch.binary_tree;
 
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.ArrayList;
 
+/**
+ * Node of a binary tree
+ */
 @Data
 public class Node {
 

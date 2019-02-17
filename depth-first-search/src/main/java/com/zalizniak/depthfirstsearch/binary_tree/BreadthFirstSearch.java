@@ -1,11 +1,13 @@
-package com.zalizniak.depthfirstsearch;
+package com.zalizniak.depthfirstsearch.binary_tree;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * BFS on a binary tree
+ */
 @Slf4j
 public class BreadthFirstSearch {
 
@@ -25,22 +27,23 @@ public class BreadthFirstSearch {
         }
 
         Queue<Node> queue = new LinkedList<>();
-        ArrayList<Node> explored = new ArrayList<>();
+        //ArrayList<Node> explored = new ArrayList<>();
         queue.add(startNode);
-        explored.add(startNode);
+        //explored.add(startNode);
 
         while (!queue.isEmpty()) {
             Node current = queue.remove();
             if (current.equals(goalNode)) {
-                log.info("explored: " + explored);
+                //log.info("explored: " + explored);
                 return true;
             } else {
-                if (current.getChildren().isEmpty())
+                if (current.getChildren().isEmpty()) {
                     return false;
-                else
+                } else {
                     queue.addAll(current.getChildren());
+                }
             }
-            explored.add(current);
+            //explored.add(current);
         }
 
         return false;
