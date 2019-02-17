@@ -2,7 +2,11 @@ package com.zalizniak.numbermanipulations;
 
 public class ReverseNumber {
 
-    public  static int reverse(int num) {
+    public static boolean palindrome(int num) {
+        return reverse(num) == num;
+    }
+
+    public static int reverse(int num) {
         int reversed = 0;
 
         while (num != 0) {

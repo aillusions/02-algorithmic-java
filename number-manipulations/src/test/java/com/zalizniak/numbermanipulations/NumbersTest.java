@@ -9,4 +9,10 @@ public class NumbersTest {
     public void testReverse() {
         Assert.assertEquals(4321, ReverseNumber.reverse(1234));
     }
+
+    @Test
+    public void testPalindrome() {
+        Assert.assertTrue(ReverseNumber.palindrome(12344321));
+        Assert.assertFalse(ReverseNumber.palindrome(12345678));
+    }
 }
