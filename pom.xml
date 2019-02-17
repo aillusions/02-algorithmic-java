@@ -12,6 +12,7 @@
         <module>graph-traversal</module>
         <module>graph-shortest-path</module>
         <module>collection-sorting</module>
+        <module>collection-search</module>
     </modules>
 
 </project>
