@@ -17,21 +17,12 @@ public class BreadthFirstSearchTest {
         Node node60 = new Node(60);
         Node node70 = new Node(70);
 
-        node40.addNeighbour(node10);
-        node40.addNeighbour(node20);
-
-        node10.addNeighbour(node30);
-
-        node20.addNeighbour(node10);
-        node20.addNeighbour(node30);
-        node20.addNeighbour(node60);
-        node20.addNeighbour(node50);
-
-        node30.addNeighbour(node60);
-
-        node60.addNeighbour(node70);
-
-        node50.addNeighbour(node70);
+        node40.addNeighbours(node10, node20);
+        node10.addNeighbours(node30);
+        node20.addNeighbours(node10, node30, node60, node50);
+        node30.addNeighbours(node60);
+        node60.addNeighbours(node70);
+        node50.addNeighbours(node70);
 
         log.info("The BFS traversal of the graph is ");
 

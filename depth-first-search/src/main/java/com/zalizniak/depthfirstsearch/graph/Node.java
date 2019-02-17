@@ -1,6 +1,7 @@
 package com.zalizniak.depthfirstsearch.graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Node {
@@ -14,8 +15,8 @@ public class Node {
         this.neighbours = new ArrayList<>();
     }
 
-    public void addNeighbour(Node neighbourNode) {
-        this.neighbours.add(neighbourNode);
+    public void addNeighbours(Node...neighbourNode) {
+        this.neighbours.addAll(Arrays.asList(neighbourNode));
     }
 
     public List<Node> getNeighbours() {

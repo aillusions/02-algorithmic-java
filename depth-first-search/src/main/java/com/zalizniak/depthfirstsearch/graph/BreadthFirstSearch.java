@@ -28,13 +28,12 @@ public class BreadthFirstSearch {
             log.info(element.data + "\t");
             List<Node> neighbours = element.getNeighbours();
 
-            for (int i = 0; i < neighbours.size(); i++) {
-                Node n = neighbours.get(i);
-                if (n != null && !n.visited) {
+            neighbours.forEach(n -> {
+                if (!n.visited) {
                     queue.add(n);
                     n.visited = true;
                 }
-            }
+            });
         }
     }
 }
