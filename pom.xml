@@ -13,6 +13,7 @@
         <module>graph-shortest-path</module>
         <module>collection-sorting</module>
         <module>collection-search</module>
+        <module>number-manipulations</module>
     </modules>
 
 </project>
