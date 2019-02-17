@@ -4,15 +4,16 @@ public class BubbleSort {
 
     void bubbleSort(int arr[]) {
 
-        int n = arr.length;
+        for (int idx = 0; idx < arr.length - 1; idx++) {
 
-        for (int i = 0; i < n - 1; i++)
-            for (int j = 0; j < n - i - 1; j++)
-                if (arr[j] > arr[j + 1]) {
-                    // swap arr[j+1] and arr[i]
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+            for (int innerIdx = 0; innerIdx < arr.length - idx - 1; innerIdx++) {
+
+                if (arr[innerIdx] > arr[innerIdx + 1]) {
+                    int temp = arr[innerIdx];
+                    arr[innerIdx] = arr[innerIdx + 1];
+                    arr[innerIdx + 1] = temp;
                 }
+            }
+        }
     }
 }
