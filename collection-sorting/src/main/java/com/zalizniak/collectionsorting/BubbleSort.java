@@ -1,5 +1,7 @@
 package com.zalizniak.collectionsorting;
 
+import java.util.stream.IntStream;
+
 public class BubbleSort {
 
     void bubbleSort(int arr[]) {
@@ -15,5 +17,21 @@ public class BubbleSort {
                 }
             }
         }
+    }
+
+    /**
+     * time complexity O(n^2)
+     * space complexity O(1)
+     */
+    void bubbleSortStream(Integer[] arr) {
+        IntStream.range(0, arr.length - 1)
+                .flatMap(i -> IntStream.range(1, arr.length - i))
+                .forEach(j -> {
+                    if (arr[j - 1] > arr[j]) {
+                        int temp = arr[j];
+                        arr[j] = arr[j - 1];
+                        arr[j - 1] = temp;
+                    }
+                });
     }
 }
