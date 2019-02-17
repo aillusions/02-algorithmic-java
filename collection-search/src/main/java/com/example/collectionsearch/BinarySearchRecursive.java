@@ -1,6 +1,12 @@
 package com.example.collectionsearch;
 
-public class BinarySearch {
+/**
+ * Array must be sorted first
+ *
+ * Runs in logarithmic time O(log n)
+ * Auxiliary Space: O(Logn) recursion call stack space
+ */
+public class BinarySearchRecursive {
 
     public static int binarySearch(int arr[], int x) {
         return binarySearch( arr, 0, arr.length - 1, x);

@@ -13,9 +13,16 @@ public class SearchTests {
     }
 
     @Test
-    public void testBinary() {
+    public void testBinaryRecursive() {
         int arr[] = {2, 3, 4, 10, 40};
-        int result = BinarySearch.binarySearch(arr, 10);
+        int result = BinarySearchRecursive.binarySearch(arr, 10);
+        Assert.assertEquals(3, result);
+    }
+
+    @Test
+    public void testBinaryIterative() {
+        int arr[] = {2, 3, 4, 10, 40};
+        int result = BinarySearchIterative.binarySearch(arr, 10);
         Assert.assertEquals(3, result);
     }
 }
