@@ -19,19 +19,19 @@ public class BreadthFirstSearch {
 
     public boolean compute() {
 
-        if (this.startNode.equals(goalNode)) {
+        if (startNode.equals(goalNode)) {
             log.info("Goal Node Found!");
             log.info("startNode: " + startNode);
         }
 
         Queue<Node> queue = new LinkedList<>();
         ArrayList<Node> explored = new ArrayList<>();
-        queue.add(this.startNode);
+        queue.add(startNode);
         explored.add(startNode);
 
         while (!queue.isEmpty()) {
             Node current = queue.remove();
-            if (current.equals(this.goalNode)) {
+            if (current.equals(goalNode)) {
                 log.info("explored: " + explored);
                 return true;
             } else {
@@ -44,6 +44,5 @@ public class BreadthFirstSearch {
         }
 
         return false;
-
     }
 }

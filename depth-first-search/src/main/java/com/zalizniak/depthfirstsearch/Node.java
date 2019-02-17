@@ -1,6 +1,7 @@
 package com.zalizniak.depthfirstsearch;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,11 @@ public class Node {
     public String stationName;
     //    An arraylist containing a list of Nodes that
     //    This node is directly connected to - It's child nodes.
+
+    @ToString.Exclude
     Node leftChild;
+
+    @ToString.Exclude
     Node rightChild;
 
     public Node(String stationName, Node firstChild, Node secondChild) {
@@ -29,12 +34,5 @@ public class Node {
             childNodes.add(rightChild);
         }
         return childNodes;
-    }
-
-    //    An auxiliary function which allows
-    //    us to remove any child nodes from
-    //    our list of child nodes.
-    public boolean removeChild(Node n) {
-        return false;
     }
 }

@@ -8,14 +8,14 @@ public class BreadthFirstSearchTest {
 
     @Test
     public void testSearch() {
-        Node station1 = new Node("Westminster", null, null);
-        Node station2 = new Node("Waterloo", station1, null);
-        Node station3 = new Node("Trafalgar Square", station1, station2);
-        Node station4 = new Node("Canary Wharf", station2, station3);
-        Node station5 = new Node("London Bridge", station4, station3);
-        Node station6 = new Node("Tottenham Court Road", station5, station4);
+        Node Westminster = new Node("Westminster", null, null);
+        Node Waterloo = new Node("Waterloo", Westminster, null);
+        Node Trafalgar_Square = new Node("Trafalgar Square", Westminster, Waterloo);
+        Node Canary_Wharf = new Node("Canary Wharf", Waterloo, Trafalgar_Square);
+        Node London_Bridge = new Node("London Bridge", Canary_Wharf, Trafalgar_Square);
+        Node Tottenham_Court_Road = new Node("Tottenham Court Road", London_Bridge, Canary_Wharf);
 
-        BreadthFirstSearch bfs = new BreadthFirstSearch(station6, station1);
+        BreadthFirstSearch bfs = new BreadthFirstSearch(Tottenham_Court_Road, Westminster);
 
         if (bfs.compute()) {
             log.info("Path Found!");
