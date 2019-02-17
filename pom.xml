@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>depth-first-search</module>
+        <module>graph-traversal</module>
+        <module>graph-shortest-path</module>
     </modules>
 
 </project>
