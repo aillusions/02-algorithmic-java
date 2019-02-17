@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class BubbleSort {
 
-    void bubbleSort(int arr[]) {
+    static void bubbleSort(int arr[]) {
 
         for (int idx = 0; idx < arr.length - 1; idx++) {
 
@@ -23,7 +23,7 @@ public class BubbleSort {
      * time complexity O(n^2)
      * space complexity O(1)
      */
-    void bubbleSortStream(Integer[] arr) {
+    static void bubbleSortStream(Integer[] arr) {
         IntStream.range(0, arr.length - 1)
                 .flatMap(i -> IntStream.range(1, arr.length - i))
                 .forEach(j -> {
