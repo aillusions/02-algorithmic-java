@@ -15,6 +15,7 @@
         <module>collection-search</module>
         <module>number-manipulations</module>
         <module>string-manipulations</module>
+        <module>algoexpert</module>
     </modules>
 
 </project>
