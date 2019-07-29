@@ -13,7 +13,7 @@ public class TwoSumTest extends TestCase {
     //  private final int[] input = new int[]{3, 5, 2, -4, 8, 11};
 
     public void testTwoSum() {
-        Assert.assertArrayEquals(new int[0], TwoSum.findTwoSums(new int[0]));
+        Assert.assertArrayEquals(new int[0][0], TwoSum.findTwoSums(new int[0], 0));
     }
 
 }
