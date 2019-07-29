@@ -1,15 +1,14 @@
 package com.zalizniak;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TwoSum {
 
     /**
-     * 1 - x x -- 0,0 0,1 0,2
-     * 2 - - x -- 1,0 1,1 1,2
-     * 3 - - -
-     * _ 1 2 3
+     *
      */
     public static int[] findTwoSums(int[] nums, int target) {
 
@@ -25,5 +24,17 @@ public class TwoSum {
         }
 
         return rvList.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public static int[] twoSumMap(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
     }
 }

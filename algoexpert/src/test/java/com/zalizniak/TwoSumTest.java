@@ -21,4 +21,8 @@ public class TwoSumTest extends TestCase {
         Assert.assertArrayEquals(new int[]{1, 2, 3, 5}, TwoSum.findTwoSums(input, 7));
     }
 
+    public void testTwoSumMap() {
+        Assert.assertArrayEquals(new int[]{1, 2, 3, 5}, TwoSum.twoSumMap(input, 7));
+    }
+
 }
