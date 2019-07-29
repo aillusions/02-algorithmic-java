@@ -11,13 +11,13 @@ public class TwoSum {
      * 3 - - -
      * _ 1 2 3
      */
-    public static int[][] findTwoSums(int[] inputArray, int sum) {
+    public static int[][] findTwoSums(int[] nums, int target) {
 
         List<int[]> rvList = new ArrayList<int[]>();
 
-        for (int i = 0; i < inputArray.length; i++) {
-            for (int j = 0; j < inputArray.length; j++) {
-                if (j > i && inputArray[i] + inputArray[j] == sum) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (j > i && nums[i] + nums[j] == target) {
                     rvList.add(new int[]{i, j});
                 }
             }
@@ -26,7 +26,7 @@ public class TwoSum {
         int[][] rv = new int[rvList.size()][];
         for (int i = 0; i < rvList.size(); i++) {
             int[] idxs = rvList.get(i);
-            rv[i] = new int[]{inputArray[idxs[0]], inputArray[idxs[1]]};
+            rv[i] = new int[]{nums[idxs[0]], nums[idxs[1]]};
         }
 
         return rv;
