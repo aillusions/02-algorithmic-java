@@ -1,8 +1,6 @@
 package com.zalizniak;
 
 import junit.framework.TestCase;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.collection.IsArrayContainingInAnyOrder;
 import org.junit.Assert;
 
 /**
@@ -16,11 +14,11 @@ public class TwoSumTest extends TestCase {
 
 
     public void testEmptyInput() {
-        Assert.assertArrayEquals(new Integer[0], TwoSum.findTwoSums(emptyInput, 0));
+        Assert.assertArrayEquals(new int[0][0], TwoSum.findTwoSums(emptyInput, 0));
     }
 
     public void testTwoSum() {
-        MatcherAssert.assertThat(TwoSum.findTwoSums(input, 7), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(11, -4, 2, 5));
+        Assert.assertArrayEquals(new int[][]{{5, 2}, {-4, 11}}, TwoSum.findTwoSums(input, 7));
     }
 
 }
