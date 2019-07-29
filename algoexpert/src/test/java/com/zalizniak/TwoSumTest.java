@@ -14,11 +14,11 @@ public class TwoSumTest extends TestCase {
 
 
     public void testEmptyInput() {
-        Assert.assertArrayEquals(new int[0][0], TwoSum.findTwoSums(emptyInput, 0));
+        Assert.assertArrayEquals(new int[0], TwoSum.findTwoSums(emptyInput, 0));
     }
 
     public void testTwoSum() {
-        Assert.assertArrayEquals(new int[][]{{5, 2}, {-4, 11}}, TwoSum.findTwoSums(input, 7));
+        Assert.assertArrayEquals(new int[]{1, 2, 3, 5}, TwoSum.findTwoSums(input, 7));
     }
 
 }
