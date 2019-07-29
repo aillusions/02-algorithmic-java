@@ -3,6 +3,9 @@ package com.zalizniak;
 public class FibonacciSeries {
 
 
+    /**
+     * Slow of stack-overflow prone
+     */
     public static int getNthFib(int n) {
 
         if (n == 1) {
