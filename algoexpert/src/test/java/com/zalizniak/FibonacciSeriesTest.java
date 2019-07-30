@@ -30,5 +30,7 @@ public class FibonacciSeriesTest extends TestCase {
         Assert.assertEquals(13, FibonacciSeries.getNthFib2(8));
 
         Assert.assertEquals(63245986, FibonacciSeries.getNthFib2(40));
+
+        Assert.assertEquals(1836311903, FibonacciSeries.getNthFib2(47));
     }
 }
