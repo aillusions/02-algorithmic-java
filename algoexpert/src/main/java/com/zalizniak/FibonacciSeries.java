@@ -8,6 +8,8 @@ public class FibonacciSeries {
 
     /**
      * Slow of stack-overflow prone
+     * O(2^n) - time complexity
+     * O(n) - space complexity
      */
     public static int getNthFib(int n) {
 
@@ -46,4 +48,6 @@ public class FibonacciSeries {
 
         return n_0;
     }
+
+
 }
