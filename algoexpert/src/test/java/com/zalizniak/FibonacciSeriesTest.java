@@ -18,4 +18,17 @@ public class FibonacciSeriesTest extends TestCase {
 
         Assert.assertEquals(63245986, FibonacciSeries.getNthFib(40));
     }
+
+    public void test2() {
+        Assert.assertEquals(0, FibonacciSeries.getNthFib2(1));
+        Assert.assertEquals(1, FibonacciSeries.getNthFib2(2));
+        Assert.assertEquals(1, FibonacciSeries.getNthFib2(3));
+        Assert.assertEquals(2, FibonacciSeries.getNthFib2(4));
+        Assert.assertEquals(3, FibonacciSeries.getNthFib2(5));
+        Assert.assertEquals(5, FibonacciSeries.getNthFib2(6));
+        Assert.assertEquals(8, FibonacciSeries.getNthFib2(7));
+        Assert.assertEquals(13, FibonacciSeries.getNthFib2(8));
+
+        Assert.assertEquals(63245986, FibonacciSeries.getNthFib2(40));
+    }
 }
