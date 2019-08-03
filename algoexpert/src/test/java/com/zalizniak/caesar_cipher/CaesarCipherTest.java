@@ -37,4 +37,14 @@ public class CaesarCipherTest {
         assertEquals('z', CaesarCipher.shiftChar('z', 26));
     }
 
+    @Test
+    public void shouldEncode() {
+        assertEquals("bcd", CaesarCipher.encode("abc", 1));
+    }
+
+    @Test
+    public void shouldDecode() {
+        assertEquals("abc", CaesarCipher.decode("bcd", 1));
+    }
+
 }

@@ -53,11 +53,17 @@ public class CaesarCipher {
     private static final int ALPHABET_MAX_IDX = ALPHABET.length - 1;
 
     public static String encode(String plainText, int shift) {
-        return "";
+
+        char[] rv = plainText.toCharArray();
+        for (int i = 0; i < rv.length; i++) {
+            rv[i] = shiftChar(rv[i], shift);
+        }
+
+        return new String(rv);
     }
 
-    public static String decode(String ciperText, int shift) {
-        return "";
+    public static String decode(String cipherText, int shift) {
+        return encode(cipherText, -shift);
     }
 
     public static char shiftChar(char ch, int shift) {
