@@ -43,4 +43,27 @@ public class LargestThreeElementsInArray {
 
         return rv;
     }
+
+    public static Integer[] findBiggestThreeNumbersNoSort2(int[] in) {
+
+        int i, first, second, third;
+        third = first = second = Integer.MIN_VALUE;
+
+        for (i = 0; i < in.length; i++) {
+            if (in[i] > first) {
+                third = second;
+                second = first;
+                first = in[i];
+            } else if (in[i] > second) {
+                third = second;
+                second = in[i];
+            } else if (in[i] > third) {
+                third = in[i];
+            }
+        }
+
+        return new Integer[]{
+                first, second, third
+        };
+    }
 }
