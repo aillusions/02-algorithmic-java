@@ -1,7 +1,6 @@
 package com.zalizniak;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class FindClosestNumber {
 
