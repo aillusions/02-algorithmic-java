@@ -38,6 +38,6 @@ public class JavaOOTBSortsTest {
 
     @Test
     public void shouldSortListParallel() {
-        LIST.parallelStream().sorted().collect(Collectors.toList());
+        LIST.parallelStream().sorted(INTEGER_COMPARATOR).collect(Collectors.toList());
     }
 }
