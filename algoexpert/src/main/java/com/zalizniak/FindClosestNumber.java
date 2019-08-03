@@ -1,5 +1,8 @@
 package com.zalizniak;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class FindClosestNumber {
 
     public static int getClosest(int given, int[] array) {
@@ -17,5 +20,16 @@ public class FindClosestNumber {
         }
 
         return rv;
+    }
+
+    public static int getClosestSort(int given, int[] array) {
+        Integer[] integerArray = new Integer[array.length];
+        for (int i = 0; i < array.length; i++) {
+            integerArray[i] = array[i];
+        }
+
+        Arrays.sort(integerArray, (a, b) -> Math.abs(given - a) - Math.abs(given - b));
+
+        return integerArray[0];
     }
 }
