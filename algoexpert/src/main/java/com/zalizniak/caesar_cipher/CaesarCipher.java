@@ -67,7 +67,12 @@ public class CaesarCipher {
     }
 
     public static char shiftChar(char ch, int shift) {
-        return NORM_IDX_CHARS.get(shiftIdx(NORM_CHAR_INDEXES.get(ch), shift));
+        Integer idx = NORM_CHAR_INDEXES.get(ch);
+        if (idx == null) {
+            return ch;
+        }
+
+        return NORM_IDX_CHARS.get(shiftIdx(idx, shift));
     }
 
     public static int shiftIdx(int positionIdx, int shift) {
