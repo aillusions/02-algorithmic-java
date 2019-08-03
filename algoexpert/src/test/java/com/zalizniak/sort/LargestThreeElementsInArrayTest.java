@@ -1,16 +1,27 @@
 package com.zalizniak.sort;
 
-import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.collection.IsArrayContainingInAnyOrder;
 import org.junit.Test;
 
 public class LargestThreeElementsInArrayTest {
 
     @Test
-    public void shouldFindTreeLargest() {
-        Assert.assertArrayEquals(new int[]{3, 2, 1}, LargestThreeElementsInArray.findBiggestThreeNumbers(new int[]{3, 2, 1}));
+    public void shouldFindTreeLargestBySort() {
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersBySort(new int[]{3, 2, 1}), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{3, 2, 1}));
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersBySort(new int[]{1, 2, 3}), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{3, 2, 1}));
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersBySort(new int[]{1, 2, 3, 4, 5, 6}), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{6, 5, 4}));
 
-        Assert.assertArrayEquals(new int[]{3, 2, 1}, LargestThreeElementsInArray.findBiggestThreeNumbers(new int[]{1, 2, 3}));
-
-        Assert.assertArrayEquals(new int[]{6, 5, 4}, LargestThreeElementsInArray.findBiggestThreeNumbers(new int[]{1, 2, 3, 4, 5, 6}));
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersBySort(new int[]{-1, -2, -3, -4, -5, -6}), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{-1, -2, -3}));
     }
+
+    @Test
+    public void shouldFindTreeLargestNoSort() {
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersNoSort(new int[]{3, 2, 1}, 3), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{3, 2, 1}));
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersNoSort(new int[]{1, 2, 3}, 3), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{3, 2, 1}));
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersNoSort(new int[]{1, 2, 3, 4, 5, 6}, 3), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{6, 5, 4}));
+
+        MatcherAssert.assertThat(LargestThreeElementsInArray.findBiggestThreeNumbersNoSort(new int[]{-1, -2, -3, -4, -5, -6}, 3), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{-1, -2, -3}));
+    }
+
 }
