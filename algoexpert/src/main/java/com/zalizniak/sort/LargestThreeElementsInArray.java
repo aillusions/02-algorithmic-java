@@ -19,25 +19,24 @@ public class LargestThreeElementsInArray {
         return intermediate.subList(0, 3).toArray(new Integer[3]);
     }
 
-    public static Integer[] findBiggestThreeNumbersNoSort(int[] in, int biggestN) {
+    public static Integer[] findBiggestThreeNumbersNoSort(int[] in) {
 
-        Integer[] rv = new Integer[biggestN];
+        Integer[] rv = new Integer[]{
+                Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE
+        };
 
         int minRvIdx = 0;
         for (int i = 0; i < in.length; i++) {
 
             // Find minimal in array of return values
-            for (int j = 0; j < biggestN; j++) {
-                if (rv[j] == null) {
-                    minRvIdx = j;
-                    break;
-                } else if (rv[j] < rv[minRvIdx]) {
+            for (int j = 0; j < 3; j++) {
+                if (rv[j] < rv[minRvIdx]) {
                     minRvIdx = j;
                 }
             }
 
             // Replace minimal
-            if (rv[minRvIdx] == null || in[i] > rv[minRvIdx]) {
+            if (in[i] > rv[minRvIdx]) {
                 rv[minRvIdx] = in[i];
             }
         }
