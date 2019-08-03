@@ -74,15 +74,6 @@ public class CaesarCipher {
         assert positionIdx >= 0 : " positionIdx too small";
         assert positionIdx <= ALPHABET_MAX_IDX : " positionIdx too large";
 
-        int rvAbsolute = positionIdx + shift;
-        int rv;
-
-        if (rvAbsolute > ALPHABET_MAX_IDX) {
-            rv = rvAbsolute % ALPHABET_LENGTH;
-        } else {
-            rv = rvAbsolute;
-        }
-
-        return rv;
+        return (positionIdx + shift) % ALPHABET_LENGTH;
     }
 }
