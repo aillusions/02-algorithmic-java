@@ -1,4 +1,4 @@
-package com.zalizniak.sort;
+package com.zalizniak;
 
 import java.util.ArrayList;
 import java.util.Comparator;
