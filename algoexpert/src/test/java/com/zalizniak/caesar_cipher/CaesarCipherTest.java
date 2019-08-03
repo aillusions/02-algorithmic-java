@@ -30,4 +30,11 @@ public class CaesarCipherTest {
         assertEquals(0, CaesarCipher.shiftIdx(0, 26));
     }
 
+    @Test
+    public void shouldShiftChar() {
+        assertEquals('e', CaesarCipher.shiftChar('a', 4));
+        assertEquals('a', CaesarCipher.shiftChar('z', 1));
+        assertEquals('z', CaesarCipher.shiftChar('z', 26));
+    }
+
 }

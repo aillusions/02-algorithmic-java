@@ -1,12 +1,14 @@
 package com.zalizniak.caesar_cipher;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Method in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.
  * The method is named after Julius Caesar, who used it in his private correspondence.
  */
 public class CaesarCipher {
-
 
     private static final char[] ALPHABET = {
             'a', // 0
@@ -37,6 +39,16 @@ public class CaesarCipher {
             'z'  // 25
     };
 
+    private static Map<Character, Integer> NORM_CHAR_INDEXES = new HashMap<>();
+    private static Map<Integer, Character> NORM_IDX_CHARS = new HashMap<>();
+
+    static {
+        for (int i = 0; i < ALPHABET.length; i++) {
+            NORM_CHAR_INDEXES.put(ALPHABET[i], i);
+            NORM_IDX_CHARS.put(i, ALPHABET[i]);
+        }
+    }
+
     private static final int ALPHABET_LENGTH = ALPHABET.length;
     private static final int ALPHABET_MAX_IDX = ALPHABET.length - 1;
 
@@ -48,9 +60,9 @@ public class CaesarCipher {
         return "";
     }
 
-    // public static char shiftChar(char ch, int shift) {
-    //     return ch + shift;
-    // }
+    public static char shiftChar(char ch, int shift) {
+        return NORM_IDX_CHARS.get(shiftIdx(NORM_CHAR_INDEXES.get(ch), shift));
+    }
 
     public static int shiftIdx(int positionIdx, int shift) {
         assert positionIdx >= 0 : " positionIdx too small";
