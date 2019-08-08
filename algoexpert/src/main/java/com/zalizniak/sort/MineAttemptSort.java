@@ -12,7 +12,7 @@ public class MineAttemptSort {
     /**
      * In Bubble Sort, n-1 comparisons will be done in the 1st pass, n-2 in 2nd pass, n-3 in 3rd pass and so on.
      * So the total number of comparisons will be:
-     *
+     * <p>
      * (n-1) + (n-2) + (n-3) + ..... + 3 + 2 + 1
      * Sum = n(n-1)/2
      * i.e O(n2)
@@ -26,6 +26,28 @@ public class MineAttemptSort {
                     in[i + 1] = tmp;
                 }
             }
+        }
+
+        return in;
+    }
+
+    public static Integer[] selectionSort(Integer[] in) {
+
+        for (int i = 0; i < in.length; i++) {
+
+            int smallestVal = in[i];
+            int smallestIdx = i;
+
+            for (int j = i + 1; j < in.length; j++) {
+                if (smallestVal > in[j]) {
+                    smallestVal = in[j];
+                    smallestIdx = j;
+                }
+            }
+
+            int tmp = in[i];
+            in[i] = in[smallestIdx];
+            in[smallestIdx] = tmp;
         }
 
         return in;
