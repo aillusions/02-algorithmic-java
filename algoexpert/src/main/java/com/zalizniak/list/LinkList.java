@@ -40,9 +40,9 @@ public class LinkList {
 
         LinkedNode newItem = new LinkedNode(value);
 
-        if (head == null) {
+        if (position == 0) {
+            newItem.next = head;
             head = newItem;
-            size += 1;
         } else {
             LinkedNode prevNode = getNode(position - 1);
             if (prevNode.next != null) {
@@ -50,8 +50,9 @@ public class LinkList {
             }
 
             prevNode.next = newItem;
-            size += 1;
         }
+
+        size += 1;
     }
 
     public void remove(int position) {
