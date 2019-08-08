@@ -39,3 +39,12 @@ Red-Black Tree - underline structure in TreeSet
 
 AVL - re-balancing with every modification, so it's not so good for insertions / removals but very good for search.
 Red-Black tree is better for general use case
+
+
+Traversal is a process to visit all the nodes of a tree and may print their values too
+
+There are three ways which we use to traverse a tree −
+
+In-order Traversal
+Pre-order Traversal
+Post-order Traversal

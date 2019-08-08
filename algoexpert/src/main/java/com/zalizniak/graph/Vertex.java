@@ -15,10 +15,10 @@ public class Vertex {
         vertices.addAll(Arrays.asList(nodes));
     }
 
-    public static Set<Vertex> depthFirstTraversal(Vertex root) {
+    public Set<Vertex> depthFirstTraversal() {
         Set<Vertex> visited = new LinkedHashSet<>();
         Stack<Vertex> stack = new Stack<>();
-        stack.push(root);
+        stack.push(this);
         while (!stack.isEmpty()) {
             Vertex vertex = stack.pop();
             if (!visited.contains(vertex)) {
@@ -29,6 +29,25 @@ public class Vertex {
             }
         }
         return visited;
+    }
+
+    public Vertex depthFirstSearch(Integer search) {
+        Set<Vertex> visited = new LinkedHashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+        stack.push(this);
+        while (!stack.isEmpty()) {
+            Vertex vertex = stack.pop();
+            if (vertex.label.equals(search)) {
+                return vertex;
+            }
+            if (!visited.contains(vertex)) {
+                visited.add(vertex);
+                for (Vertex v : vertex.vertices) {
+                    stack.push(v);
+                }
+            }
+        }
+        return null;
     }
 
     @Override

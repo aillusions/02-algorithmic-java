@@ -1,6 +1,7 @@
 package com.zalizniak.graph;
 
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class VertexTest {
@@ -31,6 +32,9 @@ public class VertexTest {
         n1.add(n2);
         n2.add(n1, n3, n4);
 
-        System.out.println(Vertex.depthFirstTraversal(n0));
+        System.out.println(n0.depthFirstTraversal());
+
+        Assert.assertNull(n0.depthFirstSearch(10));
+        Assert.assertNotNull(n0.depthFirstSearch(4));
     }
 }
