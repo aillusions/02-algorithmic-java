@@ -1,16 +1,21 @@
 package com.zalizniak.graph;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 public class Vertex {
 
-    protected String label;
+    protected Integer label;
     protected List<Vertex> vertices = new LinkedList<>();
 
-    public Vertex(String label) {
+    public Vertex(Integer label) {
         this.label = label;
+    }
+
+    public void add(Vertex... nodes) {
+        vertices.addAll(Arrays.asList(nodes));
     }
 
     @Override
