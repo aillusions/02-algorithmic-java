@@ -1,14 +1,11 @@
 package com.zalizniak.graph;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Vertex {
 
-    protected Integer label;
-    protected List<Vertex> vertices = new LinkedList<>();
+    public Integer label;
+    public List<Vertex> vertices = new LinkedList<>();
 
     public Vertex(Integer label) {
         this.label = label;
@@ -16,6 +13,22 @@ public class Vertex {
 
     public void add(Vertex... nodes) {
         vertices.addAll(Arrays.asList(nodes));
+    }
+
+    public static Set<Vertex> depthFirstTraversal(Vertex root) {
+        Set<Vertex> visited = new LinkedHashSet<>();
+        Stack<Vertex> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Vertex vertex = stack.pop();
+            if (!visited.contains(vertex)) {
+                visited.add(vertex);
+                for (Vertex v : vertex.vertices) {
+                    stack.push(v);
+                }
+            }
+        }
+        return visited;
     }
 
     @Override
@@ -29,5 +42,10 @@ public class Vertex {
     @Override
     public int hashCode() {
         return Objects.hash(label);
+    }
+
+    @Override
+    public String toString() {
+        return label.toString();
     }
 }
