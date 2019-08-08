@@ -42,15 +42,8 @@ public class LinkedList {
             return;
         }
 
-        LinkedNode itItem = head;
-        int itIdx = -1;
-
-        while (itIdx != position - 1) {
-            itItem = itItem.next;
-            itIdx++;
-        }
-
-        itItem.next = newItem;
+        getNode(position - 1).next = newItem;
+        size += 1;
     }
 
     public void remove(int position) {
