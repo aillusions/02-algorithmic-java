@@ -10,6 +10,15 @@ public class MineAttemptSort {
     }
 
     public static Integer[] sort(Integer[] in) {
-        return referenceImpl(in);
+        for (int j = 0; j < in.length - 1; j++) {
+            for (int i = 0; i < in.length - 1; i++) {
+                if (in[i] > in[i + 1]) {
+                    Integer tmp = in[i];
+                    in[i] = in[i + 1];
+                    in[i + 1] = tmp;
+                }
+            }
+        }
+        return in;
     }
 }
