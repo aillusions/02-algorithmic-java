@@ -1,10 +1,14 @@
 package com.zalizniak.list;
 
-public class LinkedList {
+public class LinkList {
 
     private LinkedNode head;
 
     private int size = 0;
+
+    public int size() {
+        return size;
+    }
 
     public Integer get(int position) {
         assertPosition(position);
@@ -39,15 +43,30 @@ public class LinkedList {
         if (head == null) {
             head = newItem;
             size += 1;
-            return;
-        }
+        } else {
+            LinkedNode prevNode = getNode(position - 1);
+            if (prevNode.next != null) {
+                newItem.next = prevNode.next;
+            }
 
-        getNode(position - 1).next = newItem;
-        size += 1;
+            prevNode.next = newItem;
+            size += 1;
+        }
     }
 
     public void remove(int position) {
+        assertPosition(position);
 
+        if (position == 0) {
+            LinkedNode nodeToRemove = getNode(position);
+            head = nodeToRemove.next;
+        } else {
+            LinkedNode prevNode = getNode(position - 1);
+            LinkedNode nodeToRemove = prevNode.next;
+            prevNode.next = nodeToRemove.next;
+        }
+
+        size -= 1;
     }
 
     private void assertPosition(int position) {
