@@ -1,4 +1,4 @@
-package com.zalizniak;
+package com.zalizniak.tree;
 
 public class BinarySearchTree {
 

@@ -1,5 +1,6 @@
-package com.zalizniak;
+package com.zalizniak.tree;
 
+import com.zalizniak.tree.BinarySearchTree;
 import junit.framework.TestCase;
 
 public class BinarySearchTreeTest extends TestCase {
