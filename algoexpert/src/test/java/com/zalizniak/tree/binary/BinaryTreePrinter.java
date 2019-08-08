@@ -1,4 +1,4 @@
-package com.zalizniak.tree;
+package com.zalizniak.tree.binary;
 
 import java.util.ArrayList;
 import java.util.Collections;
