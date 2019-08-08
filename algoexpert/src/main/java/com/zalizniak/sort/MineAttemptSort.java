@@ -9,9 +9,9 @@ public class MineAttemptSort {
         return in;
     }
 
-    public static Integer[] sort(Integer[] in) {
+    public static Integer[] bubbleSort(Integer[] in) {
         for (int j = 0; j < in.length - 1; j++) {
-            for (int i = 0; i < in.length - 1; i++) {
+            for (int i = 0; i < (in.length - j - 1); i++) {
                 if (in[i] > in[i + 1]) {
                     Integer tmp = in[i];
                     in[i] = in[i + 1];
@@ -19,6 +19,7 @@ public class MineAttemptSort {
                 }
             }
         }
+
         return in;
     }
 }
