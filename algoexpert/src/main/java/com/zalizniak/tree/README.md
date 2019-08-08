@@ -1,3 +1,12 @@
+A Tree is just a restricted form of a Graph.
+
+Trees have direction (parent / child relationships) and don't contain cycles. 
+They fit with in the category of Directed Acyclic Graphs (or a DAG). 
+So Trees are DAGs with the restriction that a child can only have one parent.
+
+Singly linked list is a special case of a DAG
+
+
 A binary tree is a linked data structure where each node points to two child nodes (at most). 
 Binary Tree is a hierarchical data structure in which each node has zero, one, or at the most, two children
 Each node contains a “left” pointer, a “right” pointer, and a data element. The “root” pointer represents the topmost node in the tree. 
