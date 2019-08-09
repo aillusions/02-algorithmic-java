@@ -20,6 +20,8 @@ public class BinaryTreeTest {
 
         binaryTree.print();
 
+        binaryTree.printInorder();
+
         Assert.assertEquals(n_0, n_8.left);
         Assert.assertNull(n_8.right);
 

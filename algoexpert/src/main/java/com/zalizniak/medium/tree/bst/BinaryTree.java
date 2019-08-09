@@ -42,17 +42,28 @@ public class BinaryTree {
                     throw new RuntimeException("Duplication: " + val);
                 }
             }
-
-
         }
 
         return newNode;
-
-        //System.out.println();
     }
 
     public void print() {
         BinaryTreePrinter.printNode(root);
+    }
+
+    public void printInorder() {
+        printInorder(root);
+    }
+
+    private void printInorder(BinaryTreeNode node) {
+        if (node == null)
+            return;
+
+        printInorder(node.left);
+
+        System.out.print(node.toString() + " ");
+
+        printInorder(node.right);
     }
 
 }
