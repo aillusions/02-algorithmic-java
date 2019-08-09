@@ -12,7 +12,7 @@ public class ArraySearch {
     public static int findBinary(int[] in, int rangeStartIdx, int rangeEndIdx, int value) {
 
         if (rangeStartIdx <= rangeEndIdx) {
-            int centerIdx = (rangeEndIdx - rangeStartIdx) / 2;
+            int centerIdx = (rangeEndIdx + rangeStartIdx) / 2;
 
             System.out.println(rangeStartIdx + " " + rangeEndIdx + " -> center: " + centerIdx);
 
