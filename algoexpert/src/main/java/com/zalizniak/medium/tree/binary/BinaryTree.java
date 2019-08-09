@@ -7,7 +7,7 @@ public class BinaryTree {
     /**
      * A new key is always inserted at leaf
      */
-    public void add(Integer val) {
+    public void insertIterative(Integer val) {
 
         BinaryTreeNode newNode = new BinaryTreeNode(val);
 

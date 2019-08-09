@@ -8,12 +8,15 @@ public class BinaryTreeTest {
     public void testBST() {
         BinaryTree binaryTree = new BinaryTree();
 
-        binaryTree.add(9);
-        binaryTree.add(8);
-        binaryTree.add(23);
-        binaryTree.add(0);
-        binaryTree.add(12);
-        binaryTree.add(49);
+        binaryTree.insertIterative(9);
+        binaryTree.insertIterative(7);
+        binaryTree.insertIterative(23);
+        binaryTree.insertIterative(0);
+        binaryTree.insertIterative(12);
+        binaryTree.insertIterative(49);
+        binaryTree.insertIterative(8);
+        binaryTree.insertIterative(11);
+        binaryTree.insertIterative(6);
 
         binaryTree.print();
     }
