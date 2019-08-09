@@ -1,4 +1,4 @@
-package com.zalizniak.medium.tree.binary;
+package com.zalizniak.medium.tree.bst;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +16,7 @@ public class BinaryTreeTest {
         BinaryTreeNode n_12 = binaryTree.insertIterative(12);
         BinaryTreeNode n_49 = binaryTree.insertIterative(49);
         BinaryTreeNode n_2 = binaryTree.insertIterative(2);
+        BinaryTreeNode n_200 = binaryTree.insertIterative(200);
 
         binaryTree.print();
 
