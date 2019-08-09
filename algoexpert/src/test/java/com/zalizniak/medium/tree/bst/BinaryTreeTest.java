@@ -30,5 +30,8 @@ public class BinaryTreeTest {
 
         Assert.assertNull(n_0.left);
         Assert.assertEquals(n_2, n_0.right);
+
+        Assert.assertEquals(0, binaryTree.findMin());
+        Assert.assertEquals(200, binaryTree.findMax());
     }
 }

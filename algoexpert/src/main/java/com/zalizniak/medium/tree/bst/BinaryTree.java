@@ -47,6 +47,28 @@ public class BinaryTree {
         return newNode;
     }
 
+    public int findMin() {
+        BinaryTreeNode currNode = root;
+        while (true) {
+            if (currNode.left == null) {
+                return currNode.data;
+            } else {
+                currNode = currNode.left;
+            }
+        }
+    }
+
+    public int findMax() {
+        BinaryTreeNode currNode = root;
+        while (true) {
+            if (currNode.right == null) {
+                return currNode.data;
+            } else {
+                currNode = currNode.right;
+            }
+        }
+    }
+
     public void print() {
         BinaryTreePrinter.printNode(root);
     }
