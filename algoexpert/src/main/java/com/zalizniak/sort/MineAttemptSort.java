@@ -66,13 +66,17 @@ public class MineAttemptSort {
 
         for (int i = 1; i < in.length; i++) {
             System.out.println("before " + i + " - " + Arrays.toString(in));
-            for (int j = i - 1; j >= 0; j--) {
-                if (in[j + 1] < in[j]) {
-                    int tmp = in[j];
-                    in[j] = in[j + 1];
-                    in[j + 1] = tmp;
+            int card = in[i];
+            int j = i - 1;
+            for (; j >= 0; j--) {
+                if (card < in[j]) {
+                    in[j + 1] = in[j];
+                } else {
+                    break;
                 }
             }
+            in[j + 1] = card;
+
             System.out.println("after " + i + " - " + Arrays.toString(in));
         }
 
