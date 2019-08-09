@@ -65,18 +65,18 @@ public class MineAttemptSort {
     public static Integer[] insertionSort(Integer[] in) {
 
         for (int i = 1; i < in.length; i++) {
-            System.out.println("before " + i + " - " + Arrays.toString(in));
+            System.out.print(i + " - " + Arrays.toString(in) + " -> ");
             int card = in[i];
             int j = i - 1;
 
-            while (card < in[j]) {
+            while (j >= 0 && card < in[j]) {
                 in[j + 1] = in[j];
                 j--;
             }
 
             in[j + 1] = card;
 
-            System.out.println("after " + i + " - " + Arrays.toString(in));
+            System.out.println(Arrays.toString(in));
         }
 
         return in;
