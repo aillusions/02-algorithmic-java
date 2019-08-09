@@ -23,5 +23,13 @@ public class BinaryTreeInverterTest {
         n3.right = n5;
 
         BinaryTreePrinter.printNode(n2);
+        BinaryTreeTraversal.printInorder(n2);
+        System.out.println();
+
+        BinaryTreeInverter.invertTree(n2);
+
+        BinaryTreePrinter.printNode(n2);
+        BinaryTreeTraversal.printInorder(n2);
+        System.out.println();
     }
 }
