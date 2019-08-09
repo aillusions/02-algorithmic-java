@@ -8,7 +8,7 @@ public class BinaryTree {
      * A new key is always inserted at leaf
      * Leaf node is a node that does not have any further edges connected.
      */
-    public void insertIterative(Integer val) {
+    public BinaryTreeNode insertIterative(Integer val) {
 
         BinaryTreeNode newNode = new BinaryTreeNode(val);
 
@@ -31,7 +31,7 @@ public class BinaryTree {
                 }
             }
 
-            //System.out.println("Adding: " + val + " to: " + itNode);
+            System.out.println("Adding: " + val + " to: " + itNode);
 
             if (itNode.data < newNode.data) {
                 itNode.right = newNode;
@@ -39,6 +39,8 @@ public class BinaryTree {
                 itNode.left = newNode;
             }
         }
+
+        return newNode;
 
         //System.out.println();
     }
