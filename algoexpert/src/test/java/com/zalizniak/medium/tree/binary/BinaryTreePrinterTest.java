@@ -1,8 +1,10 @@
-package com.zalizniak.medium.tree.bst;
+package com.zalizniak.medium.tree.binary;
 
+import com.zalizniak.medium.tree.binary.BinaryTreeNode;
+import com.zalizniak.medium.tree.binary.BinaryTreePrinter;
 import junit.framework.TestCase;
 
-public class BinarySearchTreePrinterTest extends TestCase {
+public class BinaryTreePrinterTest extends TestCase {
 
     public void testBinaryTree() {
 

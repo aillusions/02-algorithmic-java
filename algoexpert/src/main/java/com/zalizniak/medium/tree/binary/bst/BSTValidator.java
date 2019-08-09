@@ -1,4 +1,6 @@
-package com.zalizniak.medium.tree.bst;
+package com.zalizniak.medium.tree.binary.bst;
+
+import com.zalizniak.medium.tree.binary.BinaryTreeNode;
 
 import java.util.Stack;
 

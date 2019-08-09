@@ -1,10 +1,10 @@
-package com.zalizniak.medium.tree.bst;
+package com.zalizniak.medium.tree.binary;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class BinaryTreePrinter {
+public class BinaryTreePrinter {
 
     public static <T extends Comparable<?>> void printNode(BinaryTreeNode root) {
 
@@ -81,7 +81,7 @@ class BinaryTreePrinter {
         return Math.max(BinaryTreePrinter.maxLevel(node.left), BinaryTreePrinter.maxLevel(node.right)) + 1;
     }
 
-    private static  boolean isAllElementsNull(List list) {
+    private static boolean isAllElementsNull(List list) {
         for (Object object : list) {
             if (object != null)
                 return false;

@@ -1,9 +1,9 @@
-package com.zalizniak.medium.tree.bst;
+package com.zalizniak.medium.tree.binary;
 
 public class BinaryTreeNode {
-    protected Integer data;
-    protected BinaryTreeNode left;
-    protected BinaryTreeNode right;
+    public Integer data;
+    public BinaryTreeNode left;
+    public BinaryTreeNode right;
 
     public BinaryTreeNode(Integer data) {
         this.data = data;

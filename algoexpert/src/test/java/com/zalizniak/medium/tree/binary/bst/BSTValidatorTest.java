@@ -1,5 +1,7 @@
-package com.zalizniak.medium.tree.bst;
+package com.zalizniak.medium.tree.binary.bst;
 
+import com.zalizniak.medium.tree.binary.BinaryTreeNode;
+import com.zalizniak.medium.tree.binary.BinaryTreePrinter;
 import org.junit.Assert;
 import org.junit.Test;
 
