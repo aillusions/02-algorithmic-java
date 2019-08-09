@@ -1,6 +1,5 @@
 package com.zalizniak.medium;
 
-import medium.ThreeNumberSum;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsArrayContainingInAnyOrder;
 import org.junit.Assert;

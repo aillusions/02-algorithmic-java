@@ -1,4 +1,4 @@
-package com.zalizniak.easy.tree;
+package com.zalizniak.medium.tree;
 
 
 import org.junit.Test;

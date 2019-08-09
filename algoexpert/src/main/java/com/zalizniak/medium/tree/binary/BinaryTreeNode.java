@@ -1,4 +1,4 @@
-package com.zalizniak.easy.tree.binary;
+package com.zalizniak.medium.tree.binary;
 
 public class BinaryTreeNode {
     protected Integer data;

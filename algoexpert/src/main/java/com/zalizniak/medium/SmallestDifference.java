@@ -1,4 +1,4 @@
-package medium;
+package com.zalizniak.medium;
 
 public class SmallestDifference {
 

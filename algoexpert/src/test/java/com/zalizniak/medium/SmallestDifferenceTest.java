@@ -1,6 +1,5 @@
 package com.zalizniak.medium;
 
-import medium.SmallestDifference;
 import org.junit.Assert;
 import org.junit.Test;
 

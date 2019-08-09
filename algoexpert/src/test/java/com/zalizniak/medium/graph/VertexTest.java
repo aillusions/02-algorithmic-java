@@ -1,4 +1,4 @@
-package com.zalizniak.easy.graph;
+package com.zalizniak.medium.graph;
 
 
 import org.junit.Assert;
