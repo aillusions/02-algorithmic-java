@@ -1,6 +1,6 @@
 package com.zalizniak.medium.tree.bst;
 
-public class BinaryTree {
+public class BinarySearchTree {
 
     private BinaryTreeNode root;
 

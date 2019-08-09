@@ -2,7 +2,7 @@ package com.zalizniak.medium.tree.bst;
 
 import junit.framework.TestCase;
 
-public class BinaryTreePrinterTest extends TestCase {
+public class BinarySearchTreePrinterTest extends TestCase {
 
     public void testBinaryTree() {
 
