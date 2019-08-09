@@ -58,4 +58,24 @@ public class MineAttemptSort {
 
         return in;
     }
+
+    /**
+     *
+     */
+    public static Integer[] insertionSort(Integer[] in) {
+
+        for (int i = 1; i < in.length; i++) {
+            System.out.println("before " + i + " - " + Arrays.toString(in));
+            for (int j = i - 1; j >= 0; j--) {
+                if (in[j + 1] < in[j]) {
+                    int tmp = in[j];
+                    in[j] = in[j + 1];
+                    in[j + 1] = tmp;
+                }
+            }
+            System.out.println("after " + i + " - " + Arrays.toString(in));
+        }
+
+        return in;
+    }
 }
