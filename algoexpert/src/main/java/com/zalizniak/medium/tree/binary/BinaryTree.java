@@ -18,26 +18,32 @@ public class BinaryTree {
 
             BinaryTreeNode itNode = root;
 
-            while (itNode.right != null && itNode.left != null) { // go to leaf node
-
-                //System.out.println("Adding: " + val + " visiting: " + itNode);
-
+            while (true) {
                 if (itNode.data < newNode.data) {
-                    itNode = itNode.right;
+                    if (itNode.right == null) {
+                        System.out.println("Adding: " + val + " to: " + itNode);
+                        itNode.right = newNode;
+                        break;
+                    } else {
+                        itNode = itNode.right;
+                    }
+
                 } else if (itNode.data > newNode.data) {
-                    itNode = itNode.left;
+
+                    if (itNode.left == null) {
+                        System.out.println("Adding: " + val + " to: " + itNode);
+                        itNode.left = newNode;
+                        break;
+                    } else {
+                        itNode = itNode.left;
+                    }
+
                 } else {
                     throw new RuntimeException("Duplication: " + val);
                 }
             }
 
-            System.out.println("Adding: " + val + " to: " + itNode);
 
-            if (itNode.data < newNode.data) {
-                itNode.right = newNode;
-            } else if (itNode.data > newNode.data) {
-                itNode.left = newNode;
-            }
         }
 
         return newNode;

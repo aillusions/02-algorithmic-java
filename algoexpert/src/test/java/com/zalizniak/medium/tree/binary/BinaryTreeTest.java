@@ -15,7 +15,9 @@ public class BinaryTreeTest {
         BinaryTreeNode n_0 = binaryTree.insertIterative(0);
         BinaryTreeNode n_12 = binaryTree.insertIterative(12);
         BinaryTreeNode n_49 = binaryTree.insertIterative(49);
-        //BinaryTreeNode n_2 = binaryTree.insertIterative(2);
+        BinaryTreeNode n_2 = binaryTree.insertIterative(2);
+
+        binaryTree.print();
 
         Assert.assertEquals(n_0, n_8.left);
         Assert.assertNull(n_8.right);
@@ -23,6 +25,7 @@ public class BinaryTreeTest {
         Assert.assertEquals(n_12, n_23.left);
         Assert.assertEquals(n_49, n_23.right);
 
-        binaryTree.print();
+        Assert.assertNull(n_0.left);
+        Assert.assertEquals(n_2, n_0.right);
     }
 }
