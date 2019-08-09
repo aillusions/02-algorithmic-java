@@ -6,6 +6,7 @@ public class BinaryTree {
 
     /**
      * A new key is always inserted at leaf
+     * Leaf node is a node that does not have any further edges connected.
      */
     public void insertIterative(Integer val) {
 
