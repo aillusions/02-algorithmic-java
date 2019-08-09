@@ -8,4 +8,9 @@ public class BinaryTreeNode {
     public BinaryTreeNode(Integer data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return data.toString();
+    }
 }
