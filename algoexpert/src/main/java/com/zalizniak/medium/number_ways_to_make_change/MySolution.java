@@ -6,6 +6,6 @@ public class MySolution implements MakingChange {
 
     @Override
     public int numberOfWays(int sum, Set<Integer> coins) {
-        return 0;
+        return 1;
     }
 }
