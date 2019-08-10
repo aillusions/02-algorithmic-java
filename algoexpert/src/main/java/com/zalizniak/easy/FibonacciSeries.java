@@ -7,11 +7,13 @@ public class FibonacciSeries {
 
 
     /**
+     * RECURSIVE
+     *
      * Slow of stack-overflow prone
-     * O(2^n) - time complexity
+     * O(2^n) - time complexity - exponential
      * O(n) - space complexity
      */
-    public static int getNthFib(int n) {
+    public static int getNthFibRec(int n) {
 
         if (n == 1) {
             return 0;
@@ -21,10 +23,13 @@ public class FibonacciSeries {
             return 1;
         }
 
-        return getNthFib(n - 1) + getNthFib(n - 2);
+        return getNthFibRec(n - 1) + getNthFibRec(n - 2);
     }
 
-    public static int getNthFib2(int n) {
+    /**
+     *  ITERATIVE
+     */
+    public static int getNthFibIt(int n) {
 
         int n_2 = 0;
         int n_1 = 0;
