@@ -1,8 +1,5 @@
-package com.zalizniak.medium;
+package com.zalizniak.medium.maximum_subset_from_non_adjacent_elements;
 
-import com.zalizniak.medium.maximum_subset_from_non_adjacent_elements.DynamicProgramming;
-import com.zalizniak.medium.maximum_subset_from_non_adjacent_elements.MaxNonAdjacentElementsSubset;
-import com.zalizniak.medium.maximum_subset_from_non_adjacent_elements.MostEfficient;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +9,11 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class MostEfficientTest {
+public class MaxNonAdjacentElementsSubsetTest {
 
     private MaxNonAdjacentElementsSubset solver;
 
-    public MostEfficientTest(MaxNonAdjacentElementsSubset solver) {
+    public MaxNonAdjacentElementsSubsetTest(MaxNonAdjacentElementsSubset solver) {
         this.solver = solver;
     }
 

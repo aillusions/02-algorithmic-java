@@ -2,6 +2,10 @@ package com.zalizniak.medium.maximum_subset_from_non_adjacent_elements;
 
 public class DynamicProgramming implements MaxNonAdjacentElementsSubset {
 
+    int maxLen = 10;
+    int dp[] = new int[maxLen];
+    boolean v[] = new boolean[maxLen];
+
     @Override
     public int getMaxSum(Integer[] in) {
         maxLen = 10;
@@ -9,10 +13,6 @@ public class DynamicProgramming implements MaxNonAdjacentElementsSubset {
         v = new boolean[maxLen];
         return maxSum(in, 0, in.length);
     }
-
-    int maxLen = 10;
-    int dp[] = new int[maxLen];
-    boolean v[] = new boolean[maxLen];
 
     int maxSum(Integer[] arr, int i, int n) {
         // Base case
