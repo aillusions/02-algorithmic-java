@@ -1,5 +1,8 @@
 package com.zalizniak.medium;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Given an array of positive numbers,
  * find the maximum sum of a subsequence
@@ -9,7 +12,14 @@ package com.zalizniak.medium;
  */
 public class MaximumSubsetFromNonAdjacentElements {
 
-    public static int getSumMostEfficientWay(int[] in) {
+    public static int getSumMostEfficientWay(Integer[] in) {
+
+        Arrays.sort(in, Collections.reverseOrder());
+
+        for (int i = 0; i < in.length; i++) {
+
+        }
+
         return 0;
     }
 }
