@@ -3,17 +3,19 @@ package com.zalizniak.medium;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Given an array of positive integers,
- * what's the most efficient algorithm to find non-consecutive elements from this array which,
- * when added together, produce the maximum sum?
- */
 public class MaximumSubsetFromNonAdjacentElementsTest {
 
     @Test
     public void shouldFindSum() {
-        int[] input = {1, 2, 9, 4, 5, 0, 4, 11, 6};
-        int expected = 26;
+        int[] input = {3, 2, 7, 10};
+        int expected = 13;
+        Assert.assertEquals(expected, MaximumSubsetFromNonAdjacentElements.getSumMostEfficientWay(input));
+    }
+
+    @Test
+    public void shouldFindSum0() {
+        int[] input = {3, 2, 5, 10, 7};
+        int expected = 15;
         Assert.assertEquals(expected, MaximumSubsetFromNonAdjacentElements.getSumMostEfficientWay(input));
     }
 
