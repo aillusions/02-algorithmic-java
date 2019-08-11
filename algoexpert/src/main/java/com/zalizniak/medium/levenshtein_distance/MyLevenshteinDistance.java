@@ -1,19 +1,20 @@
 package com.zalizniak.medium.levenshtein_distance;
 
 /**
- *
+ * 3^n - exponential
  */
 public class MyLevenshteinDistance implements LevenshteinDistance {
 
     @Override
     public int getDistance(String a, String b) {
-        if (a.isEmpty() && b.isEmpty()) {
-            return 0;
-        } else if (a.isEmpty()) {
+
+        if (a.isEmpty()) {
             return b.length();
         } else if (b.isEmpty()) {
             return a.length();
-        } else if (a.charAt(0) == b.charAt(0)) {
+        }
+
+        if (a.charAt(0) == b.charAt(0)) {
             return getDistance(a.substring(1), b.substring(1));
         }
 
