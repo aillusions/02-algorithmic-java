@@ -9,6 +9,7 @@ public class LevenshteinDistanceTest {
 
     @Test
     public void shouldCalculateDistance() {
+        Assert.assertEquals(0, calc.getDistance("ALEX", "ALEX"));
         Assert.assertEquals(3, calc.getDistance("FLOMAX", "VOLMAX"));
         Assert.assertEquals(2, calc.getDistance("GILY", "GEELY"));
         Assert.assertEquals(3, calc.getDistance("HONDA", "HYUNDAI"));
