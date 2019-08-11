@@ -9,11 +9,15 @@ public class MyKadenesAlgo implements KadenesAlgo {
 
     static int maxSubArraySum(Integer[] in) {
 
-        int maxEndingHere = 0;
+        if (in == null || in.length == 0) {
+            return 0;
+        }
+
+        int maxEndingHere = in[0];
         int maxSoFar = Integer.MIN_VALUE;
 
-        for (int i = 0; i < in.length; i++) {
-            maxEndingHere = Math.max(maxEndingHere + in[i], 0);
+        for (int i = 1; i < in.length; i++) {
+            maxEndingHere = Math.max(maxEndingHere + in[i], in[i]);
             maxSoFar = Math.max(maxEndingHere, maxSoFar);
         }
 
