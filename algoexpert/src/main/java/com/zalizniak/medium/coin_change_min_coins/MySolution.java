@@ -6,6 +6,16 @@ public class MySolution implements ChangeMinCoins {
 
     @Override
     public int minCoins(int sum, List<Integer> coins) {
-        return 0;
+
+        if (sum <= 0 || coins.isEmpty()) {
+            return 0;
+        }
+
+        int denom = coins.get(0);
+        if (sum >= denom) {
+            return 1 + minCoins(sum - denom, coins);
+        } else {
+            return minCoins(sum, coins.subList(1, coins.size()));
+        }
     }
 }

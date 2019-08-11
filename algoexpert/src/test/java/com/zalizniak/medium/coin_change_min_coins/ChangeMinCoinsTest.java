@@ -30,6 +30,17 @@ public class ChangeMinCoinsTest {
     @Test
     public void shouldFindSum() {
         Assert.assertEquals(1, maker.minCoins(1, DENOMINATIONS));
+        Assert.assertEquals(1, maker.minCoins(5, DENOMINATIONS));
+        Assert.assertEquals(1, maker.minCoins(10, DENOMINATIONS));
+        Assert.assertEquals(1, maker.minCoins(20, DENOMINATIONS));
+        Assert.assertEquals(2, maker.minCoins(21, DENOMINATIONS));
+        Assert.assertEquals(3, maker.minCoins(50, DENOMINATIONS));
+    }
+
+    @Test
+    public void shouldFindSum0() {
+        Assert.assertEquals(2, maker.minCoins(30, Arrays.asList(25, 10, 5)));
+        Assert.assertEquals(2, maker.minCoins(11, Arrays.asList(9, 6, 5, 1)));
     }
 
 }
