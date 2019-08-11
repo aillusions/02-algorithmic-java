@@ -1,20 +1,27 @@
 package com.zalizniak.medium.coin_change;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * https://www.ideserve.co.in/learn/coin-change-problem-number-of-ways-to-make-change
  * <p>
  * If we are make change of 50 using infinite number of coins of denominations {20,10,5,1} then
- * total number of ways to make change of 50 using denominations {20,10,5,1} = total number of ways to make change of 50 using 0 coins of 20 + total number of ways to make change of 50 using 1 coin of 20 + total number of ways to make change of 50 using 2 coins of 20
- * Now first term on the right hand side of above equation that is - total number of ways to make change of 50 using 0 coins of 20 can be restated as total number of ways to make change of 50 using denominations {10,5,1}
- * And second term that is total number of ways to make change of 50 using 1 coin of 20 = total number of ways to make change of 30 using denominations {10,5,1}
- * Similarly, total number of ways to make change of 50 using 2 coins of 20 = total number of ways to make change of 10 using denominations {10,5,1}.
+ * <p>
+ * total number of ways to make change of 50 using denominations {20,10,5,1}
+ * =
+ * total number of ways to make change of 50 using 0 coins of 20
+ * + total number of ways to make change of 50 using 1 coin of 20
+ * + total number of ways to make change of 50 using 2 coins of 20
  * <p>
  * Time Complexity is O(nm)
  * Space Complexity is O(nm)
  */
 public class MySolution implements MakingChange {
+
+    Map<String, Integer> lookup = new HashMap<>();
+
 
     /**
      * Assuming ordered
@@ -30,13 +37,19 @@ public class MySolution implements MakingChange {
             return 0;
         }
 
-        final int denomination = coins.get(0);
-        final int sumRemainded = sum - denomination;
-        final List<Integer> denomRemainded = coins.subList(1, coins.size());
+        String key = coins.toString() + "|" + sum;
 
-        final int incl = numberOfWays(sumRemainded, coins);
-        final int excl = numberOfWays(sum, denomRemainded);
+        if (!lookup.containsKey(key)) {
+            final int denomination = coins.get(0);
+            final int sumRemainded = sum - denomination;
+            final List<Integer> denomRemainded = coins.subList(1, coins.size());
 
-        return incl + excl;
+            final int incl = numberOfWays(sumRemainded, coins);
+            final int excl = numberOfWays(sum, denomRemainded);
+
+            lookup.put(key, incl + excl);
+        }
+
+        return lookup.get(key);
     }
 }
