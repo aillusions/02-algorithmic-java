@@ -8,6 +8,11 @@ public class LevenshteinDistanceTest {
     private LevenshteinDistance calc = new MyLevenshteinDistance();
 
     @Test
+    public void calcForLongSentence() {
+        Assert.assertEquals(5, calc.getDistance("ABCDE", "FGHI"));
+    }
+
+    @Test
     public void shouldCalculateDistance() {
         Assert.assertEquals(0, calc.getDistance("ALEX", "ALEX"));
         Assert.assertEquals(3, calc.getDistance("FLOMAX", "VOLMAX"));
