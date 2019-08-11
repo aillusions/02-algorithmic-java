@@ -1,40 +1,27 @@
 package com.zalizniak.medium.levenshtein_distance;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * insertions
- * deletions
- * substitutions
+ *
  */
 public class MyLevenshteinDistance implements LevenshteinDistance {
 
     @Override
     public int getDistance(String a, String b) {
-        return getDistance(a.chars().mapToObj(i -> (char) i).collect(Collectors.toList()),
-                b.chars().mapToObj(i -> (char) i).collect(Collectors.toList()));
-    }
-
-    public int getDistance(List<Character> a, List<Character> b) {
         if (a.isEmpty() && b.isEmpty()) {
             return 0;
-        }
-
-        if (a.isEmpty()) {
-            return 1 + getDistance(a, b.subList(1, b.size()));
+        } else if (a.isEmpty()) {
+            return b.length();
         } else if (b.isEmpty()) {
-            return 1 + getDistance(a.subList(1, a.size()), b);
+            return a.length();
+        } else if (a.charAt(0) == b.charAt(0)) {
+            return getDistance(a.substring(1), b.substring(1));
         }
 
-        if (a.get(0) == b.get(0)) {
-            return getDistance(a.subList(1, a.size()), b.subList(1, b.size()));
-        }
-
-        int d1 = getDistance(a.subList(1, a.size()), b);
-        int d2 = getDistance(a, b.subList(1, b.size()));
-        int d3 = getDistance(a.subList(1, a.size()), b.subList(1, b.size()));
+        int d1 = getDistance(a.substring(1), b); // removal / insertion
+        int d2 = getDistance(a, b.substring(1)); // removal / insertion
+        int d3 = getDistance(a.substring(1), b.substring(1)); // substitutions
 
         return 1 + Math.min(d1, Math.min(d2, d3));
     }
+
 }

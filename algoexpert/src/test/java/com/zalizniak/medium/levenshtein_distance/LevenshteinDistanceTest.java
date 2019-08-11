@@ -13,5 +13,6 @@ public class LevenshteinDistanceTest {
         Assert.assertEquals(3, calc.getDistance("FLOMAX", "VOLMAX"));
         Assert.assertEquals(2, calc.getDistance("GILY", "GEELY"));
         Assert.assertEquals(3, calc.getDistance("HONDA", "HYUNDAI"));
+        Assert.assertEquals(1, calc.getDistance("shot", "spot"));
     }
 }
