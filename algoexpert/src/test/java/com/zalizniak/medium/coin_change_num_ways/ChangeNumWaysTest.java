@@ -1,4 +1,4 @@
-package com.zalizniak.medium.coin_change;
+package com.zalizniak.medium.coin_change_num_ways;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,13 +10,13 @@ import java.util.Collection;
 import java.util.List;
 
 @RunWith(Parameterized.class)
-public class MakingChangeTest {
+public class ChangeNumWaysTest {
 
     private static final List<Integer> DENOMINATIONS = Arrays.asList(20, 10, 5, 1);
 
-    private MakingChange maker;
+    private ChangeNumWays maker;
 
-    public MakingChangeTest(MakingChange maker) {
+    public ChangeNumWaysTest(ChangeNumWays maker) {
         this.maker = maker;
     }
 

@@ -1,4 +1,4 @@
-package com.zalizniak.medium.coin_change;
+package com.zalizniak.medium.coin_change_num_ways;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.Map;
  * Time Complexity is O(nm)
  * Space Complexity is O(nm)
  */
-public class MySolution implements MakingChange {
+public class MySolution implements ChangeNumWays {
 
     Map<String, Integer> lookup = new HashMap<>();
 
