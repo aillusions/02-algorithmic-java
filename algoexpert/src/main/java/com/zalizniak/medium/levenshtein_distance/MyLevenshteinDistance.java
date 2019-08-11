@@ -12,7 +12,6 @@ public class MyLevenshteinDistance implements LevenshteinDistance {
 
     @Override
     public int getDistance(String a, String b) {
-
         return getDistance(a.chars().mapToObj(i -> (char) i).collect(Collectors.toList()),
                 b.chars().mapToObj(i -> (char) i).collect(Collectors.toList()));
     }
@@ -32,6 +31,10 @@ public class MyLevenshteinDistance implements LevenshteinDistance {
             return getDistance(a.subList(1, a.size()), b.subList(1, b.size()));
         }
 
-        return 1 + Math.min(getDistance(a.subList(1, a.size()), b), getDistance(a, b.subList(1, b.size())));
+        int d1 = getDistance(a.subList(1, a.size()), b);
+        int d2 = getDistance(a, b.subList(1, b.size()));
+        int d3 = getDistance(a.subList(1, a.size()), b.subList(1, b.size()));
+
+        return 1 + Math.min(d1, Math.min(d2, d3));
     }
 }
