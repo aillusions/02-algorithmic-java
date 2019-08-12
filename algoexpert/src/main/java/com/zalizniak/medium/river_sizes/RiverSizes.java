@@ -1,6 +1,7 @@
 package com.zalizniak.medium.river_sizes;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,40 +24,40 @@ public class RiverSizes {
         for (int h = 0; h < matrix.length; h++) {
             for (int w = 0; w < matrix.length; w++) {
 
-                int adjacencyElementIdx = w + (matrixWidth * h);
+                int currentElementIdx = (matrixWidth * h) + w;
+                List<Integer> adjacentList = new LinkedList<>();
+                adjacentLists[currentElementIdx] = adjacentList;
+
                 int matrixElement = matrix[h][w];
-
-                //if (matrixElement == 0) {
-                //    continue;
-                //}
-
-                List<Integer> adjacentList = adjacentLists[adjacencyElementIdx];
+                if (matrixElement == 0) {
+                    continue;
+                }
 
                 if (h - 1 >= 0) {
                     if (matrix[h - 1][w] == 1) {
-
+                        adjacentList.add((matrixWidth * (h - 1)) + w);
                     }
                 }
 
                 if (h + 1 < matrixHeight) {
                     if (matrix[h + 1][w] == 1) {
-
+                        adjacentList.add((matrixWidth * (h + 1)) + w);
                     }
                 }
 
                 if (w - 1 >= 0) {
                     if (matrix[h][w - 1] == 1) {
-
+                        adjacentList.add((matrixWidth * h) + (w - 1));
                     }
                 }
 
                 if (w + 1 < matrixWidth) {
                     if (matrix[h][w + 1] == 1) {
-
+                        adjacentList.add((matrixWidth * h) + (w + 1));
                     }
                 }
 
-                System.out.println("seen: " + adjacencyElementIdx + " connected to: " + adjacentList);
+                System.out.println("seen: " + currentElementIdx + " connected to: " + adjacentList);
             }
         }
     }
