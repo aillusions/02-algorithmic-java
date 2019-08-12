@@ -12,5 +12,12 @@ public class RiverSizesTest {
     @Test
     public void test() {
         Assert.assertEquals(Arrays.asList(1), riverSizes.riverSizes(new int[][]{{1}}));
+        Assert.assertEquals(Arrays.asList(1, 2, 2, 2, 5), riverSizes.riverSizes(new int[][]{
+                {1, 0, 0, 1, 0},
+                {1, 0, 1, 0, 0},
+                {0, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 1, 0}
+        }));
     }
 }
