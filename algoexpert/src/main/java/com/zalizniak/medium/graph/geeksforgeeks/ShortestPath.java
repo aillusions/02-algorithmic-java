@@ -1,5 +1,6 @@
 package com.zalizniak.medium.graph.geeksforgeeks;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -20,17 +21,26 @@ public class ShortestPath {
 
     public int getShortestPath(int startNode, int endNode) {
 
-        int[] distances = new int[adjacencyLists.length];
+        int[] shortestDistances = new int[adjacencyLists.length];
+        for (int i = 0; i < shortestDistances.length; i++) {
+            shortestDistances[i] = Integer.MAX_VALUE;
+        }
 
         boolean[] visited = new boolean[adjacencyLists.length];
 
         Queue<Integer> queue = new LinkedList<>();
         queue.add(startNode);
+        int globalDistance = -1;
 
         while (!queue.isEmpty()) {
             int node = queue.poll();
             System.out.println(startNode + " -> " + endNode + ": visited " + node);
+            globalDistance++;
+
             visited[node] = true;
+            if (globalDistance < shortestDistances[node]) {
+                shortestDistances[node] = globalDistance;
+            }
 
             for (int i = 0; i < adjacencyLists[node].length; i++) {
                 int adjacentToNode = adjacencyLists[node][i];
@@ -41,8 +51,12 @@ public class ShortestPath {
         }
 
         System.out.println();
+        System.out.println("[0, 1, 2, 3, 4, 5]");
+        System.out.println("------------------");
+        System.out.println(Arrays.toString(shortestDistances));
+        System.out.println();
 
-        return 0;
+        return shortestDistances[endNode];
     }
 
 }
