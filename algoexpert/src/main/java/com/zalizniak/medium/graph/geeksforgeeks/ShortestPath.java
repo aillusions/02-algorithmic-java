@@ -1,7 +1,8 @@
 package com.zalizniak.medium.graph.geeksforgeeks;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -9,54 +10,66 @@ import java.util.Queue;
  */
 public class ShortestPath {
 
-    // directed unweighted predefined graph of 6 nodes, see
-    private int[][] adjacencyLists = new int[][]{
-            /*0*/ {1, 2, 5},
-            /*1*/ {4},
-            /*2*/ {},
-            /*3*/ {1, 5},
-            /*4*/ {0, 3},
-            /*5*/ {2}
-    };
+
+    private int[][] adjacencyLists;
+
+    public ShortestPath(int[][] adjacencyLists) {
+        this.adjacencyLists = adjacencyLists;
+    }
 
     public int getShortestPath(int startNode, int endNode) {
 
-        int[] shortestDistances = new int[adjacencyLists.length];
-        for (int i = 0; i < shortestDistances.length; i++) {
-            shortestDistances[i] = Integer.MAX_VALUE;
-        }
-
+        boolean isRouteFound = false;
         boolean[] visited = new boolean[adjacencyLists.length];
+        int[] distances = new int[adjacencyLists.length];
+        int[] prevNodes = new int[adjacencyLists.length];
+
+        for (int i = 0; i < distances.length; i++) {
+            visited[i] = false;
+            distances[i] = -1;
+            prevNodes[i] = -1;
+        }
 
         Queue<Integer> queue = new LinkedList<>();
         queue.add(startNode);
-        int globalDistance = -1;
+        distances[startNode] = 0;
+        visited[startNode] = true;
 
-        while (!queue.isEmpty()) {
-            int node = queue.poll();
-            System.out.println(startNode + " -> " + endNode + ": visited " + node);
-            globalDistance++;
+        while (!queue.isEmpty() && !isRouteFound) {
+            int polledNode = queue.poll();
 
-            visited[node] = true;
-            if (globalDistance < shortestDistances[node]) {
-                shortestDistances[node] = globalDistance;
-            }
+            for (int i = 0; i < adjacencyLists[polledNode].length; i++) {
+                int adjacentNode = adjacencyLists[polledNode][i];
 
-            for (int i = 0; i < adjacencyLists[node].length; i++) {
-                int adjacentToNode = adjacencyLists[node][i];
-                if (!visited[adjacentToNode]) {
-                    queue.add(adjacentToNode);
+                if (!visited[adjacentNode]) {
+
+                    distances[adjacentNode] = distances[polledNode] + 1;
+                    prevNodes[adjacentNode] = polledNode;
+
+                    if (adjacentNode == endNode) {
+                        isRouteFound = true;
+                        break;
+                    }
+
+                    visited[adjacentNode] = true;
+                    queue.add(adjacentNode);
                 }
             }
         }
 
-        System.out.println();
-        System.out.println("[0, 1, 2, 3, 4, 5]");
-        System.out.println("------------------");
-        System.out.println(Arrays.toString(shortestDistances));
+        List<Integer> path = new LinkedList<>();
+        int prevNode = endNode;
+        path.add(prevNode);
+        while (prevNodes[prevNode] != -1) {
+            prevNode = prevNodes[prevNode];
+            path.add(prevNode);
+        }
+
+        Collections.reverse(path);
+        System.out.println(startNode + " -> " + endNode + " path: " + path);
         System.out.println();
 
-        return shortestDistances[endNode];
+        return distances[endNode];
     }
 
 }
