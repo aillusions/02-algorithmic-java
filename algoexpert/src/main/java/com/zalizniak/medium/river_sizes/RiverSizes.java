@@ -1,11 +1,12 @@
 package com.zalizniak.medium.river_sizes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
 /**
- *
+ * https://neo4j.com/docs/graph-algorithms/current/algorithms/connected-components/
  */
 public class RiverSizes {
 
@@ -62,9 +63,9 @@ public class RiverSizes {
         }
     }
 
-    public List<Integer> riverSizes() {
+    public ArrayList<Integer> riverSizes() {
 
-        List<Integer> rv = new LinkedList<>();
+        ArrayList<Integer> rv = new ArrayList<>();
         boolean[] visited = new boolean[totalElementsOfMatrix];
 
         Stack<Integer> stack = new Stack<>();
