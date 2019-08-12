@@ -32,7 +32,7 @@ public class MinHeapTree {
                 BinaryTreeNode currentNode = queue.poll();
                 completeNewPath.add(currentNode);
 
-                System.out.println("Adding: " + value + " seen: " + currentNode.data);
+                // System.out.println("Adding: " + value + " seen: " + currentNode.data);
 
                 if (currentNode.left == null || currentNode.right == null) {
                     break;
@@ -50,6 +50,19 @@ public class MinHeapTree {
                 parent.left = newNode;
             }
 
+            completeNewPath.add(newNode);
+
+            for (int i = completeNewPath.size() - 1; i >= 1; i--) {
+                BinaryTreeNode current = completeNewPath.get(i);
+                BinaryTreeNode previous = completeNewPath.get(i - 1);
+                if (previous.data < current.data) {
+                    break;
+                } else {
+                    int tmp = current.data;
+                    current.data = previous.data;
+                    previous.data = tmp;
+                }
+            }
 
         }
     }
