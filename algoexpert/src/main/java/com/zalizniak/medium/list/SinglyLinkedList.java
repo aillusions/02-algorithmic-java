@@ -18,6 +18,10 @@ public class SinglyLinkedList {
         }
     }
 
+    public int getNthFromTheEnd(int nth) {
+        return 0;
+    }
+
     public void print() {
 
         ListNode currentNode = root;
