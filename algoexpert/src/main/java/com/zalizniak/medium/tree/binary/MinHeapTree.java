@@ -16,6 +16,10 @@ public class MinHeapTree {
 
     private BinaryTreeNode root;
 
+    public void delete() {
+
+    }
+
     public void insert(Integer value) {
         BinaryTreeNode newNode = new BinaryTreeNode(value);
 

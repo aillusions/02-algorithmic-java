@@ -5,7 +5,8 @@ import org.junit.Test;
 public class MinHeapTreeTest {
 
     @Test
-    public void test() {
+    public void testInsert() {
+
         MinHeapTree minHeap = new MinHeapTree();
 
         minHeap.insert(2);
@@ -23,5 +24,10 @@ public class MinHeapTreeTest {
         minHeap.insert(5);
 
         minHeap.print();
+    }
+
+    @Test
+    public void testDelete() {
+
     }
 }
