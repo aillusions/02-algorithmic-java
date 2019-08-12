@@ -23,8 +23,8 @@ public class RiverSizes {
         totalElementsOfMatrix = matrixWidth * matrixHeight;
         adjacentLists = new List[totalElementsOfMatrix];
 
-        for (int h = 0; h < matrix.length; h++) {
-            for (int w = 0; w < matrix.length; w++) {
+        for (int h = 0; h < matrixHeight; h++) {
+            for (int w = 0; w < matrixWidth; w++) {
 
                 int currentElementIdx = (matrixWidth * h) + w;
                 List<Integer> adjacentList = new LinkedList<>();
