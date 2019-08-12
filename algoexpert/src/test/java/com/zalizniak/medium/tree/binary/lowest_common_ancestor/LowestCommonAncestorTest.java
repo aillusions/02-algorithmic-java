@@ -28,5 +28,8 @@ public class LowestCommonAncestorTest {
         BinaryTreePrinter.printNode(n2);
 
         Assert.assertEquals(0, ancestor.getLowestCommonAncestor(root, 4, 5));
+        Assert.assertEquals(2, ancestor.getLowestCommonAncestor(root, 4, 1));
+        Assert.assertEquals(2, ancestor.getLowestCommonAncestor(root, 1, 3));
+        Assert.assertEquals(2, ancestor.getLowestCommonAncestor(root, 3, 1));
     }
 }
