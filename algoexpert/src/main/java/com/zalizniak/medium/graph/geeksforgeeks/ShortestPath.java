@@ -15,4 +15,10 @@ public class ShortestPath {
             /*5*/ {2}
     };
 
+    public int getShortestPath(int startNode, int endNode){
+        return 0;
+
+
+    }
+
 }
