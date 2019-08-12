@@ -1,6 +1,7 @@
 package com.zalizniak.medium.tree.binary;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -22,23 +23,25 @@ public class MinHeapTree {
             root = newNode;
         } else {
 
-            BinaryTreeNode parent = null;
+            List<BinaryTreeNode> completeNewPath = new LinkedList<>();
 
             Queue<BinaryTreeNode> queue = new LinkedList<>();
             queue.add(root);
 
             while (!queue.isEmpty()) {
-                parent = queue.poll();
+                BinaryTreeNode currentNode = queue.poll();
+                completeNewPath.add(currentNode);
 
-                System.out.println("Adding: " + value + " seen: " + parent.data);
+                System.out.println("Adding: " + value + " seen: " + currentNode.data);
 
-                if (parent.left == null || parent.right == null) {
+                if (currentNode.left == null || currentNode.right == null) {
                     break;
                 }
 
-                queue.addAll(parent.getChildNodes());
+                queue.addAll(currentNode.getChildNodes());
             }
 
+            BinaryTreeNode parent = completeNewPath.get(completeNewPath.size() - 1);
             if (parent.left == null) {
                 parent.left = newNode;
             } else if (parent.right == null) {
@@ -46,6 +49,8 @@ public class MinHeapTree {
             } else {
                 parent.left = newNode;
             }
+
+
         }
     }
 
