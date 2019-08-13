@@ -18,6 +18,18 @@ public class SinglyLinkedList {
         }
     }
 
+    public int getNth(int nth) {
+        int idxToFind = nth - 1;
+        int idx = 0;
+        ListNode node = root;
+        while (idx < idxToFind) {
+            node = node.next;
+            idx++;
+        }
+
+        return node.data;
+    }
+
     public int getNthFromTheEnd(int nth) {
 
         ListNode node = root;
