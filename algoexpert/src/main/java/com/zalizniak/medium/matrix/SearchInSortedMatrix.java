@@ -36,10 +36,8 @@ public class SearchInSortedMatrix {
 
     static int binarySearch(int[] row, int elem) {
 
-        int maxIdx = row.length - 1;
-
         int startIdx = 0;
-        int endIdx = maxIdx;
+        int endIdx = row.length - 1;
 
         while (startIdx <= endIdx) {
 
