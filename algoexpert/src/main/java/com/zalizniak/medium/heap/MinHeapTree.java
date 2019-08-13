@@ -1,4 +1,7 @@
-package com.zalizniak.medium.tree.binary;
+package com.zalizniak.medium.heap;
+
+import com.zalizniak.medium.tree.binary.BinaryTreeNode;
+import com.zalizniak.medium.tree.binary.BinaryTreePrinter;
 
 import java.util.LinkedList;
 import java.util.List;
