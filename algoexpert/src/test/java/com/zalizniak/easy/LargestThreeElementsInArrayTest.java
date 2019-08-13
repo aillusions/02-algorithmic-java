@@ -1,6 +1,5 @@
 package com.zalizniak.easy;
 
-import com.zalizniak.easy.LargestThreeElementsInArray;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.collection.IsArrayContainingInAnyOrder;
 import org.junit.Test;
