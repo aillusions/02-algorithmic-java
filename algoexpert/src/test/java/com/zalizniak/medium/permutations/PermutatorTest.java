@@ -12,6 +12,7 @@ public class PermutatorTest {
         for (int i = 0; i < permutations.length; i++) {
             System.out.println(Arrays.toString(permutations[i]));
         }
+        System.out.println();
     }
 
     @Test
@@ -20,6 +21,7 @@ public class PermutatorTest {
         for (int i = 0; i < permutations.length; i++) {
             System.out.println(Arrays.toString(permutations[i]));
         }
+        System.out.println();
     }
 
     @Test
@@ -28,6 +30,7 @@ public class PermutatorTest {
         for (int i = 0; i < permutations.length; i++) {
             System.out.println(Arrays.toString(permutations[i]));
         }
+        System.out.println();
     }
 
     @Test
@@ -36,5 +39,6 @@ public class PermutatorTest {
         for (int i = 0; i < permutations.length; i++) {
             System.out.println(Arrays.toString(permutations[i]));
         }
+        System.out.println();
     }
 }
