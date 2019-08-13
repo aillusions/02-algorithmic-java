@@ -6,7 +6,14 @@ import org.junit.Test;
 public class QueueOfTwoStacksTest {
 
     @Test
-    public void test() {
+    public void testSimple() {
+        QueueOfTwoStacks queue = new QueueOfTwoStacks();
+        queue.add(1);
+        Assert.assertEquals(1, queue.poll().intValue());
+    }
+
+    @Test
+    public void testComplete() {
         QueueOfTwoStacks queue = new QueueOfTwoStacks();
 
         queue.add(1);

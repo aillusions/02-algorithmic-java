@@ -7,15 +7,15 @@ public class QueueOfTwoStacks {
     private Stack<Integer> inbox = new Stack<>();
     private Stack<Integer> outbox = new Stack<>();
 
-    public boolean add(Integer integer) {
-        return false;
+    public void add(Integer integer) {
+        inbox.push(integer);
     }
 
     public Integer poll() {
-        return null;
+        return inbox.pop();
     }
 
     public Integer peek() {
-        return null;
+        return inbox.peek();
     }
 }
