@@ -19,7 +19,22 @@ public class SinglyLinkedList {
     }
 
     public int getNthFromTheEnd(int nth) {
-        return 0;
+
+        ListNode node = root;
+        int maxIdx = 0;
+        while (node.next != null) {
+            node = node.next;
+            maxIdx++;
+        }
+
+        node = root;
+        int index = 0;
+        while (index + (nth - 1) < maxIdx) {
+            node = node.next;
+            index++;
+        }
+
+        return node.data;
     }
 
     public void print() {

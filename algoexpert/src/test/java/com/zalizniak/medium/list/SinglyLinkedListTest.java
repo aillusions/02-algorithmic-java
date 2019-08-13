@@ -27,5 +27,7 @@ public class SinglyLinkedListTest {
         list.add(50);
 
         Assert.assertEquals(40, list.getNthFromTheEnd(2));
+        Assert.assertEquals(10, list.getNthFromTheEnd(5));
+        Assert.assertEquals(50, list.getNthFromTheEnd(1));
     }
 }
