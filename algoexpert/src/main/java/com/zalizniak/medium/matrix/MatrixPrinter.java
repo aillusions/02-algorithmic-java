@@ -10,6 +10,6 @@ public class MatrixPrinter {
             }
             System.out.println();
         }
-
+        System.out.println();
     }
 }
