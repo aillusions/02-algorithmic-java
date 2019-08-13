@@ -14,7 +14,7 @@ public class SearchInSortedMatrix {
             for (int w = 0; w < matrix[0].length; w++) {
                 if (matrix[h][w] == search) {
                     Integer[] rv = new Integer[]{h, w};
-                    System.out.println("Found: " + search + " at " + Arrays.toString(rv));
+                    //System.out.println("Found: " + search + " at " + Arrays.toString(rv));
                     return rv;
                 }
             }
@@ -38,17 +38,24 @@ public class SearchInSortedMatrix {
 
     static int binarySearch(int[] row, int elem) {
 
-        int length = row.length;
-        int maxIdx = length - 1;
+        int maxIdx = row.length - 1;
 
         int startIdx = 0;
         int endIdx = maxIdx;
 
+        int safelyIterator = 0;
+
         while (startIdx <= endIdx) {
 
-            int middleIdx = (maxIdx + startIdx) / 2;
+            int middleIdx = (endIdx + startIdx) / 2;
 
-            System.out.println("Checking: " + startIdx + " to " + endIdx + " with mid idx: " + middleIdx);
+            // System.out.println("Checking: " + startIdx + " to " + endIdx + " with mid idx: " + middleIdx);
+
+            if (safelyIterator > maxIdx) {
+                throw new RuntimeException("Too many iterations: " + safelyIterator);
+            }
+
+            safelyIterator++;
 
             int middleValue = row[middleIdx];
 

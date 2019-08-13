@@ -33,7 +33,7 @@ public class SearchInSortedMatrixTest {
         MatrixPrinter.print(matrix);
 
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 6), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{1, 2}));
-        //MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 1), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{0, 0}));
-        //MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 9), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{2, 2}));
+        MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 1), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{0, 0}));
+        MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 9), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{2, 2}));
     }
 }
