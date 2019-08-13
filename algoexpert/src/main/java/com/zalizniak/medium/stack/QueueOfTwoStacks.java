@@ -12,7 +12,10 @@ public class QueueOfTwoStacks {
     }
 
     public Integer poll() {
-        return inbox.pop();
+        while (!inbox.isEmpty()) {
+            outbox.push(inbox.pop());
+        }
+        return outbox.pop();
     }
 
     public Integer peek() {
