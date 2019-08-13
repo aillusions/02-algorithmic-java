@@ -1,7 +1,7 @@
 package com.zalizniak.medium.super_set;
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -10,27 +10,30 @@ import java.util.Set;
 public class SuperSetGenerator {
 
     public static Set<Set<Integer>> getSuperset(Set<Integer> in) {
-        return superSet(in.toArray(new Integer[in.size()]));
+        return superSet(new HashSet<>(in));
     }
 
-    private static Set<Set<Integer>> superSet(Integer[] in) {
+    private static Set<Set<Integer>> superSet(Set<Integer> in) {
 
-        System.out.println("Super set of: " + Arrays.toString(in));
+        System.out.println("Super set of: " + in.toString());
 
         Set<Set<Integer>> rv = new HashSet<>();
 
-        if (in.length == 0) {
+        if (in.isEmpty()) {
+            rv.add(new HashSet<>());
             return rv;
         }
 
-        Integer[] subArray = Arrays.copyOfRange(in, 1, in.length);
-        Set<Set<Integer>> subArraySuperSet = superSet(subArray);
+        Iterator<Integer> it = in.iterator();
+        Integer thisVariable = it.next();
+        it.remove();
+
+        Set<Set<Integer>> subArraySuperSet = superSet(in);
 
         for (Set<Integer> subSet : subArraySuperSet) {
             Set<Integer> incl = new HashSet<>(subSet);
             Set<Integer> excl = new HashSet<>(subSet);
-            incl.add(in[0]);
-
+            incl.add(thisVariable);
             rv.add(incl);
             rv.add(excl);
         }
