@@ -26,9 +26,41 @@ public class SearchInSortedMatrix {
     public static Integer[] searchBinary(int[][] matrix, int search) {
 
         for (int h = 0; h < matrix.length; h++) {
-
+            int[] row = matrix[h];
+            int binarySearchResult = binarySearch(row, search);
+            if (binarySearchResult >= 0) {
+                return new Integer[]{h, binarySearchResult};
+            }
         }
 
         return null;
+    }
+
+    static int binarySearch(int[] row, int elem) {
+
+        int length = row.length;
+        int maxIdx = length - 1;
+
+        int startIdx = 0;
+        int endIdx = maxIdx;
+
+        while (startIdx <= endIdx) {
+
+            int middleIdx = (maxIdx + startIdx) / 2;
+
+            System.out.println("Checking: " + startIdx + " to " + endIdx + " with mid idx: " + middleIdx);
+
+            int middleValue = row[middleIdx];
+
+            if (elem == middleValue) {
+                return middleIdx;
+            } else if (elem < middleValue) {
+                endIdx = middleIdx - 1;
+            } else {
+                startIdx = middleIdx + 1;
+            }
+        }
+
+        return -1;
     }
 }
