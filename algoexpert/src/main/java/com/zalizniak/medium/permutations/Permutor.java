@@ -9,21 +9,20 @@ import java.util.List;
  * By the time you have 10 elements, there are more than 3.5 million permutations
  * With factorial algorithms - computer is unable to compute more than the first dozen or so cases in any reasonable amount of time.
  */
-public class Permutator {
+public class Permutor {
 
 
-    public static int[][] permutate(int[] in) {
+    public static int[][] permute(int[] in) {
         int size = in.length;
+
+        List<int[]> permutationsHolder = new LinkedList<>();
+
+        permute(in, 0, size - 1, permutationsHolder);
+
         int permutationsNumber = factorialUsingForLoop(size);
-
-
-        List<int[]> holder = new LinkedList<>();
-
-        permute(in, 0, size - 1, holder);
-
         int[][] rv = new int[permutationsNumber][size];
-        for (int i = 0; i < holder.size(); i++) {
-            rv[i] = holder.get(i);
+        for (int i = 0; i < permutationsHolder.size(); i++) {
+            rv[i] = permutationsHolder.get(i);
         }
 
         return rv;
@@ -43,8 +42,7 @@ public class Permutator {
     }
 
     public static void swap(int[] in, int i, int j) {
-        int temp;
-        temp = in[i];
+        int temp = in[i];
         in[i] = in[j];
         in[j] = temp;
     }
