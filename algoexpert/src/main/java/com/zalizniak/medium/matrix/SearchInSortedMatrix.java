@@ -22,4 +22,13 @@ public class SearchInSortedMatrix {
 
         return null;
     }
+
+    public static Integer[] searchBinary(int[][] matrix, int search) {
+
+        for (int h = 0; h < matrix.length; h++) {
+
+        }
+
+        return null;
+    }
 }
