@@ -16,7 +16,8 @@ public class SuperSetGeneratorTest {
 
     @Test
     public void testSuperSetGenerator() {
-        Assert.assertEquals(superSet(), SuperSetGenerator.getSuperset(new HashSet<>(Arrays.asList(1, 2))));
+        Assert.assertEquals(superSet(new int[0], new int[]{1}, new int[]{2}, new int[]{1, 2}), SuperSetGenerator.getSuperset(new HashSet<>(Arrays.asList(1, 2))));
+        Assert.assertEquals(superSet(new int[0], new int[]{1}, new int[]{2}, new int[]{3}, new int[]{1, 2}, new int[]{1, 3}, new int[]{2, 3}, new int[]{1, 2, 3}), SuperSetGenerator.getSuperset(new HashSet<>(Arrays.asList(1, 2, 3))));
     }
 
     private Set<Set<Integer>> superSet(int[]... subSets) {
