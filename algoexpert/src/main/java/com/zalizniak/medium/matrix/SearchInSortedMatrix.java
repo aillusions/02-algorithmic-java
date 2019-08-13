@@ -1,7 +1,5 @@
 package com.zalizniak.medium.matrix;
 
-import java.util.Arrays;
-
 public class SearchInSortedMatrix {
 
     /**
@@ -43,19 +41,9 @@ public class SearchInSortedMatrix {
         int startIdx = 0;
         int endIdx = maxIdx;
 
-        int safelyIterator = 0;
-
         while (startIdx <= endIdx) {
 
             int middleIdx = (endIdx + startIdx) / 2;
-
-            // System.out.println("Checking: " + startIdx + " to " + endIdx + " with mid idx: " + middleIdx);
-
-            if (safelyIterator > maxIdx) {
-                throw new RuntimeException("Too many iterations: " + safelyIterator);
-            }
-
-            safelyIterator++;
 
             int middleValue = row[middleIdx];
 

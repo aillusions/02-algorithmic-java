@@ -7,13 +7,18 @@ import org.junit.Test;
 
 public class SearchInSortedMatrixTest {
 
+    int[][] matrix = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+    };
+
+    int[][] largeMatrix = new int[1_000][100_000];
+
+
     @Test
     public void shouldSearchBruteForce() {
-        int[][] matrix = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
+
 
         MatrixPrinter.print(matrix);
 
@@ -24,16 +29,21 @@ public class SearchInSortedMatrixTest {
 
     @Test
     public void shouldSearchBinary() {
-        int[][] matrix = {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
 
         MatrixPrinter.print(matrix);
 
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 6), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{1, 2}));
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 1), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{0, 0}));
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBinary(matrix, 9), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{2, 2}));
+    }
+
+    @Test
+    public void shouldSearchBruteForcePerf() {
+        SearchInSortedMatrix.searchBruteForce(largeMatrix, 999);
+    }
+
+    @Test
+    public void shouldSearchBinaryPerf() {
+        SearchInSortedMatrix.searchBinary(largeMatrix, 999);
     }
 }
