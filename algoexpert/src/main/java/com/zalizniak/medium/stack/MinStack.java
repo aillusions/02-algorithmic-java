@@ -7,19 +7,14 @@ class MinStack {
     private Stack<Integer> stack = new Stack<>();
     private Stack<Integer> min = new Stack<>();
 
-    public void push(int x) {
+    public void push(int val) {
 
-        stack.push(x);
+        stack.push(val);
 
         if (min.isEmpty()) {
-            min.push(x);
+            min.push(val);
         } else {
-            int y = min.peek();
-            if (x < y) {
-                min.push(x);
-            } else {
-                min.push(y);
-            }
+            min.push(Math.min(val, min.peek()));
         }
     }
 
