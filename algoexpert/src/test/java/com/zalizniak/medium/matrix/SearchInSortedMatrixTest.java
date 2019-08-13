@@ -14,6 +14,9 @@ public class SearchInSortedMatrixTest {
                 {4, 5, 6},
                 {7, 8, 9}
         };
+
+        MatrixPrinter.print(matrix);
+
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBruteForce(matrix, 6), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{1, 2}));
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBruteForce(matrix, 1), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{0, 0}));
         MatcherAssert.assertThat(SearchInSortedMatrix.searchBruteForce(matrix, 9), IsArrayContainingInAnyOrder.arrayContainingInAnyOrder(new Integer[]{2, 2}));
