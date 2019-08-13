@@ -17,7 +17,7 @@ public class Permutor {
 
         List<int[]> permutationsHolder = new LinkedList<>();
 
-        permute(in, 0, size - 1, permutationsHolder);
+        permute(in, 0, permutationsHolder);
 
         int permutationsNumber = factorialUsingForLoop(size);
         int[][] rv = new int[permutationsNumber][size];
@@ -28,15 +28,16 @@ public class Permutor {
         return rv;
     }
 
-    private static void permute(int[] in, int startingIndex, int endIndex, List<int[]> holder) {
-        if (startingIndex == endIndex) {
+    private static void permute(int[] in, int startIndex, List<int[]> holder) {
+        int endIndex = in.length - 1;
+        if (startIndex == endIndex) {
             //System.out.println(Arrays.toString(in));
             holder.add(Arrays.copyOf(in, in.length));
         } else {
-            for (int i = startingIndex; i <= endIndex; i++) {
-                swap(in, startingIndex, i);
-                permute(in, startingIndex + 1, endIndex, holder);
-                swap(in, startingIndex, i);
+            for (int i = startIndex; i <= endIndex; i++) {
+                swap(in, startIndex, i);
+                permute(in, startIndex + 1, holder);
+                swap(in, startIndex, i);
             }
         }
     }
