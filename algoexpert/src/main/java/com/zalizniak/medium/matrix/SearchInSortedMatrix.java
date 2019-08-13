@@ -1,5 +1,10 @@
 package com.zalizniak.medium.matrix;
 
+//
+//TODO Method 3: (The most efficient way)
+// We will try to utilise the fact that the array is sorted in the row wise and column wise manner. That means for every row, the last element is the largest one and for every column, the last element is again the largest one. That means for any given number, all numbers to the right of it and all numbers to the bottom of it will be greater.
+// We can start search from the top right corner. First, keep going left until we find the exact number (return true), or until we find a number that is smaller. If we find a number that is smaller, we go downward in the matrix. Then again we move to the left, and so on, until we find the number, or hit the boundary of the matrix.
+//
 public class SearchInSortedMatrix {
 
     /**
