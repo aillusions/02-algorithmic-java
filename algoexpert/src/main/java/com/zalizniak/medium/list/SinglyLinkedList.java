@@ -49,6 +49,27 @@ public class SinglyLinkedList {
         return node.data;
     }
 
+    public int getNthFromTheEndFast(int nth) {
+
+        ListNode tail = root;
+        ListNode head = root;
+
+        int tailIdx = 0;
+        int headIdx = 0;
+
+        while (head.next != null) {
+            head = head.next;
+            headIdx++;
+
+            if (headIdx - tailIdx == nth) {
+                tail = tail.next;
+                tailIdx++;
+            }
+        }
+
+        return tail.data;
+    }
+
     public void print() {
 
         ListNode currentNode = root;
