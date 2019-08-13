@@ -9,11 +9,11 @@ class MinStack {
 
     public void push(int x) {
 
-        if (stack.isEmpty()) {
-            stack.push(x);
+        stack.push(x);
+
+        if (min.isEmpty()) {
             min.push(x);
         } else {
-            stack.push(x);
             int y = min.peek();
             if (x < y) {
                 min.push(x);
