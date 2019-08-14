@@ -1,41 +1,37 @@
 package com.zalizniak.medium.longest_palindromic_sub;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LongestPalindromicSubsequence {
-
-    private static final boolean IS_USE_CACHE = true;
-    private Map<String, Integer> cache = new HashMap<>();
 
     public int longestPalindromeSubseq(String s) {
 
-        if (!IS_USE_CACHE || !cache.containsKey(s)) {
-
-            int max;
-            if (s.length() <= 1) {
-                max = 0;
-            } else if (PalindromeChecker.isPalindrome(s)) {
-                max = s.length();
-            } else {
-                max = Integer.MIN_VALUE;
-                for (int i = 0; i < s.length(); i++) {
-                    String sub = removeChar(s, i);
-                    max = Math.max(max, longestPalindromeSubseq(sub));
-                }
+        int max;
+        if (s.length() <= 1) {
+            max = 0;
+        } else if (isPalindrome(s)) {
+            max = s.length();
+        } else {
+            max = Integer.MIN_VALUE;
+            for (int i = 0; i < s.length(); i++) {
+                String sub = removeChar(s, i);
+                max = Math.max(max, longestPalindromeSubseq(sub));
             }
-
-            if (!IS_USE_CACHE) {
-                return max;
-            }
-            cache.put(s, max);
         }
 
-        // System.out.println("Checking: " + s + " - " + cache.get(s));
-        return cache.get(s);
+        return max;
     }
 
-    public static String removeChar(String s, int index) {
+    private boolean isPalindrome(String s) {
+
+        for (int i = 0; i < s.length() / 2; i++) {
+            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private String removeChar(String s, int index) {
         return s.substring(0, index) + s.substring(index + 1);
     }
 }
