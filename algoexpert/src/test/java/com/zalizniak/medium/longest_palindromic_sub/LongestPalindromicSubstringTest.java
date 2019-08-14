@@ -15,6 +15,5 @@ public class LongestPalindromicSubstringTest {
         Assert.assertEquals(2, gen.longestPalindromeSubstr("cbbd")); // bb
         Assert.assertEquals(6, gen.longestPalindromeSubstr("1abba1")); // 1abba1
         Assert.assertEquals(4, gen.longestPalindromeSubstr("1abba2")); // abba
-        Assert.assertEquals(1, gen.longestPalindromeSubstr("abc")); // a, b, c
     }
 }

@@ -15,6 +15,5 @@ public class LongestPalindromicSubsequenceTest {
         Assert.assertEquals(2, gen.longestPalindromeSubseq("cbbd")); // bb
         Assert.assertEquals(6, gen.longestPalindromeSubseq("1abba1")); // 1abba1
         Assert.assertEquals(4, gen.longestPalindromeSubseq("1abba2")); // abba
-        Assert.assertEquals(1, gen.longestPalindromeSubseq("abc")); // a, b, c
     }
 }
