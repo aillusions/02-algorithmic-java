@@ -1,4 +1,4 @@
-package com.zalizniak.medium.longest_palindromic_subsequence;
+package com.zalizniak.medium.longest_palindromic_sub;
 
 public class LongestPalindromicSubsequence {
 

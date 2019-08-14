@@ -1,4 +1,4 @@
-package com.zalizniak.medium.longest_palindromic_subsequence;
+package com.zalizniak.medium.longest_palindromic_sub;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +13,8 @@ public class LongestPalindromicSubsequenceTest {
         Assert.assertEquals(7, gen.longestPalindromeSubseq("BBABCBCAB")); // BABCBAB, BBBBB, BBCBB
         Assert.assertEquals(4, gen.longestPalindromeSubseq("bbbab")); // bbbb
         Assert.assertEquals(2, gen.longestPalindromeSubseq("cbbd")); // bb
-        Assert.assertEquals(4, gen.longestPalindromeSubseq("1abba1")); // abba
+        Assert.assertEquals(6, gen.longestPalindromeSubseq("1abba1")); // 1abba1
+        Assert.assertEquals(4, gen.longestPalindromeSubseq("1abba2")); // abba
         Assert.assertEquals(1, gen.longestPalindromeSubseq("abc")); // a, b, c
     }
 }
