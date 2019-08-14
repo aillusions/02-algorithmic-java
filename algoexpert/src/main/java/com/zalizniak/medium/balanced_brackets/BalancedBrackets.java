@@ -13,10 +13,9 @@ public class BalancedBrackets {
 
         for (int i = 0; i < in.length(); i++) {
             char charAt = in.charAt(i);
-            boolean open = (charAt == OPEN);
-            if (open) {
+            if (charAt == OPEN) {
                 stack.push(1);
-            } else {
+            } else if (charAt == CLOSE) {
                 if (stack.isEmpty()) {
                     return false;
                 }
