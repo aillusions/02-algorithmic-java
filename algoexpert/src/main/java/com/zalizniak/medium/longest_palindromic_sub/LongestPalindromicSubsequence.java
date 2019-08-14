@@ -5,11 +5,12 @@ import java.util.Map;
 
 public class LongestPalindromicSubsequence {
 
+    private static final boolean IS_USE_CACHE = true;
     private Map<String, Integer> cache = new HashMap<>();
 
     public int longestPalindromeSubseq(String s) {
 
-        if (!cache.containsKey(s)) {
+        if (!IS_USE_CACHE || !cache.containsKey(s)) {
 
             int max;
             if (s.length() <= 1) {
@@ -24,10 +25,13 @@ public class LongestPalindromicSubsequence {
                 }
             }
 
+            if (!IS_USE_CACHE) {
+                return max;
+            }
             cache.put(s, max);
         }
 
-        System.out.println("Checking: " + s + " - " + cache.get(s));
+        // System.out.println("Checking: " + s + " - " + cache.get(s));
         return cache.get(s);
     }
 
