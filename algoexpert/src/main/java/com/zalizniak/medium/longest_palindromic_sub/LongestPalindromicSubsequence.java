@@ -9,27 +9,26 @@ public class LongestPalindromicSubsequence {
 
     public int longestPalindromeSubseq(String s) {
 
-        if (cache.containsKey(s)) {
-            return cache.get(s);
-        }
+        if (!cache.containsKey(s)) {
 
-        int rv;
-        System.out.println("Checking: " + s);
-        if (s.length() <= 1) {
-            rv = 0;
-        } else if (PalindromeChecker.isPalindrome(s)) {
-            rv = s.length();
-        } else {
-            rv = Integer.MIN_VALUE;
-            for (int i = 0; i < s.length(); i++) {
-                String sub = removeChar(s, i);
-                rv = Math.max(rv, longestPalindromeSubseq(sub));
+            int max;
+            if (s.length() <= 1) {
+                max = 0;
+            } else if (PalindromeChecker.isPalindrome(s)) {
+                max = s.length();
+            } else {
+                max = Integer.MIN_VALUE;
+                for (int i = 0; i < s.length(); i++) {
+                    String sub = removeChar(s, i);
+                    max = Math.max(max, longestPalindromeSubseq(sub));
+                }
             }
+
+            cache.put(s, max);
         }
 
-        cache.put(s, rv);
-
-        return rv;
+        System.out.println("Checking: " + s + " - " + cache.get(s));
+        return cache.get(s);
     }
 
     public static String removeChar(String s, int index) {
