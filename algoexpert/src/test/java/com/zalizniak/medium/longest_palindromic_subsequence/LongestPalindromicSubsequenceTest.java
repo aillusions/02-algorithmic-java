@@ -9,9 +9,11 @@ public class LongestPalindromicSubsequenceTest {
 
     @Test
     public void test() {
-        Assert.assertEquals(0, gen.longestPalindromeSubseq(""));
-        Assert.assertEquals(1, gen.longestPalindromeSubseq("ab"));
-        Assert.assertEquals(4, gen.longestPalindromeSubseq("abba"));
-        Assert.assertEquals(4, gen.longestPalindromeSubseq("12abba34"));
+        Assert.assertEquals(5, gen.longestPalindromeSubseq("geeksforgeeks")); // EEKEE, EESEE, EEFEE
+        Assert.assertEquals(7, gen.longestPalindromeSubseq("BBABCBCAB")); // BABCBAB, BBBBB, BBCBB
+        Assert.assertEquals(4, gen.longestPalindromeSubseq("bbbab")); // bbbb
+        Assert.assertEquals(2, gen.longestPalindromeSubseq("cbbd")); // bb
+        Assert.assertEquals(4, gen.longestPalindromeSubseq("1abba1")); // abba
+        Assert.assertEquals(1, gen.longestPalindromeSubseq("abc")); // a, b, c
     }
 }
