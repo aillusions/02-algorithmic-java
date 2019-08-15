@@ -9,6 +9,7 @@ public class QuickSortTest {
 
     @Test
     public void testInsertion() {
+        MatcherAssert.assertThat(QuickSort.insertionSort(new Integer[]{5, 4, 3, 2, 1}), IsArrayContainingInOrder.arrayContaining(1, 2, 3, 4, 5));
         MatcherAssert.assertThat(QuickSort.insertionSort(new Integer[]{3, 2, 1}), IsArrayContainingInOrder.arrayContaining(1, 2, 3));
         MatcherAssert.assertThat(QuickSort.insertionSort(new Integer[]{1, 0, 2, -1, 3}), IsArrayContainingInOrder.arrayContaining(-1, 0, 1, 2, 3));
     }

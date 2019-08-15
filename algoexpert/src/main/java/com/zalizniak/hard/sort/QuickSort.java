@@ -10,15 +10,19 @@ package com.zalizniak.hard.sort;
 public class QuickSort {
 
 
+    /**
+     * 5 4 3 2 1
+     */
     public static Integer[] insertionSort(Integer[] in) {
 
         for (int i = 1; i < in.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (in[i] < in[j]) {
-                    swap(in, i, j);
-                    break;
-                }
+            int cardValue = in[i];
+            int j = i - 1;
+            while (j >= 0 && in[j] > cardValue) {
+                in[j + 1] = in[j];
+                j--;
             }
+            in[j + 1] = cardValue;
         }
         return in;
     }
