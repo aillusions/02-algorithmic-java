@@ -13,15 +13,14 @@ public class MergeSort {
     }
 
     public static void mergeSort(Integer[] in) {
-        int length = in.length;
-        if (length < 2) {
+        if (in.length < 2) {
             return;
         }
 
-        int midIdx = length / 2;
+        int midIdx = in.length / 2;
 
         Integer[] left = Arrays.copyOfRange(in, 0, midIdx);
-        Integer[] right = Arrays.copyOfRange(in, midIdx, length);
+        Integer[] right = Arrays.copyOfRange(in, midIdx, in.length);
 
         mergeSort(left);
         mergeSort(right);
@@ -31,21 +30,25 @@ public class MergeSort {
 
     public static void merge(Integer[] in, Integer[] left, Integer[] right) {
 
-        int i = 0, j = 0, k = 0;
-        while (i < left.length && j < right.length) {
-            if (left[i] <= right[j]) {
-                in[k++] = left[i++];
+        int leftIdx = 0;
+        int rightIdx = 0;
+
+        int inIdx = 0;
+
+        while (leftIdx < left.length && rightIdx < right.length) {
+            if (left[leftIdx] <= right[rightIdx]) {
+                in[inIdx++] = left[leftIdx++];
             } else {
-                in[k++] = right[j++];
+                in[inIdx++] = right[rightIdx++];
             }
         }
 
-        while (i < left.length) {
-            in[k++] = left[i++];
+        while (leftIdx < left.length) {
+            in[inIdx++] = left[leftIdx++];
         }
 
-        while (j < right.length) {
-            in[k++] = right[j++];
+        while (rightIdx < right.length) {
+            in[inIdx++] = right[rightIdx++];
         }
     }
 
