@@ -6,11 +6,12 @@ package com.zalizniak.hard.sort;
 public class MergeSort {
 
     public static Integer[] sort(Integer[] in) {
-        mergeSort(in, in.length);
+        mergeSort(in);
         return in;
     }
 
-    public static void mergeSort(Integer[] in, int length) {
+    public static void mergeSort(Integer[] in) {
+        int length = in.length;
         if (length < 2) {
             return;
         }
@@ -24,8 +25,8 @@ public class MergeSort {
         for (int i = mid; i < length; i++) {
             right[i - mid] = in[i];
         }
-        mergeSort(left, mid);
-        mergeSort(right, length - mid);
+        mergeSort(left);
+        mergeSort(right);
 
         merge(in, left, right, mid, length - mid);
     }
