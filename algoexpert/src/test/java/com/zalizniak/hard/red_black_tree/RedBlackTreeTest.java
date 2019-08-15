@@ -13,4 +13,15 @@ public class RedBlackTreeTest {
 
         tree.print();
     }
+
+    @Test
+    public void testUnbalanced() {
+        RedBlackTree tree = new RedBlackTree();
+
+        for (int i = 0; i <= 5; i++) {
+            tree.add(i);
+        }
+
+        tree.print();
+    }
 }
