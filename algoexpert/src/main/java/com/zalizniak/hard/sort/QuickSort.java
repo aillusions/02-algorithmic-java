@@ -1,7 +1,5 @@
 package com.zalizniak.hard.sort;
 
-import java.util.Arrays;
-
 /**
  * O(n log n)
  * <p>
