@@ -30,7 +30,6 @@ public class BinaryTreeNode {
         return rv;
     }
 
-
     @Override
     public String toString() {
         return data.toString();

@@ -27,4 +27,9 @@ public class RedBlackNode extends BinaryTreeNode {
     public boolean isRed() {
         return !black;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " [" + (black ? 'b' : 'r') + "]";
+    }
 }

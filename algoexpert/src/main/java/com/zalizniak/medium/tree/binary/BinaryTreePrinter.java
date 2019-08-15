@@ -27,7 +27,7 @@ public class BinaryTreePrinter {
         List<BinaryTreeNode> newNodes = new ArrayList<BinaryTreeNode>();
         for (BinaryTreeNode node : nodes) {
             if (node != null) {
-                System.out.print(node.data);
+                System.out.print(node.toString());
                 newNodes.add(node.left);
                 newNodes.add(node.right);
             } else {
