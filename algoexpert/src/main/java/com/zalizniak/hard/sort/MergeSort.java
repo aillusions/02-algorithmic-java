@@ -28,6 +28,12 @@ public class MergeSort {
         merge(in, left, right);
     }
 
+    /**
+     *
+     * @param in - unordered super-array
+     * @param left - sorted sub-array
+     * @param right- sorted sub-array
+     */
     public static void merge(Integer[] in, Integer[] left, Integer[] right) {
 
         int leftIdx = 0;
