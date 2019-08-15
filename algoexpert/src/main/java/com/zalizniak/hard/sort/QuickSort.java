@@ -1,5 +1,7 @@
 package com.zalizniak.hard.sort;
 
+import java.util.Arrays;
+
 /**
  * O(n log n)
  * <p>
@@ -42,8 +44,8 @@ public class QuickSort {
      * Performs pivot partitioning
      */
     protected static int partition(Integer[] in, int startIdx, int endIdx) {
-        int pivotIdx = endIdx;
-        int pivotValue = in[pivotIdx];
+        int origPivotIdx = endIdx;
+        int pivotValue = in[origPivotIdx];
 
         int leftIdx = startIdx;
         int rightIdx = endIdx - 1;
@@ -54,7 +56,7 @@ public class QuickSort {
                 leftIdx++;
             }
 
-            while (in[rightIdx] > pivotIdx) {
+            while (rightIdx > 0 && in[rightIdx] > pivotValue) {
                 rightIdx--;
             }
 
@@ -63,11 +65,10 @@ public class QuickSort {
             }
 
             swap(in, leftIdx, rightIdx);
-            leftIdx++;
-            rightIdx--;
         }
 
-        swap(in, leftIdx, pivotIdx);
+        swap(in, leftIdx, origPivotIdx);
+
         return leftIdx;
     }
 
