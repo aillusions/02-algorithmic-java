@@ -26,24 +26,26 @@ public class MergeSort {
         mergeSort(left);
         mergeSort(right);
 
-        merge(in, left, right, midIdx, length - midIdx);
+        merge(in, left, right);
     }
 
-    public static void merge(Integer[] in, Integer[] l, Integer[] r, int left, int right) {
+    public static void merge(Integer[] in, Integer[] left, Integer[] right) {
 
         int i = 0, j = 0, k = 0;
-        while (i < left && j < right) {
-            if (l[i] <= r[j]) {
-                in[k++] = l[i++];
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) {
+                in[k++] = left[i++];
             } else {
-                in[k++] = r[j++];
+                in[k++] = right[j++];
             }
         }
-        while (i < left) {
-            in[k++] = l[i++];
+
+        while (i < left.length) {
+            in[k++] = left[i++];
         }
-        while (j < right) {
-            in[k++] = r[j++];
+
+        while (j < right.length) {
+            in[k++] = right[j++];
         }
     }
 
