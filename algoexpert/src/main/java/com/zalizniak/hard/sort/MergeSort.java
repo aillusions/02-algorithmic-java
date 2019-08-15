@@ -3,7 +3,8 @@ package com.zalizniak.hard.sort;
 import java.util.Arrays;
 
 /**
- * O(n log n)
+ * time complexity is O(n log n)
+ * space complexity is O(n)
  */
 public class MergeSort {
 
