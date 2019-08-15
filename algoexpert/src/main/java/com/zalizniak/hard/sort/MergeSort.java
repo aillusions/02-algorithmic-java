@@ -1,5 +1,7 @@
 package com.zalizniak.hard.sort;
 
+import java.util.Arrays;
+
 /**
  * O(n log n)
  */
@@ -15,20 +17,16 @@ public class MergeSort {
         if (length < 2) {
             return;
         }
-        int mid = length / 2;
-        Integer[] left = new Integer[mid];
-        Integer[] right = new Integer[length - mid];
 
-        for (int i = 0; i < mid; i++) {
-            left[i] = in[i];
-        }
-        for (int i = mid; i < length; i++) {
-            right[i - mid] = in[i];
-        }
+        int midIdx = length / 2;
+
+        Integer[] left = Arrays.copyOfRange(in, 0, midIdx);
+        Integer[] right = Arrays.copyOfRange(in, midIdx, length);
+
         mergeSort(left);
         mergeSort(right);
 
-        merge(in, left, right, mid, length - mid);
+        merge(in, left, right, midIdx, length - midIdx);
     }
 
     public static void merge(Integer[] in, Integer[] l, Integer[] r, int left, int right) {
