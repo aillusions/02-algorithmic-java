@@ -4,9 +4,27 @@ import com.zalizniak.medium.tree.binary.BinaryTreeNode;
 
 public class RedBlackNode extends BinaryTreeNode {
 
-    boolean isRed;
+    boolean black;
+
+    RedBlackNode parent;
 
     public RedBlackNode(Integer data) {
         super(data);
+    }
+
+    public void setBlack() {
+        black = true;
+    }
+
+    public void setRed() {
+        black = false;
+    }
+
+    public boolean isBlack() {
+        return black;
+    }
+
+    public boolean isRed() {
+        return !black;
     }
 }
