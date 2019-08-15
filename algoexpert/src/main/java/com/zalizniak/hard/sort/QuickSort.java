@@ -27,15 +27,56 @@ public class QuickSort {
         return in;
     }
 
-
     public static Integer[] quickSort(Integer[] in) {
+        quickSort(in, 0, in.length - 1);
         return in;
     }
 
-    private static void swap(Integer[] in, int i, int j) {
+    protected static void swap(Integer[] in, int i, int j) {
         int tmp = in[j];
         in[j] = in[i];
         in[i] = tmp;
     }
 
+    /**
+     * Performs pivot partitioning
+     */
+    protected static int partition(Integer[] in, int startIdx, int endIdx) {
+        int pivotIdx = endIdx;
+        int pivotValue = in[pivotIdx];
+
+        int leftIdx = startIdx;
+        int rightIdx = endIdx - 1;
+
+        while (true) {
+
+            while (in[leftIdx] < pivotValue) {
+                leftIdx++;
+            }
+
+            while (in[rightIdx] > pivotIdx) {
+                rightIdx--;
+            }
+
+            if (leftIdx >= rightIdx) {
+                break;
+            }
+
+            swap(in, leftIdx, rightIdx);
+            leftIdx++;
+            rightIdx--;
+        }
+
+        swap(in, leftIdx, pivotIdx);
+        return leftIdx;
+    }
+
+    protected static void quickSort(Integer[] in, int startIdx, int endIdx) {
+        if (startIdx < endIdx) {
+            int pivotIdx = partition(in, startIdx, endIdx);
+
+            quickSort(in, startIdx, pivotIdx - 1);  // Before pivotIdx
+            quickSort(in, pivotIdx + 1, endIdx); // After pivotIdx
+        }
+    }
 }
