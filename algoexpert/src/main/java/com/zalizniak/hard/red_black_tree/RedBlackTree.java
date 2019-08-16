@@ -53,7 +53,7 @@ public class RedBlackTree {
             throw new RuntimeException("Unable to remove missing value: " + value);
         } else {
             RedBlackNode parent = nodeToRemove.parent;
-            if (nodeToRemove.left == null && nodeToRemove.right == null) { // If n has no children, we only have to remove n from the tree.
+            if (nodeToRemove.left == null && nodeToRemove.right == null) { // If n has no children (is a leaf), we only have to remove n from the tree.
                 if (parent.right != null && parent.right.data.equals(nodeToRemove.data)) {
                     parent.right = null;
                 } else {
@@ -61,10 +61,12 @@ public class RedBlackTree {
                 }
             } else if (nodeToRemove.left == null || nodeToRemove.right == null) { // If n has a single child, we remove n and connect its parent to its child.
                 RedBlackNode singleChild = (RedBlackNode) (nodeToRemove.left == null ? nodeToRemove.right : nodeToRemove.left);
-                if (parent.right != null && parent.right.data.equals(nodeToRemove.data)) {
-                    parent.right = singleChild;
+                nodeToRemove.data = singleChild.data;
+
+                if (nodeToRemove.right != null) {
+                    nodeToRemove.right = null;
                 } else {
-                    parent.left = singleChild;
+                    nodeToRemove.left = null;
                 }
             }
         }
