@@ -46,6 +46,37 @@ public class RedBlackTree {
         }
     }
 
+    public void delete(int value) {
+        RedBlackNode nodeToRemove = getNode(value);
+
+        if (nodeToRemove == null) {
+            throw new RuntimeException("Unable to remove missing value: " + value);
+        } else {
+            RedBlackNode parent = nodeToRemove.parent;
+            if (nodeToRemove.left == null && nodeToRemove.right == null) {
+                if (parent.right != null && parent.right.data.equals(nodeToRemove.data)) {
+                    parent.right = null;
+                } else {
+                    parent.left = null;
+                }
+            }
+        }
+    }
+
+    public RedBlackNode getNode(int value) {
+
+        RedBlackNode node = root;
+        while (node != null && node.data != value) {
+            if (node.data > value) {
+                node = (RedBlackNode) node.left;
+            } else {
+                node = (RedBlackNode) node.right;
+            }
+        }
+
+        return node;
+    }
+
     protected void fixTree(RedBlackNode newNode) {
 
     }

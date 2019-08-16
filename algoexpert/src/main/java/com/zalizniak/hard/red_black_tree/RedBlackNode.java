@@ -30,6 +30,6 @@ public class RedBlackNode extends BinaryTreeNode {
 
     @Override
     public String toString() {
-        return super.toString() + " [" + (black ? 'b' : 'r') + "]";
+        return super.toString() /*+ " [" + (black ? 'b' : 'r') + "]"*/;
     }
 }

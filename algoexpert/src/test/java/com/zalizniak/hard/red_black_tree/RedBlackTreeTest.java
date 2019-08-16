@@ -12,6 +12,12 @@ public class RedBlackTreeTest {
         tree.add(-1);
 
         tree.print();
+
+        tree.delete(-1);
+        tree.print();
+
+        tree.delete(1);
+        tree.print();
     }
 
     @Test
