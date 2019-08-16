@@ -1,32 +1,42 @@
 package com.zalizniak.hard.red_black_tree;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 public class RedBlackTreeTest {
 
     @Test
     public void testNormal() {
-        RedBlackTree tree = new RedBlackTree();
-        tree.add(5);
+        RedBlackTree redBlackTree = new RedBlackTree();
+        redBlackTree.add(5);
 
-        tree.add(7);
-        tree.add(3);
+        redBlackTree.add(7);
+        redBlackTree.add(3);
 
-        tree.add(4);
-        tree.add(2);
+        redBlackTree.add(4);
+        redBlackTree.add(2);
 
-        tree.add(9);
+        redBlackTree.add(9);
 
-        tree.print();
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 3, 4, 5, 7, 9), redBlackTree.inOrder());
 
-        tree.delete(4);
-        tree.print();
+        redBlackTree.delete(4);
 
-        tree.delete(3);
-        tree.print();
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 3, 5, 7, 9), redBlackTree.inOrder());
 
-        tree.delete(7);
-        tree.print();
+        redBlackTree.delete(3);
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 5, 7, 9), redBlackTree.inOrder());
+
+
+        redBlackTree.delete(7);
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 5, 9), redBlackTree.inOrder());
+
     }
 
     @Test

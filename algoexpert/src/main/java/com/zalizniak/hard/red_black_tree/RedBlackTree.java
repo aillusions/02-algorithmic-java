@@ -1,6 +1,10 @@
 package com.zalizniak.hard.red_black_tree;
 
+import com.zalizniak.medium.tree.binary.BinaryTreeNode;
 import com.zalizniak.medium.tree.binary.BinaryTreePrinter;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class RedBlackTree {
 
@@ -88,6 +92,25 @@ public class RedBlackTree {
 
     protected void fixTree(RedBlackNode newNode) {
 
+    }
+
+    public List<Integer> inOrder() {
+        List<Integer> rv = new LinkedList<>();
+        inOrder(root, rv);
+        return rv;
+    }
+
+    public void inOrder(BinaryTreeNode node, List<Integer> tracker) {
+
+        if (node == null) {
+            return;
+        }
+
+        inOrder(node.left, tracker);
+
+        tracker.add(node.data);
+
+        inOrder(node.right, tracker);
     }
 
     public void print() {
