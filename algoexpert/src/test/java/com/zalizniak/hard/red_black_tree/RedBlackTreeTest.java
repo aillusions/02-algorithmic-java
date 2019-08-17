@@ -46,7 +46,7 @@ public class RedBlackTreeTest {
 
         redBlackTree.delete(5);
         redBlackTree.print();
-        Assert.assertEquals(Arrays.asList(2, 7, 9, 8), redBlackTree.inOrder());
+        Assert.assertEquals(Arrays.asList(2, 7, 8, 9), redBlackTree.inOrder());
     }
 
     //@Test
