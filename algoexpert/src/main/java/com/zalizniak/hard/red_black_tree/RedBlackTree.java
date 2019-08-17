@@ -11,47 +11,29 @@ public class RedBlackTree {
     RedBlackNode root;
 
     public void add(int value) {
+        root = insertNode(root, value);
+        fixTree(root);
+    }
 
-        RedBlackNode newNode = new RedBlackNode(value);
+    public RedBlackNode insertNode(BinaryTreeNode startRoot, int value) {
+        if (startRoot == null) {
+            return new RedBlackNode(value);
+        }
 
-        if (root == null) {
-            root = newNode;
-            newNode.setBlack();
-            newNode.parent = null;
+        if (value == startRoot.data) {
+            return (RedBlackNode) startRoot;
+        } else if (value < startRoot.data) {
+            startRoot.left = insertNode(startRoot.left, value);
+            return (RedBlackNode) startRoot;
         } else {
-
-            newNode.setRed(); // why ??
-
-            RedBlackNode temp = root;
-
-            while (true) {
-                if (value < temp.data) {
-                    if (temp.left == null) {
-                        temp.left = newNode;
-                        newNode.parent = temp;
-                        break;
-                    } else {
-                        temp = (RedBlackNode) temp.left;
-                    }
-                } else if (value > temp.data) {
-                    if (temp.right == null) {
-                        temp.right = newNode;
-                        newNode.parent = temp;
-                        break;
-                    } else {
-                        temp = (RedBlackNode) temp.right;
-                    }
-                } else {
-                    throw new RuntimeException("Duplicated value: " + value);
-                }
-            }
-
-            fixTree(newNode);
+            startRoot.right = insertNode(startRoot.right, value);
+            return (RedBlackNode) startRoot;
         }
     }
 
     public void delete(int value) {
         root = deleteRec(root, value);
+        fixTree(root);
         System.out.println("Deleted: " + value);
     }
 
@@ -87,11 +69,11 @@ public class RedBlackTree {
         return (RedBlackNode) startRoot;
     }
 
-    protected int minValue(BinaryTreeNode root) {
-        int minv = root.data;
-        while (root.left != null) {
-            minv = root.left.data;
-            root = root.left;
+    protected int minValue(BinaryTreeNode startRoot) {
+        int minv = startRoot.data;
+        while (startRoot.left != null) {
+            minv = startRoot.left.data;
+            startRoot = startRoot.left;
         }
         return minv;
     }
