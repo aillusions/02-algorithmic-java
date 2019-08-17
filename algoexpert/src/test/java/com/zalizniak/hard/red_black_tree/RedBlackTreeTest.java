@@ -24,7 +24,6 @@ public class RedBlackTreeTest {
         Assert.assertEquals(Arrays.asList(2, 3, 4, 5, 7, 9), redBlackTree.inOrder());
 
         redBlackTree.delete(4);
-
         redBlackTree.print();
         Assert.assertEquals(Arrays.asList(2, 3, 5, 7, 9), redBlackTree.inOrder());
 
@@ -32,11 +31,18 @@ public class RedBlackTreeTest {
         redBlackTree.print();
         Assert.assertEquals(Arrays.asList(2, 5, 7, 9), redBlackTree.inOrder());
 
-
         redBlackTree.delete(7);
         redBlackTree.print();
         Assert.assertEquals(Arrays.asList(2, 5, 9), redBlackTree.inOrder());
 
+        redBlackTree.add(7);
+        redBlackTree.add(8);
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 5, 7, 9, 8), redBlackTree.inOrder());
+
+        redBlackTree.delete(5);
+        redBlackTree.print();
+        Assert.assertEquals(Arrays.asList(2, 7, 9, 8), redBlackTree.inOrder());
     }
 
     @Test

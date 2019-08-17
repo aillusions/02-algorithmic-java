@@ -51,29 +51,49 @@ public class RedBlackTree {
     }
 
     public void delete(int value) {
-        RedBlackNode nodeToRemove = getNode(value);
+        root = deleteRec(root, value);
+        System.out.println("Deleted: " + value);
+    }
 
-        if (nodeToRemove == null) {
-            throw new RuntimeException("Unable to remove missing value: " + value);
-        } else {
-            RedBlackNode parent = nodeToRemove.parent;
-            if (nodeToRemove.left == null && nodeToRemove.right == null) { // If n has no children (is a leaf), we only have to remove n from the tree.
-                if (parent.right != null && parent.right.data.equals(nodeToRemove.data)) {
-                    parent.right = null;
-                } else {
-                    parent.left = null;
-                }
-            } else if (nodeToRemove.left == null || nodeToRemove.right == null) { // If n has a single child, we remove n and connect its parent to its child.
-                RedBlackNode singleChild = (RedBlackNode) (nodeToRemove.left == null ? nodeToRemove.right : nodeToRemove.left);
-                nodeToRemove.data = singleChild.data;
-
-                if (nodeToRemove.right != null) {
-                    nodeToRemove.right = null;
-                } else {
-                    nodeToRemove.left = null;
-                }
-            }
+    /**
+     * If n has no children, we only have to remove n from the tree.
+     * If n has a single child, we remove n and connect its parent to its child.
+     * If n has two children, we need to :
+     * - Find the smallest node that is larger than n, call it m.
+     * - Remove m from the tree (if you have reached this case then m will always have no left child, though I’ll leave the proof to the reader), so we apply one or the other of the above cases to do this.
+     * - Replace the value of n with m.
+     */
+    protected RedBlackNode deleteRec(BinaryTreeNode startRoot, int value) {
+        if (startRoot == null) {
+            return null;
         }
+
+        if (value < startRoot.data) {
+            startRoot.left = deleteRec(startRoot.left, value);
+        } else if (value > startRoot.data) {
+            startRoot.right = deleteRec(startRoot.right, value);
+        } else {
+            if (startRoot.left == null) {
+                return (RedBlackNode) startRoot.right;
+            } else if (startRoot.right == null) {
+                return (RedBlackNode) startRoot.left;
+            }
+
+            startRoot.data = minValue(startRoot.right);  // node with two children: Get the inorder successor (smallest in the right subtree)
+
+            startRoot.right = deleteRec(startRoot.right, startRoot.data);
+        }
+
+        return (RedBlackNode) startRoot;
+    }
+
+    protected int minValue(BinaryTreeNode root) {
+        int minv = root.data;
+        while (root.left != null) {
+            minv = root.left.data;
+            root = root.left;
+        }
+        return minv;
     }
 
     public RedBlackNode getNode(int value) {
