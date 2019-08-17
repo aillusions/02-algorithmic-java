@@ -8,15 +8,19 @@ import java.util.Arrays;
 public class RedBlackTreeTest {
 
     @Test
-    public void testNormal() {
+    public void testAddRemove() {
         RedBlackTree redBlackTree = new RedBlackTree();
         redBlackTree.add(5);
+        Assert.assertEquals(Arrays.asList(5), redBlackTree.inOrder());
 
         redBlackTree.add(7);
         redBlackTree.add(3);
+        Assert.assertEquals(Arrays.asList(3, 5, 7), redBlackTree.inOrder());
 
         redBlackTree.add(4);
         redBlackTree.add(2);
+
+        Assert.assertEquals(Arrays.asList(2, 3, 4, 5, 7), redBlackTree.inOrder());
 
         redBlackTree.add(9);
 
@@ -38,7 +42,7 @@ public class RedBlackTreeTest {
         redBlackTree.add(7);
         redBlackTree.add(8);
         redBlackTree.print();
-        Assert.assertEquals(Arrays.asList(2, 5, 7, 9, 8), redBlackTree.inOrder());
+        Assert.assertEquals(Arrays.asList(2, 5, 7, 8, 9), redBlackTree.inOrder());
 
         redBlackTree.delete(5);
         redBlackTree.print();
