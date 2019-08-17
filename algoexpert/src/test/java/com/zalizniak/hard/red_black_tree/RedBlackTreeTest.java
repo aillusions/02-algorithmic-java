@@ -40,13 +40,14 @@ public class RedBlackTreeTest {
         Assert.assertEquals(Arrays.asList(2, 5, 9), redBlackTree.inOrder());
 
         redBlackTree.add(7);
-        redBlackTree.add(8);
+        redBlackTree.add(10);
+        System.out.println("Added: " + 7 + ", " + 10);
         redBlackTree.print();
-        Assert.assertEquals(Arrays.asList(2, 5, 7, 8, 9), redBlackTree.inOrder());
+        Assert.assertEquals(Arrays.asList(2, 5, 7, 9, 10), redBlackTree.inOrder());
 
         redBlackTree.delete(5);
         redBlackTree.print();
-        Assert.assertEquals(Arrays.asList(2, 7, 8, 9), redBlackTree.inOrder());
+        Assert.assertEquals(Arrays.asList(2, 7, 9, 10), redBlackTree.inOrder());
     }
 
     //@Test
