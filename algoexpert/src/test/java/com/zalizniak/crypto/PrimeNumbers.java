@@ -3,6 +3,9 @@ package com.zalizniak.crypto;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PrimeNumbers {
 
     @Test
@@ -32,7 +35,7 @@ public class PrimeNumbers {
      * Found 63129 prime numbers per 1000000 integers: 7000000 -  8000000
      * Found 62712 prime numbers per 1000000 integers: 8000000 -  9000000
      * Found 62090 prime numbers per 1000000 integers: 9000000 -  10000000
-     *
+     * <p>
      * Found 48155 prime numbers per 1000000 integers: 1000000000 - 1001000000
      * Found 48262 prime numbers per 1000000 integers: 1001000000 - 1002000000
      * Found 48198 prime numbers per 1000000 integers: 1002000000 - 1003000000
@@ -56,6 +59,13 @@ public class PrimeNumbers {
         }
     }
 
+    @Test
+    public void testPrimeFactors() {
+        System.out.println(primeFactors(44));
+        System.out.println(primeFactors(3));
+        System.out.println(primeFactors(32));
+    }
+
     // 2, 3, 5, 7, 11, 13, 17, 19, 23, 29
     public boolean isPrime(long n) {
 
@@ -68,5 +78,17 @@ public class PrimeNumbers {
                 return false;
         }
         return true;
+    }
+
+    public static List<Integer> primeFactors(long number) {
+        long n = number;
+        List<Integer> factors = new ArrayList<>();
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                factors.add(i);
+                n /= i;
+            }
+        }
+        return factors;
     }
 }
