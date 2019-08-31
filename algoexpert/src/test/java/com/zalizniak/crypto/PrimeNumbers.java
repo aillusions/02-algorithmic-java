@@ -32,13 +32,11 @@ public class PrimeNumbers {
      * Found 63129 prime numbers per 1000000 integers: 7000000 -  8000000
      * Found 62712 prime numbers per 1000000 integers: 8000000 -  9000000
      * Found 62090 prime numbers per 1000000 integers: 9000000 -  10000000
-     * Found 61938 prime numbers per 1000000 integers: 10000000 -  11000000
-     * Found 61543 prime numbers per 1000000 integers: 11000000 -  12000000
-     * Found 61192 prime numbers per 1000000 integers: 12000000 -  13000000
-     * Found 60825 prime numbers per 1000000 integers: 13000000 -  14000000
-     * Found 60627 prime numbers per 1000000 integers: 14000000 -  15000000
-     * Found 60426 prime numbers per 1000000 integers: 15000000 -  16000000
-     * Found 60184 prime numbers per 1000000 integers: 16000000 -  17000000
+     *
+     * Found 48155 prime numbers per 1000000 integers: 1000000000 - 1001000000
+     * Found 48262 prime numbers per 1000000 integers: 1001000000 - 1002000000
+     * Found 48198 prime numbers per 1000000 integers: 1002000000 - 1003000000
+     * Found 48263 prime numbers per 1000000 integers: 1003000000 - 1004000000
      */
     @Test
     public void loopPrimes() {
@@ -46,7 +44,7 @@ public class PrimeNumbers {
         final int terminator = 1_000_000;
 
         int counter = 0;
-        for (long i = 2; i < Long.MAX_VALUE; i++) {
+        for (long i = 10_000_000_000L; i < Long.MAX_VALUE; i++) {
             if (isPrime(i)) {
                 counter++;
             }
