@@ -69,9 +69,14 @@ public class PrimeNumbers {
     // 4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51, 55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95
     @Test
     public void testSemiprime() {
-        System.out.println(primeFactors(57));
-        System.out.println(primeFactors(86));
-        System.out.println(primeFactors(95));
+        System.out.println(26 + " -> " + primeFactors(26));
+        System.out.println(57 + " -> " + primeFactors(57));
+        System.out.println(86 + " -> " + primeFactors(86));
+        System.out.println(95 + " -> " + primeFactors(95));
+        System.out.println(116393 + " -> " + primeFactors(116393));
+        System.out.println(3789829 + " -> " + primeFactors(3789829));
+        System.out.println(7388399 + " -> " + primeFactors(7388399));
+        System.out.println(392524199 + " -> " + primeFactors(392524199));
     }
 
     // 2, 3, 5, 7, 11, 13, 17, 19, 23, 29
