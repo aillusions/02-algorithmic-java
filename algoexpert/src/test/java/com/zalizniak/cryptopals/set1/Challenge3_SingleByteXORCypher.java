@@ -7,26 +7,48 @@ import org.junit.Test;
  */
 public class Challenge3_SingleByteXORCypher {
 
-    char[] CHARS = "abcdef0123456789".toCharArray();
-    //char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+    char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
     private static final int RADIX = 16;
 
     @Test
     public void test() {
-        final String XORed = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
-        final String decrypted = "746865206b696420646f6e277420706c6179";
+        final String XORedHex = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+        final String XORed = hexToASCII(XORedHex);
+        final String decrypted = "Cooking MC's like a pound of bacon";
 
         for (char aChar : CHARS) {
-            System.out.println(Challenge2_XOR.fixedXOR(XORed, fillAString(aChar, XORed.length())));
-        }
+            String variant = singleCharacterXor(XORed, aChar);
 
+            System.out.println(aChar + " --> " + variant);
+            if (variant.equals(decrypted)) {
+                break;
+            }
+        }
     }
 
-    private static final String fillAString(char character, int size) {
-        char[] rv = new char[size];
+    public static String hexToASCII(String hex) {
+        StringBuilder sb = new StringBuilder();
+        StringBuilder temp = new StringBuilder();
+
+        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
+        for (int i = 0; i < hex.length() - 1; i += 2) {
+            //grab the hex in pairs
+            String output = hex.substring(i, (i + 2));
+            //convert hex to decimal
+            int decimal = Integer.parseInt(output, 16);
+            //convert the decimal to character
+            sb.append((char) decimal);
+            temp.append(decimal);
+        }
+
+        return sb.toString();
+    }
+
+    public static String singleCharacterXor(String hex, char character) {
+        char[] rv = new char[hex.length()];
         for (int i = 0; i < rv.length; i++) {
-            rv[i] = character;
+            rv[i] = (char) (hex.charAt(i) ^ character);
         }
         return new String(rv);
     }

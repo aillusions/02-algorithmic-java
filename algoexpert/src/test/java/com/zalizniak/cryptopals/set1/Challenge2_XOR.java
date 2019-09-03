@@ -7,6 +7,8 @@ import java.math.BigInteger;
 
 /**
  * https://cryptopals.com/sets/1/challenges/2
+ *
+ * XOR - exclusive disjunction
  */
 public class Challenge2_XOR {
 
