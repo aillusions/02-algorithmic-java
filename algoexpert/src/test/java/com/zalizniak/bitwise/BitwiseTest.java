@@ -2,6 +2,7 @@ package com.zalizniak.bitwise;
 
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
 public class BitwiseTest {
@@ -15,13 +16,19 @@ public class BitwiseTest {
 
     @Test
     public void intToBytes() {
-        for (byte b : intToBytes(1)) {
+        for (byte b : intToBytes(Integer.MAX_VALUE)) {
             System.out.format("0x%x ", b);
         }
 
         System.out.println();
 
-        for (byte b : intToByteArray(1)) {
+        for (byte b : intToByteArray(Integer.MAX_VALUE)) {
+            System.out.format("0x%x ", b);
+        }
+
+        System.out.println();
+
+        for (byte b : integerToBytes(Integer.MAX_VALUE)) {
             System.out.format("0x%x ", b);
         }
 
@@ -30,6 +37,10 @@ public class BitwiseTest {
 
     public static byte[] intToBytes(int value) {
         return ByteBuffer.allocate(4).putInt(value).array();
+    }
+
+    public static byte[] integerToBytes(int value) {
+        return BigInteger.valueOf(value).toByteArray();
     }
 
     public static byte[] intToByteArray(int value) {
