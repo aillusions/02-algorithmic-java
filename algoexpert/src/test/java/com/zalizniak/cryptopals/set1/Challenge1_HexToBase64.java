@@ -32,7 +32,7 @@ import java.util.Base64;
  * 15	001111	P	31	011111	f	47	101111	v	63	111111	/
  * padding	=
  */
-public class ConvertHexToBase64 {
+public class Challenge1_HexToBase64 {
 
     public final static char[] base64alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
 

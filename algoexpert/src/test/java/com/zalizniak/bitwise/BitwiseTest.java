@@ -16,13 +16,13 @@ public class BitwiseTest {
 
     @Test
     public void intToBytes() {
-        for (byte b : intToBytes(Integer.MAX_VALUE)) {
+        for (byte b : intToBytes(Integer.MIN_VALUE)) {
             System.out.format("0x%x ", b);
         }
 
         System.out.println();
 
-        for (byte b : intToByteArray(Integer.MAX_VALUE)) {
+        for (byte b : intToByteArray(800)) {
             System.out.format("0x%x ", b);
         }
 
