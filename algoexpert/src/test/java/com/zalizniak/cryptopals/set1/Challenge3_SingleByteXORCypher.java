@@ -41,7 +41,6 @@ import java.util.Map;
  */
 public class Challenge3_SingleByteXORCypher {
 
-    //private static final char[] CHARS = "8".toCharArray();
     private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
     private static final Map<Character, Double> ENGLISH_FREQ = new HashMap<>();
@@ -81,6 +80,13 @@ public class Challenge3_SingleByteXORCypher {
         final String XORed = hexToASCII(XORedHex);
         final String decrypted = "Cooking MC's like a pound of bacon";
 
+        String rv = singleBbyteXORCipher(XORed);
+
+        System.out.println("selected: " + rv);
+        Assert.assertEquals(decrypted, rv);
+    }
+
+    public static String singleBbyteXORCipher(String XORed) {
         double minChi = Double.MAX_VALUE;
         String rv = "";
 
@@ -95,8 +101,7 @@ public class Challenge3_SingleByteXORCypher {
             System.out.println(aChar + " --> " + chi + " - " + variant);
         }
 
-        System.out.println("selected: " + rv + " with Chi: " + minChi);
-        Assert.assertEquals(decrypted, rv);
+        return rv;
     }
 
     public static String hexToASCII(String hex) {
