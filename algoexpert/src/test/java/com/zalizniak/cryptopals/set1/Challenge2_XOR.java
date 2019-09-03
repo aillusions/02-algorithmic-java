@@ -19,6 +19,8 @@ public class Challenge2_XOR {
         final String XORed = "746865206b696420646f6e277420706c6179";
 
         Assert.assertEquals(XORed, fixedXOR(base16A, base16B));
+        Assert.assertEquals(base16A, fixedXOR(XORed, base16B));
+        Assert.assertEquals(base16B, fixedXOR(XORed, base16A));
     }
 
     public static String fixedXOR(String inA, String inB) {
