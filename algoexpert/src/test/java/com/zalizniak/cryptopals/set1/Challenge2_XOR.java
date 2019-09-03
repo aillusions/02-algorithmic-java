@@ -3,11 +3,14 @@ package com.zalizniak.cryptopals.set1;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigInteger;
+
 /**
  * https://cryptopals.com/sets/1/challenges/2
  */
 public class Challenge2_XOR {
 
+    private static final int RADIX = 16;
 
     @Test
     public void test() {
@@ -16,10 +19,9 @@ public class Challenge2_XOR {
         final String XORed = "746865206b696420646f6e277420706c6179";
 
         Assert.assertEquals(XORed, fixedXOR(base16A, base16B));
-
     }
 
     public static String fixedXOR(String inA, String inB) {
-        return inA;
+        return new BigInteger(inA, RADIX).xor(new BigInteger(inB, RADIX)).toString(RADIX);
     }
 }
