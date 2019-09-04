@@ -2,7 +2,6 @@ package com.zalizniak.bitwise;
 
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
@@ -17,6 +16,7 @@ public class HexTest {
         System.out.println(5 + " -> " + String.format("%02x", 5));
         System.out.println(9 + " -> " + String.format("%02x", 9));
         System.out.println(10 + " -> " + String.format("%02x", 10));
+        System.out.println(15 + " -> " + String.format("%02x", 15));
         System.out.println(100 + " -> " + String.format("%02x", 100));
         System.out.println(255 + " -> " + String.format("%02x", 255));
     }
@@ -25,6 +25,7 @@ public class HexTest {
     public void testChar() {
         System.out.println(-1 + " -> " + String.format("%04x", -1));
         System.out.println(1 + " -> " + String.format("%04x", 1));
+        System.out.println(15 + " -> " + String.format("%04x", 15));
         System.out.println(100 + " -> " + String.format("%04x", 100));
         System.out.println((int) '\uffff' + " -> " + String.format("%04x", (int) '\uffff'));
         System.out.println('a' + " -> " + Integer.toHexString((int) 'a'));
@@ -33,6 +34,7 @@ public class HexTest {
     @Test
     public void testInt() {
         System.out.println(-300 + " -> " + Integer.toHexString(-1));
+        System.out.println(15 + " -> " + Integer.toHexString(15));
         System.out.println(500 + " -> " + Integer.toHexString(500));
         System.out.println(100_000_000 + " -> " + Integer.toHexString(100_000_000));
     }
@@ -40,6 +42,7 @@ public class HexTest {
     @Test
     public void testLong() {
         System.out.println(500L + " -> " + Long.toHexString(500L));
+        System.out.println(15L + " -> " + Long.toHexString(15L));
         System.out.println(100_000_000L + " -> " + Long.toHexString(100_000_000L));
         System.out.println(1_000_000_000_000_000L + " -> " + Long.toHexString(1_000_000_000_000_000L));
     }
@@ -49,6 +52,9 @@ public class HexTest {
         System.out.println(100 + " -> " + new BigInteger("100").toString(16));
         System.out.println("1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000" + " -> "
                 + new BigInteger("1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000".replace("_", "")).toString(16));
+
+        System.out.println(255 + " -> " + new BigInteger("ff", 16).toString(16));
+        System.out.println(15 + " -> " + new BigInteger("15").toString(16));
     }
 
     public static String hexToASCII(String hex) {
