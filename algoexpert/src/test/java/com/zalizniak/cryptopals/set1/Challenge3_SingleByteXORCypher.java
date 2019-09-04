@@ -1,5 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
+import com.zalizniak.bitwise.HexTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -91,7 +92,7 @@ public class Challenge3_SingleByteXORCypher {
     @Test
     public void test() {
         final String XORedHex = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
-        final String XORed = hexToASCII(XORedHex);
+        final String XORed = HexTest.hexToASCII(XORedHex);
         final String decrypted = "Cooking MC's like a pound of bacon";
 
         String rv = singleBbyteXORCipher(XORed);
@@ -116,26 +117,6 @@ public class Challenge3_SingleByteXORCypher {
         }
 
         return rv;
-    }
-
-    public static String hexToASCII(String hex) {
-        StringBuilder sb = new StringBuilder();
-
-        //49204c6f7665204a617661 split into two characters 49, 20, 4c...
-        for (int i = 0; i < hex.length() - 1; i += 2) {
-            //grab the hex in pairs
-            String output = hex.substring(i, (i + 2));
-            //convert hex to decimal
-            int decimal = Integer.parseInt(output, 16);
-            //convert the decimal to character
-            sb.append((char) decimal);
-        }
-
-        return sb.toString();
-    }
-
-    public static String convertStringToHex(String str) {
-        return String.format("%040x", new BigInteger(1, str.getBytes(StandardCharsets.UTF_8)));
     }
 
     public static String singleCharacterXor(String hex, char character) {

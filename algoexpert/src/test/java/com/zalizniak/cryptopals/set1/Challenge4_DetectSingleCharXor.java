@@ -1,5 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
+import com.zalizniak.bitwise.HexTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class Challenge4_DetectSingleCharXor {
         String rv = "";
 
         for (String hex : strings) {
-            String ascii = Challenge3_SingleByteXORCypher.hexToASCII(hex);
+            String ascii = HexTest.hexToASCII(hex);
             String variant = Challenge3_SingleByteXORCypher.singleBbyteXORCipher(ascii);
             double chi = Challenge3_SingleByteXORCypher.getEnglishScore(variant);
 

@@ -1,5 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
+import com.zalizniak.bitwise.HexTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,14 +39,14 @@ public class Challenge5_RepeatingKeyXOR {
                 + "I go crazy when I hear a cymbal";
 
         String expectedHexed = "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f";
-        String expectedXorred = Challenge3_SingleByteXORCypher.hexToASCII(expectedHexed);
+        String expectedXorred = HexTest.hexToASCII(expectedHexed);
         String expectedPlain = repeatingKeyXOR(expectedXorred);
         Assert.assertEquals(plain, expectedPlain);
 
         String xorred = repeatingKeyXOR(plain);
         Assert.assertEquals(expectedXorred, xorred);
 
-        String hexed = Challenge3_SingleByteXORCypher.convertStringToHex(xorred);
+        String hexed = HexTest.convertStringToHex(xorred);
         Assert.assertEquals(expectedHexed, hexed);
     }
 
