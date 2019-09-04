@@ -57,6 +57,21 @@ public class HexTest {
         System.out.println(15 + " -> " + new BigInteger("15").toString(16));
     }
 
+    @Test
+    public void testString() {
+        System.out.println("" + " -> " + convertStringToHex(""));
+        System.out.println("0" + " -> " + convertStringToHex("0"));
+        System.out.println("1" + " -> " + convertStringToHex("1"));
+        System.out.println("a" + " -> " + convertStringToHex("a"));
+        System.out.println("aaaaa" + " -> " + convertStringToHex("aaaaa"));
+        System.out.println("x" + " -> " + convertStringToHex("x"));
+        System.out.println("[" + " -> " + convertStringToHex("["));
+        System.out.println("\u00ff" + " -> " + convertStringToHex("\u00ff"));
+        System.out.println("\uffff" + " -> " + convertStringToHex("\uffff"));
+        System.out.println("ъ" + " -> " + convertStringToHex("ъ"));
+        System.out.println("long text " + " -> " + convertStringToHex(LONG_TEXT));
+    }
+
     public static String hexToASCII(String hex) {
         StringBuilder sb = new StringBuilder();
 
@@ -74,6 +89,13 @@ public class HexTest {
     }
 
     public static String convertStringToHex(String str) {
-        return String.format("%040x", new BigInteger(1, str.getBytes(StandardCharsets.UTF_8)));
+        return String.format("%x", new BigInteger(1, str.getBytes(StandardCharsets.UTF_8)));
     }
+
+    public static final String LONG_TEXT = "What is a Hexadecimal?\n" +
+            "Most people are familiar with the decimal, or base-10, system of numbers (all possible numbers can be notated using the 10 digits, 0,1,2,3,4,5,6,7,8,9). With only 10 digits, extra digits need to be used at certain intervals to correctly notate a number. For example, the number 423,004 uses twice as much digits as the number 961.\n" +
+            "\n" +
+            "The hexadecimal, or base-16, system was created to emulate some of the same properties of the common decimal system. The overall difference is, 16 digits are available instead of the 10 digits available to use to notate the value of a number.\n" +
+            "\n" +
+            "The 16 symbols that the hexadecimal system uses are: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E and F. So instead of a decimal symbol of 10, hexadecimal uses an A, and so on and so forth until we get to the decimal of 15 which is notated as F. Similar to the decimal system, after the base of 16 symbols has been used, the appropriate extra digit is added and the order of numbers starts over. In other words, after F, we begin with 10, and so on. To better understand the relationship between the Decimal and Hexadecimal system, check out the table below.";
 }
