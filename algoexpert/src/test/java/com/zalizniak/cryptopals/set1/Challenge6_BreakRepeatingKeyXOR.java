@@ -1,5 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
+import com.zalizniak.Base64Test;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
     @Test
     public void test1() {
-        System.out.println();
+        System.out.println(Base64Test.decodeString(BASE64_TEXT));
     }
 
     public static final String BASE64_TEXT = "" +
