@@ -2,6 +2,7 @@ package com.zalizniak.bitwise;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
@@ -34,6 +35,20 @@ public class HexTest {
         System.out.println(-300 + " -> " + Integer.toHexString(-1));
         System.out.println(500 + " -> " + Integer.toHexString(500));
         System.out.println(100_000_000 + " -> " + Integer.toHexString(100_000_000));
+    }
+
+    @Test
+    public void testLong() {
+        System.out.println(500L + " -> " + Long.toHexString(500L));
+        System.out.println(100_000_000L + " -> " + Long.toHexString(100_000_000L));
+        System.out.println(1_000_000_000_000_000L + " -> " + Long.toHexString(1_000_000_000_000_000L));
+    }
+
+    @Test
+    public void testBigDecimal() {
+        System.out.println(100 + " -> " + new BigInteger("100").toString(16));
+        System.out.println("1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000" + " -> "
+                + new BigInteger("1_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000".replace("_", "")).toString(16));
     }
 
     public static String hexToASCII(String hex) {
