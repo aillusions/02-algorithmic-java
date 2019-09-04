@@ -1,6 +1,8 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
+import com.zalizniak.medium.levenshtein_distance.MyLevenshteinDistance;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -8,13 +10,29 @@ import org.junit.Test;
  */
 public class Challenge6_BreakRepeatingKeyXOR {
 
+    private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+
+    @Test
+    public void testEditDistance() {
+        Assert.assertEquals(37, editDistance("this is a test", "wokka wokka!!!"));
+    }
+
     @Test
     public void test1() {
-        System.out.println(Base64Test.decodeString(BASE64_TEXT));
+        String cypherText = Base64Test.decodeString(BASE64_TEXT);
+        Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
+        System.out.println(cypherText);
+    }
+
+    /**
+     * The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. In other words, it is the number of substitutions required to transform one string into another.
+     */
+    public int editDistance(String str1, String str2) {
+        return new MyLevenshteinDistance().getDistance(str1, str2);
     }
 
     public static final String BASE64_TEXT = "" +
-            "HUIfTQsPAh9PE048GmllH0kcDk4TAQsHThsBFkU2AB4BSWQgVB0dQzNTTmVS" +
+            "HUIfTQsPAh9PE048GmllH0kcDk4TAQsHThsBFkU2AB4BSWQgVB0dQzNTTmVS" /*+
             "BgBHVBwNRU0HBAxTEjwMHghJGgkRTxRMIRpHKwAFHUdZEQQJAGQmB1MANxYG" +
             "DBoXQR0BUlQwXwAgEwoFR08SSAhFTmU+Fgk4RQYFCBpGB08fWXh+amI2DB0P" +
             "QQ1IBlUaGwAdQnQEHgFJGgkRAlJ6f0kASDoAGhNJGk9FSA8dDVMEOgFSGQEL" +
@@ -77,5 +95,5 @@ public class Challenge6_BreakRepeatingKeyXOR {
             "DBBOFRwOBgA+T04pC0kDElMdC0VXBgYdFkU2CgtNEAEUVBwTWXhTVG5SGg8e" +
             "AB0cRSo+AwgKRSANExlJCBQaBAsANU9TKxFJL0dMHRwRTAtPBRwQMAAATQcB" +
             "FlRlIkw5QwA2GggaR0YBBg5ZTgIcAAw3SVIaAQcVEU8QTyEaYy0fDE4ITlhI" +
-            "Jk8DCkkcC3hFMQIEC0EbAVIqCFZBO1IdBgZUVA4QTgUWSR4QJwwRTWM=";
+            "Jk8DCkkcC3hFMQIEC0EbAVIqCFZBO1IdBgZUVA4QTgUWSR4QJwwRTWM="*/;
 }
