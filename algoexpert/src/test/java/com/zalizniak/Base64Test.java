@@ -22,8 +22,12 @@ public class Base64Test {
         Assert.assertEquals("123-abc-DEF", decodeString(encodeString("123-abc-DEF")));
     }
 
+    public static String encodeString(byte[] in) {
+        return Base64.getEncoder().encodeToString(in);
+    }
+
     public static String encodeString(String in) {
-        return Base64.getEncoder().encodeToString(in.getBytes());
+        return encodeString(in.getBytes());
     }
 
     public static String decodeString(String in) {

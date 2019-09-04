@@ -1,10 +1,10 @@
 package com.zalizniak.cryptopals.set1;
 
+import com.zalizniak.Base64Test;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigInteger;
-import java.util.Base64;
 
 /**
  * https://cryptopals.com/sets/1/challenges/1
@@ -46,7 +46,7 @@ public class Challenge1_HexToBase64 {
     }
 
     public static String hexToBase64(String in) {
-        return Base64.getEncoder().encodeToString(new BigInteger(in, 16).toByteArray());
+        return Base64Test.encodeString(new BigInteger(in, 16).toByteArray());
     }
 
     public static String base16to64(String hex) {
