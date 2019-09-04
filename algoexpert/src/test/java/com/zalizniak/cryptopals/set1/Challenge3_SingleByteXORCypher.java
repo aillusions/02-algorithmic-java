@@ -110,7 +110,7 @@ public class Challenge3_SingleByteXORCypher {
                 rv = variant;
             }
 
-            System.out.println(aChar + " --> " + chi + " - " + variant);
+            //System.out.println(aChar + " --> " + chi + " - " + variant);
         }
 
         return rv;
@@ -140,9 +140,11 @@ public class Challenge3_SingleByteXORCypher {
         return new String(rv);
     }
 
+    // smaller is better
     public static double getEnglishScore(String str) {
         str = str.toLowerCase();
         int length = str.length();
+        double unexpectedCharMultiplicator = 5d;
 
         final Map<Character, Integer> count = countChars(str);
 
@@ -161,7 +163,7 @@ public class Challenge3_SingleByteXORCypher {
             if (c == '.' || c == ',' || c == ' ' || ENGLISH_FREQ.get(c) != null) {
                 continue;
             }
-            rv += 1;
+            rv += 1 * unexpectedCharMultiplicator;
         }
         return rv;
     }
