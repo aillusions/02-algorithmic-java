@@ -35,4 +35,8 @@ public class Percents {
     // What is the percent change from 2100 to 1890?
     // 2100 - 1890 / 2100  * 100 = 10 %
 
+    // Frequency of character A in English is 8.12
+    // How many of characters A are in string of 150 symbols long.?
+    // 0.0812 * 150 == 12.18
+
 }

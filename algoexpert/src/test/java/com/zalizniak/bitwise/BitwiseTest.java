@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 
 public class BitwiseTest {
 
+    // there are 26 letters in English: to represent all letters enough 5 bits (2 ^ 5 == 32)
+
     @Test
     public void testBitwiseOperations() {
         for (int i = 0; i <= 100; i++) {
