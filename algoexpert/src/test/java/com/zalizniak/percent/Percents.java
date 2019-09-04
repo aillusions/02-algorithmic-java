@@ -36,7 +36,12 @@ public class Percents {
     // 2100 - 1890 / 2100  * 100 = 10 %
 
     // Frequency of character A in English is 8.12
-    // How many of characters A are in string of 150 symbols long.?
+    // How many of characters A are expected to be in a string of 150 symbols long?
     // 0.0812 * 150 == 12.18
+
+    // expected count is 20
+    // observed count is 20
+    // how close observed to expected?
+    // 1  - (20 - 20) /
 
 }
