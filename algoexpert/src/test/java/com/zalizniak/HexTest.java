@@ -1,4 +1,4 @@
-package com.zalizniak.bitwise;
+package com.zalizniak;
 
 import org.junit.Test;
 

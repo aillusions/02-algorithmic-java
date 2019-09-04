@@ -1,6 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
-import com.zalizniak.bitwise.HexTest;
+import com.zalizniak.HexTest;
 import org.junit.Assert;
 import org.junit.Test;
 
