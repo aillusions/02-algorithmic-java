@@ -1,9 +1,24 @@
 package com.zalizniak.bitwise;
 
+import org.junit.Test;
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 
 public class HexTest {
+
+    /**
+     * 2 ^ 8 == 16 ^ 2
+     */
+    @Test
+    public void testByte() {
+        System.out.println(1 + " -> " + String.format("%02X", 1));
+        System.out.println(5 + " -> " + String.format("%02X", 5));
+        System.out.println(9 + " -> " + String.format("%02X", 9));
+        System.out.println(10 + " -> " + String.format("%02X", 10));
+        System.out.println(100 + " -> " + String.format("%02X", 100));
+        System.out.println(255 + " -> " + String.format("%02X", 255));
+    }
 
     public static String hexToASCII(String hex) {
         StringBuilder sb = new StringBuilder();
