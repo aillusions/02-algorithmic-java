@@ -3,6 +3,8 @@ package com.zalizniak.cryptopals.set1;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,6 +132,10 @@ public class Challenge3_SingleByteXORCypher {
         }
 
         return sb.toString();
+    }
+
+    public static String convertStringToHex(String str) {
+        return String.format("%040x", new BigInteger(1, str.getBytes(StandardCharsets.UTF_8)));
     }
 
     public static String singleCharacterXor(String hex, char character) {
