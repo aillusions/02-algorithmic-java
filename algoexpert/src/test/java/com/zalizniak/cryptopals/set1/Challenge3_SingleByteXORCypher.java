@@ -43,8 +43,7 @@ import java.util.Map;
  */
 public class Challenge3_SingleByteXORCypher {
 
-    //private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
-    private static final char[] CHARS = "8X".toCharArray();
+    private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
 
     private static final Map<Character, Double> ENGLISH_FREQ = new HashMap<>();
 
@@ -155,6 +154,14 @@ public class Challenge3_SingleByteXORCypher {
             double difference = Math.abs(observed - expected);
             double chi = Math.pow(difference, 2) / expected;
             rv += chi;
+        }
+
+        for (int i = 0; i < length; i++) {
+            char c = str.charAt(i);
+            if (c == '.' || c == ',' || c == ' ' || ENGLISH_FREQ.get(c) != null) {
+                continue;
+            }
+            rv += 1;
         }
         return rv;
     }
