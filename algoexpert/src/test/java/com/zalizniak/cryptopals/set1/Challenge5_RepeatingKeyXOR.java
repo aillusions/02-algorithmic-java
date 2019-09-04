@@ -3,10 +3,32 @@ package com.zalizniak.cryptopals.set1;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 /**
  * https://cryptopals.com/sets/1/challenges/4
  */
 public class Challenge5_RepeatingKeyXOR {
+
+    @Test
+    public void checkCircularList() {
+        CircularCharList key = new CircularCharList("ICE");
+
+        Assert.assertEquals('E', key.get(-2).charValue());
+        Assert.assertEquals('C', key.get(-1).charValue());
+
+        Assert.assertEquals('I', key.get(0).charValue());
+        Assert.assertEquals('C', key.get(1).charValue());
+        Assert.assertEquals('E', key.get(2).charValue());
+
+        Assert.assertEquals('I', key.get(3).charValue());
+        Assert.assertEquals('C', key.get(4).charValue());
+        Assert.assertEquals('E', key.get(5).charValue());
+
+        Assert.assertEquals('I', key.get(6).charValue());
+        Assert.assertEquals('C', key.get(7).charValue());
+        Assert.assertEquals('E', key.get(8).charValue());
+    }
 
     @Test
     public void test1() {
@@ -24,9 +46,37 @@ public class Challenge5_RepeatingKeyXOR {
         Assert.assertEquals(expected, repeatingKeyXOR(orig));
     }
 
+    // In repeating-key XOR, you'll sequentially apply each byte of the key;
+    // the first byte of plaintext will be XOR'd against I, the next C, the next E
+    // then I again for the 4th byte, and so on.
     public static String repeatingKeyXOR(String in) {
-        String key = "ICE";
+        CircularCharList key = new CircularCharList("ICE");
+        char[] rv = new char[in.length()];
+        for (int i = 0; i < in.length(); i++) {
+            rv[i] = (char) (in.charAt(i) ^ key.get(i));
+        }
 
-        return in;
+        return new String(rv);
+    }
+
+    private static class CircularCharList extends ArrayList<Character> {
+
+        public CircularCharList(String str) {
+            for (char c : str.toCharArray()) {
+                add(c);
+            }
+        }
+
+        @Override
+        public Character get(int index) {
+            int size = this.size();
+            if (index < 0) {
+                return super.get(-index);
+            } else if (index >= size) {
+                return super.get(index % size);
+            }
+
+            return super.get(index);
+        }
     }
 }
