@@ -7,6 +7,7 @@ import com.zalizniak.cryptopals.set1.Challenge7_AESinECB;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * Cipher Block Chaining (CBC)
@@ -18,11 +19,11 @@ public class Challenge10_ImplementCBCmode {
     // called the initialization vector, or IV.
     public static final byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    public static final String KEY = "YELLOW SUBMARINE";
+    public static final String KEY_TEXT = "YELLOW SUBMARINE";
+    public static final byte[] KEY = KEY_TEXT.getBytes(StandardCharsets.UTF_8);
 
     @Test
     public void test() {
-        byte[] key = KEY.getBytes(StandardCharsets.UTF_8);
         byte[] cypherText = Base64Test.decode(BASE64_TEXT);
 
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
@@ -30,12 +31,24 @@ public class Challenge10_ImplementCBCmode {
 
         for (int i = 0; i < blocks.length; i++) {
             byte[] block = blocks[i];
-            byte[] cypherBlock = Challenge7_AESinECB.decryptECB(block, key);
+            byte[] cypherBlock = Challenge7_AESinECB.decryptECB(block, KEY);
         }
     }
 
+    @Test
+    public void testEncrypt() {
+        System.out.println(Arrays.toString(encryptCBC("test".getBytes(StandardCharsets.UTF_8), KEY)));
+    }
+
     public static byte[] encryptCBC(byte[] plainText, byte[] key) {
-        byte[] rv = new byte[plainText.length];
+        int responseSize;
+        if (plainText.length > Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
+            responseSize = plainText.length + (plainText.length % Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        } else {
+            responseSize = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES;
+        }
+
+        byte[] rv = new byte[responseSize];
 
         byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
         System.out.println(ByteArraysTest.printGrid(blocks));
@@ -48,8 +61,7 @@ public class Challenge10_ImplementCBCmode {
             byte[] cypherBlock = Challenge7_AESinECB.encryptECB(block, key);
             previousBlock = cypherBlock;
 
-            // TODO
-            //byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE * i, KEYSIZE * (i + 1));
+            System.arraycopy(cypherBlock, 0, rv, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, block.length);
         }
 
         return rv;
