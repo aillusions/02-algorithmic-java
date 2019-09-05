@@ -37,13 +37,19 @@ public class Challenge10_ImplementCBCmode {
 
     public static byte[] decryptCBC(byte[] cypherText, byte[] key) {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        System.out.println(ByteArraysTest.printGrid(blocks));
+        // System.out.println(ByteArraysTest.printGrid(blocks));
 
+        byte[] rv = new byte[cypherText.length]; // TODO refine also remove pad bytes
+
+        byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
-            byte[] block = blocks[i];
-            byte[] cypherBlock = Challenge7_AESinECB.decryptECB(block, KEY);
+            byte[] cypherBlock = blocks[i];
+            byte[] prePlainBlock = Challenge7_AESinECB.decryptECB(cypherBlock, KEY);
+            byte[] plainBlock = Challenge2_XOR.fixedXOR(previousBlock, prePlainBlock);
+            previousBlock = cypherBlock;
+
+            System.arraycopy(plainBlock, 0, rv, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
         }
-        byte[] rv = new byte[cypherText.length];// TODO refine
 
         return rv;
     }
@@ -59,7 +65,7 @@ public class Challenge10_ImplementCBCmode {
         byte[] rv = new byte[responseSize];
 
         byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        System.out.println(ByteArraysTest.printGrid(blocks));
+        // System.out.println(ByteArraysTest.printGrid(blocks));
 
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
