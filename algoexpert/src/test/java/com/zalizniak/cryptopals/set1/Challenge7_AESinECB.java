@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 
 /**
- * https://cryptopals.com/sets/1/challenges/6
+ * https://cryptopals.com/sets/1/challenges/7
  */
 public class Challenge7_AESinECB {
 
