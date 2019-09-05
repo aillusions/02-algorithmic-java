@@ -31,16 +31,20 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
     public static int probableKeySize(byte[] cypherTextBytes) {
         int minDistance = Integer.MAX_VALUE;
+        int rv = 0;
 
         for (int KEYSIZE = 2; KEYSIZE < 40; KEYSIZE++) {
             byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, 0, KEYSIZE);
             byte[] secondKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE, KEYSIZE * 2);
             int distance = BitwiseTest.editDistanceFast2(firstKEYSIZEWorthOfBytes, secondKEYSIZEWorthOfBytes);
             int normalizedDistance = distance / KEYSIZE;
-            minDistance = Math.min(normalizedDistance, minDistance);
+            if (normalizedDistance < minDistance) {
+                minDistance = normalizedDistance;
+                rv = KEYSIZE;
+            }
         }
 
-        return minDistance;
+        return rv;
     }
 
     public static final String BASE64_TEXT = "" +
