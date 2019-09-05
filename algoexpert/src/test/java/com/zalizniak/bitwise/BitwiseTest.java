@@ -2,6 +2,9 @@ package com.zalizniak.bitwise;
 
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -40,6 +43,7 @@ public class BitwiseTest {
         System.out.println(Integer.MIN_VALUE + " -> " + Arrays.toString(intToBytes(Integer.MIN_VALUE)));
 
         System.out.println(10 + " -> " + Arrays.toString(integerToBytes(10)));
+        System.out.println(10 + " -> " + Arrays.toString(intToByteArrayBaos(10)));
     }
 
     @Test
@@ -61,6 +65,18 @@ public class BitwiseTest {
 
     public static byte[] integerToBytes(int value) {
         return BigInteger.valueOf(value).toByteArray();
+    }
+
+    public static byte[] intToByteArrayBaos(int i) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            DataOutputStream dos = new DataOutputStream(baos);
+            dos.writeInt(i);
+            dos.flush();
+            return baos.toByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static byte[] intToByteArray(int value) {
