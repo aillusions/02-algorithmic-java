@@ -1,10 +1,12 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
+import com.zalizniak.BitwiseTest;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * https://cryptopals.com/sets/1/challenges/6
@@ -18,12 +20,31 @@ public class Challenge6_BreakRepeatingKeyXOR {
     @Test
     public void test1() {
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
-        Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
-        System.out.println(cypherText);
+        byte[] cypherTextBytes = cypherText.getBytes(UTF_8_CH);
+
+        //Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
+
+        int KEYSIZE = probableKeySize(cypherTextBytes);
+
+        System.out.println("probableKeySize: " + KEYSIZE);
+    }
+
+    public static int probableKeySize(byte[] cypherTextBytes) {
+        int minDistance = Integer.MAX_VALUE;
+
+        for (int KEYSIZE = 2; KEYSIZE < 40; KEYSIZE++) {
+            byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, 0, KEYSIZE);
+            byte[] secondKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE, KEYSIZE * 2);
+            int distance = BitwiseTest.editDistanceFast2(firstKEYSIZEWorthOfBytes, secondKEYSIZEWorthOfBytes);
+            int normalizedDistance = distance / KEYSIZE;
+            minDistance = Math.min(normalizedDistance, minDistance);
+        }
+
+        return minDistance;
     }
 
     public static final String BASE64_TEXT = "" +
-            "HUIfTQsPAh9PE048GmllH0kcDk4TAQsHThsBFkU2AB4BSWQgVB0dQzNTTmVS" /*+
+            "HUIfTQsPAh9PE048GmllH0kcDk4TAQsHThsBFkU2AB4BSWQgVB0dQzNTTmVS" +
             "BgBHVBwNRU0HBAxTEjwMHghJGgkRTxRMIRpHKwAFHUdZEQQJAGQmB1MANxYG" +
             "DBoXQR0BUlQwXwAgEwoFR08SSAhFTmU+Fgk4RQYFCBpGB08fWXh+amI2DB0P" +
             "QQ1IBlUaGwAdQnQEHgFJGgkRAlJ6f0kASDoAGhNJGk9FSA8dDVMEOgFSGQEL" +
@@ -86,5 +107,5 @@ public class Challenge6_BreakRepeatingKeyXOR {
             "DBBOFRwOBgA+T04pC0kDElMdC0VXBgYdFkU2CgtNEAEUVBwTWXhTVG5SGg8e" +
             "AB0cRSo+AwgKRSANExlJCBQaBAsANU9TKxFJL0dMHRwRTAtPBRwQMAAATQcB" +
             "FlRlIkw5QwA2GggaR0YBBg5ZTgIcAAw3SVIaAQcVEU8QTyEaYy0fDE4ITlhI" +
-            "Jk8DCkkcC3hFMQIEC0EbAVIqCFZBO1IdBgZUVA4QTgUWSR4QJwwRTWM="*/;
+            "Jk8DCkkcC3hFMQIEC0EbAVIqCFZBO1IdBgZUVA4QTgUWSR4QJwwRTWM=";
 }

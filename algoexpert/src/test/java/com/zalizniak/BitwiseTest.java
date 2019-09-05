@@ -22,18 +22,7 @@ public class BitwiseTest {
         Assert.assertEquals(37, BitwiseTest.editDistanceFast2(strA, strB));
     }
 
-    public static int bitsMismatch(byte byte1, byte byte2) {
-        int rv = 0;
-        for (int i = 0; i < 8; i++) {
-            // right shift both the numbers by 'i' and
-            // check if the bit at the 0th position is different
-            if (((byte1 >> i) & 1) != ((byte2 >> i) & 1)) {
-                rv++;
-            }
-        }
 
-        return rv;
-    }
 
     public static int editDistanceSlow(String str1, String str2) {
         String binaryString1 = convertToBinary(str1, Challenge6_BreakRepeatingKeyXOR.UTF_8);
@@ -52,6 +41,10 @@ public class BitwiseTest {
         byte[] bytes1 = str1.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
         byte[] bytes2 = str2.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
 
+        return editDistanceFast(bytes1, bytes2);
+    }
+
+    public static int editDistanceFast(byte[] bytes1, byte[] bytes2) {
         int rv = 0;
         for (int i = 0; i < bytes1.length; i++) {
             byte byte1 = bytes1[i];
@@ -67,6 +60,23 @@ public class BitwiseTest {
         return rv;
     }
 
+    public static int editDistanceFast2(String str1, String str2) {
+        byte[] bytes1 = str1.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
+        byte[] bytes2 = str2.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
+
+        return editDistanceFast2(bytes1, bytes2);
+    }
+
+    public static int editDistanceFast2(byte[] bytes1, byte[] bytes2) {
+
+        int rv = 0;
+        for (int i = 0; i < bytes1.length; i++) {
+            rv += bitsMismatch(bytes1[i], bytes2[i]);
+        }
+
+        return rv;
+    }
+
     public static String xor(String strA, String strB) {
         char[] rv = new char[strA.length()];
         for (int i = 0; i < strA.length(); i++) {
@@ -76,17 +86,19 @@ public class BitwiseTest {
         return new String(rv);
     }
 
-    public static int editDistanceFast2(String str1, String str2) {
-        byte[] bytes1 = str1.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
-        byte[] bytes2 = str2.getBytes(Challenge6_BreakRepeatingKeyXOR.UTF_8_CH);
-
+    public static int bitsMismatch(byte byte1, byte byte2) {
         int rv = 0;
-        for (int i = 0; i < bytes1.length; i++) {
-            rv += bitsMismatch(bytes1[i], bytes2[i]);
+        for (int i = 0; i < 8; i++) {
+            // right shift both the numbers by 'i' and
+            // check if the bit at the 0th position is different
+            if (((byte1 >> i) & 1) != ((byte2 >> i) & 1)) {
+                rv++;
+            }
         }
 
         return rv;
     }
+
 
     // there are 26 letters in English: to represent all letters enough 5 bits (2 ^ 5 == 32)
 
