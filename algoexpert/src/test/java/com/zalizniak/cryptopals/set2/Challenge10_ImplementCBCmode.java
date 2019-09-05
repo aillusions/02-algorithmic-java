@@ -23,9 +23,19 @@ public class Challenge10_ImplementCBCmode {
     public static final byte[] KEY = KEY_TEXT.getBytes(StandardCharsets.UTF_8);
 
     @Test
-    public void test() {
+    public void testDecrypt() {
         byte[] cypherText = Base64Test.decode(BASE64_TEXT);
+        byte[] plainText = decryptCBC(cypherText, KEY);
+        System.out.println(new String(plainText, StandardCharsets.UTF_8));
+    }
 
+    @Test
+    public void testEncrypt() {
+        System.out.println(Arrays.toString(encryptCBC("test".getBytes(StandardCharsets.UTF_8), KEY)));
+        System.out.println(Arrays.toString(encryptCBC("test-test-test-test-test-test-test-test-test-test-test-test".getBytes(StandardCharsets.UTF_8), KEY)));
+    }
+
+    public static byte[] decryptCBC(byte[] cypherText, byte[] key) {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
         System.out.println(ByteArraysTest.printGrid(blocks));
 
@@ -33,12 +43,9 @@ public class Challenge10_ImplementCBCmode {
             byte[] block = blocks[i];
             byte[] cypherBlock = Challenge7_AESinECB.decryptECB(block, KEY);
         }
-    }
+        byte[] rv = new byte[cypherText.length];// TODO refine
 
-    @Test
-    public void testEncrypt() {
-        System.out.println(Arrays.toString(encryptCBC("test".getBytes(StandardCharsets.UTF_8), KEY)));
-        System.out.println(Arrays.toString(encryptCBC("test-test-test-test-test-test-test-test-test-test-test-test".getBytes(StandardCharsets.UTF_8), KEY)));
+        return rv;
     }
 
     public static byte[] encryptCBC(byte[] plainText, byte[] key) {
