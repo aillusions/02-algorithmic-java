@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * https://cryptopals.com/sets/1/challenges/8
@@ -18,21 +20,20 @@ public class Challenge8_DetectAESinECB {
     public void test1() {
         for (String cipherTextHex : BASE64_TEXT) {
             String cipherText = HexTest.hexToASCII(cipherTextHex);
-            byte[] cipherTextBytes = cipherTextHex.getBytes(StandardCharsets.UTF_8);
+            byte[] cipherTextBytes = cipherText.getBytes(StandardCharsets.UTF_8);
             byte[][] cipherTextBytesMatrix = Challenge6_BreakRepeatingKeyXOR.ciphertextBlocks(cipherTextBytes, ECB_BLOCK_SIZE);
 
-            // Note can use Set -> number_of_repetitions = len(chunks) - len(set(chunks))
+            String[] blockStrings = new String[cipherTextBytesMatrix.length];
             for (int i = 0; i < cipherTextBytesMatrix.length; i++) {
-                for (int j = i + 1; j < cipherTextBytesMatrix.length; j++) {
-                    if (Arrays.equals(cipherTextBytesMatrix[i], cipherTextBytesMatrix[j])) {
-                        System.out.println("cipherTextHex: " + cipherTextHex);
-                        System.out.println("Found equal: \n" + Arrays.toString(cipherTextBytesMatrix[i]) + " \n" + Arrays.toString(cipherTextBytesMatrix[j]));
+                blockStrings[i] = new String(cipherTextBytesMatrix[i], StandardCharsets.UTF_8);
+            }
+            Set<String> unique = new HashSet<>(Arrays.asList(blockStrings));
+            if (unique.size() != cipherTextBytesMatrix.length) {
+                System.out.println("cipherTextHex: " + cipherTextHex);
 
-                        System.out.println();
-                        System.out.println(ByteArraysTest.printGrid(cipherTextBytesMatrix));
-                        System.out.println();
-                    }
-                }
+                System.out.println();
+                System.out.println(ByteArraysTest.printGrid(cipherTextBytesMatrix));
+                System.out.println();
             }
         }
     }
