@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * https://cryptopals.com/sets/1/challenges/6
@@ -21,14 +23,35 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public void test1() {
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
         byte[] cypherTextBytes = cypherText.getBytes(UTF_8_CH);
+        int cypherTextLength = cypherTextBytes.length;
+        System.out.println("cypherTextLength: " + cypherTextLength);
 
         //Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
 
         int KEYSIZE = probableKeySize(cypherTextBytes);
-
         System.out.println("probableKeySize: " + KEYSIZE);
+
+        int i = 0;
+        int start = 0;
+        int end = 0;
+
+        List<byte[]> ciphertextBlocks = new ArrayList<>();
+        while (end < cypherTextLength) {
+            start = i * KEYSIZE;
+            end = KEYSIZE + i * KEYSIZE;
+            byte[] KEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, start, end);
+            ciphertextBlocks.add(KEYSIZEWorthOfBytes);
+            i++;
+        }
+
+        System.out.println("ciphertextBlocks: " + ciphertextBlocks.size());
     }
 
+    /**
+     * The KEYSIZE with the smallest normalized edit distance is probably the key.
+     * TODO You could proceed perhaps with the smallest 2-3 KEYSIZE values.
+     * TODO Or take 4 KEYSIZE blocks instead of 2 and average the distances.
+     */
     public static int probableKeySize(byte[] cypherTextBytes) {
         int minDistance = Integer.MAX_VALUE;
         int rv = 0;
