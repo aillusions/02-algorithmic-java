@@ -33,6 +33,21 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
         byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
         System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
+
+        byte[][] transposedBlocks = transposeBlocks(cipherTextBlocks, KEYSIZE);
+        System.out.println("transposedBlocks: \n" + ByteArraysTest.printGrid(transposedBlocks));
+    }
+
+    public static byte[][] transposeBlocks(byte[][] cipherTextBlocks, int KEYSIZE) {
+        byte[][] rv = new byte[KEYSIZE][cipherTextBlocks.length];
+
+        for (int i = 0; i < KEYSIZE; i++) {
+            for (int j = 0; j < cipherTextBlocks.length; j++) {
+                rv[i][j] = cipherTextBlocks[j][i];
+            }
+        }
+
+        return rv;
     }
 
     public static byte[][] ciphertextBlocks(byte[] cypherTextBytes, int KEYSIZE) {
