@@ -14,7 +14,7 @@ public class MyLevenshteinDistance implements LevenshteinDistance {
     public int getDistance(String a, String b) {
 
         String key = a + " - " + b;
-        System.out.println(key);
+        //System.out.println(key);
 
         if (cache.containsKey(key)) {
             return cache.get(key);

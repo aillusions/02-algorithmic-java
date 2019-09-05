@@ -6,19 +6,25 @@ import com.zalizniak.medium.levenshtein_distance.MyLevenshteinDistance;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 /**
  * https://cryptopals.com/sets/1/challenges/6
  */
 public class Challenge6_BreakRepeatingKeyXOR {
 
     private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+    public static final String UTF_8 = "UTF-8";
+    public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
     @Test
     public void testEditDistance() {
         String strA = "this is a test";
         String strB = "wokka wokka!!!";
 
-        Assert.assertEquals(37, editDistance(strA, strB));
+        Assert.assertEquals(37, editDistanceSlow(strA, strB));
+        Assert.assertEquals(37, editDistanceFast(strA, strB));
     }
 
     @Test
@@ -29,11 +35,31 @@ public class Challenge6_BreakRepeatingKeyXOR {
     }
 
     /**
-     * The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. In other words, it is the number of substitutions required to transform one string into another.
+     * The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.
+     * In other words, it is the number of substitutions required to transform one string into another.
      */
-    public int editDistance(String str1, String str2) {
-        String binaryString1 = BitwiseTest.convertToBinary(str1, "UTF-8");
-        String binaryString2 = BitwiseTest.convertToBinary(str2, "UTF-8");
+    public int editDistanceFast(String str1, String str2) {
+        byte[] bytes1 = str1.getBytes(UTF_8_CH);
+        byte[] bytes2 = str2.getBytes(UTF_8_CH);
+
+        int rv = 0;
+        for (int i = 0; i < bytes1.length; i++) {
+            byte byte1 = bytes1[i];
+            byte byte2 = bytes2[i];
+            byte xorred = (byte) (byte1 ^ byte2);
+
+            while (xorred != 0) {
+                rv += xorred & 1;
+                xorred >>= 1;
+            }
+        }
+
+        return rv;
+    }
+
+    public int editDistanceSlow(String str1, String str2) {
+        String binaryString1 = BitwiseTest.convertToBinary(str1, UTF_8);
+        String binaryString2 = BitwiseTest.convertToBinary(str2, UTF_8);
         System.out.println(str1 + " -> " + binaryString1);
         System.out.println(str2 + " -> " + binaryString2);
 
