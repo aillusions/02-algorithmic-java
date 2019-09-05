@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class BitwiseTest {
 
@@ -16,25 +17,24 @@ public class BitwiseTest {
         }
     }
 
+    // 2 bytes, 65,536 characters
+    @Test
+    public void charToBytes() {
+        char origChar = 'a';
+        byte[] bytes = ByteBuffer.allocate(2).putChar(origChar).array();
+        byte[] reverseBytes = ByteBuffer.allocate(2).putChar(Character.reverseBytes(origChar)).array();
+        ByteBuffer reverseBuffer = ByteBuffer.wrap(reverseBytes);
+
+        System.out.println(((int) origChar) + " == " + Arrays.toString(bytes) + "  <->  " + Arrays.toString(reverseBytes) + " == " + ((int) reverseBuffer.getChar()));
+    }
+
     @Test
     public void intToBytes() {
-        for (byte b : intToBytes(Integer.MIN_VALUE)) {
-            System.out.format("0x%x ", b);
-        }
-
-        System.out.println();
-
-        for (byte b : intToByteArray(800)) {
-            System.out.format("0x%x ", b);
-        }
-
-        System.out.println();
-
-        for (byte b : integerToBytes(Integer.MAX_VALUE)) {
-            System.out.format("0x%x ", b);
-        }
-
-        System.out.println();
+        System.out.println(Integer.MAX_VALUE + " -> " + Arrays.toString(intToBytes(Integer.MAX_VALUE)));
+        System.out.println(800 + " -> " + Arrays.toString(intToBytes(800)));
+        System.out.println(1 + " -> " + Arrays.toString(intToBytes(1)));
+        System.out.println(0 + " -> " + Arrays.toString(intToBytes(0)));
+        System.out.println(Integer.MIN_VALUE + " -> " + Arrays.toString(intToBytes(Integer.MIN_VALUE)));
     }
 
     public static byte[] intToBytes(int value) {
