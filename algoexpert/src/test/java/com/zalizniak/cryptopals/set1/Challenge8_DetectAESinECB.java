@@ -18,9 +18,10 @@ public class Challenge8_DetectAESinECB {
     public void test1() {
         for (String cipherTextHex : BASE64_TEXT) {
             String cipherText = HexTest.hexToASCII(cipherTextHex);
-            byte[] cipherTextBytes = cipherText.getBytes(StandardCharsets.UTF_8);
+            byte[] cipherTextBytes = cipherTextHex.getBytes(StandardCharsets.UTF_8);
             byte[][] cipherTextBytesMatrix = Challenge6_BreakRepeatingKeyXOR.ciphertextBlocks(cipherTextBytes, ECB_BLOCK_SIZE);
 
+            // Note can use Set -> number_of_repetitions = len(chunks) - len(set(chunks))
             for (int i = 0; i < cipherTextBytesMatrix.length; i++) {
                 for (int j = i + 1; j < cipherTextBytesMatrix.length; j++) {
                     if (Arrays.equals(cipherTextBytesMatrix[i], cipherTextBytesMatrix[j])) {
