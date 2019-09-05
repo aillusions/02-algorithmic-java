@@ -32,7 +32,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
         int KEYSIZE = probableKeySize(cypherTextBytes);
         System.out.println("probableKeySize: " + KEYSIZE);
-        Assert.assertEquals(EXPECTED_KEY.length(), probableKeySize(cypherTextBytes));
+        Assert.assertEquals(EXPECTED_KEY.length(), KEYSIZE);
 
         byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
         //System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
@@ -99,16 +99,23 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public static int probableKeySize(byte[] cypherTextBytes) {
         int minDistance = Integer.MAX_VALUE;
         int rv = 0;
+        int pairs = 30;
 
         for (int KEYSIZE = 2; KEYSIZE < 40; KEYSIZE++) {
-            byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, 0, KEYSIZE);
-            byte[] secondKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE, KEYSIZE * 2);
-            int distance = BitwiseTest.editDistanceFast2(firstKEYSIZEWorthOfBytes, secondKEYSIZEWorthOfBytes);
-            int normalizedDistance = distance / KEYSIZE;
+            int distance = 0;
+            for (int i = 0; i < pairs; i++) {
+                byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE * i, KEYSIZE * (i + 1));
+                byte[] secondKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE * (i + 1), KEYSIZE * (i + 2));
+                distance += BitwiseTest.editDistanceFast(firstKEYSIZEWorthOfBytes, secondKEYSIZEWorthOfBytes);
+            }
+
+            int normalizedDistance = distance / (KEYSIZE * pairs);
             if (normalizedDistance < minDistance) {
                 minDistance = normalizedDistance;
                 rv = KEYSIZE;
             }
+
+            System.out.println(KEYSIZE + " -> " + normalizedDistance);
         }
 
         return rv;
