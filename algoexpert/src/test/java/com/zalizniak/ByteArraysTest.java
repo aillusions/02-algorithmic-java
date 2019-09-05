@@ -8,10 +8,36 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ByteArraysTest {
 
+
+    public static byte[][] splitOnBlocks(byte[] cypherTextBytes, int KEYSIZE) {
+        int cypherTextLength = cypherTextBytes.length;
+
+        int i = 0;
+        int start = 0;
+        int end = 0;
+
+        List<byte[]> cipherTextBlocks = new ArrayList<>();
+        while (end < cypherTextLength) {
+            start = i * KEYSIZE;
+            end = KEYSIZE + i * KEYSIZE;
+            byte[] KEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, start, end);
+            cipherTextBlocks.add(KEYSIZEWorthOfBytes);
+            i++;
+        }
+
+        byte[][] rv = new byte[cipherTextBlocks.size()][5];
+        for (int j = 0; j < cipherTextBlocks.size(); j++) {
+            rv[j] = cipherTextBlocks.get(j);
+        }
+
+        return rv;
+    }
 
     // 2 bytes, 65,536 characters
     @Test

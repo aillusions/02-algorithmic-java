@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class Challenge7_AESinECB {
 
-    public static final int BLOCK_SIZE_BYTES = 16;
+    public static final int AES_BLOCK_SIZE_BYTES = 16;
 
     private static String KEY = "YELLOW SUBMARINE";
 

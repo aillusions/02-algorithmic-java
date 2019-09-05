@@ -14,14 +14,12 @@ import java.util.Set;
  */
 public class Challenge8_DetectAESinECB {
 
-    public static int ECB_BLOCK_SIZE = 16;
-
     @Test
     public void test1() {
         for (String cipherTextHex : BASE64_TEXT) {
             String cipherText = HexTest.hexToASCII(cipherTextHex);
             byte[] cipherTextBytes = cipherText.getBytes(StandardCharsets.UTF_8);
-            byte[][] cipherTextBytesMatrix = Challenge6_BreakRepeatingKeyXOR.ciphertextBlocks(cipherTextBytes, ECB_BLOCK_SIZE);
+            byte[][] cipherTextBytesMatrix = ByteArraysTest.splitOnBlocks(cipherTextBytes, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
 
             String[] blockStrings = new String[cipherTextBytesMatrix.length];
             for (int i = 0; i < cipherTextBytesMatrix.length; i++) {

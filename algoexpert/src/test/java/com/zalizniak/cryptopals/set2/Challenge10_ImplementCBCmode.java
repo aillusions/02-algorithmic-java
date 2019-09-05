@@ -1,10 +1,11 @@
 package com.zalizniak.cryptopals.set2;
 
 import com.zalizniak.Base64Test;
+import com.zalizniak.ByteArraysTest;
+import com.zalizniak.cryptopals.set1.Challenge2_XOR;
+import com.zalizniak.cryptopals.set1.Challenge7_AESinECB;
 import org.junit.Test;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -24,7 +25,34 @@ public class Challenge10_ImplementCBCmode {
         byte[] key = KEY.getBytes(StandardCharsets.UTF_8);
         byte[] cypherText = Base64Test.decode(BASE64_TEXT);
 
+        byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        System.out.println(ByteArraysTest.printGrid(blocks));
 
+        for (int i = 0; i < blocks.length; i++) {
+            byte[] block = blocks[i];
+            byte[] cypherBlock = Challenge7_AESinECB.decryptECB(block, key);
+        }
+    }
+
+    public static byte[] encryptCBC(byte[] plainText, byte[] key) {
+        byte[] rv = new byte[plainText.length];
+
+        byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        System.out.println(ByteArraysTest.printGrid(blocks));
+
+        byte[] previousBlock = iv;
+        for (int i = 0; i < blocks.length; i++) {
+            byte[] block = blocks[i];
+            block = Challenge9_PKCS7padding.padBlock(block, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+            block = Challenge2_XOR.fixedXOR(previousBlock, block);
+            byte[] cypherBlock = Challenge7_AESinECB.encryptECB(block, key);
+            previousBlock = cypherBlock;
+
+            // TODO
+            //byte[] firstKEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, KEYSIZE * i, KEYSIZE * (i + 1));
+        }
+
+        return rv;
     }
 
     public static final String BASE64_TEXT = "" +

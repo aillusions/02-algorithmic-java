@@ -2,14 +2,13 @@ package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
 import com.zalizniak.BitwiseTest;
+import com.zalizniak.ByteArraysTest;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * https://cryptopals.com/sets/1/challenges/6
@@ -33,7 +32,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
         System.out.println("probableKeySize: " + KEYSIZE);
         Assert.assertEquals(EXPECTED_KEY.length(), KEYSIZE);
 
-        byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
+        byte[][] cipherTextBlocks = ByteArraysTest.splitOnBlocks(cypherTextBytes, KEYSIZE);
         //System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
 
         byte[][] transposedBlocks = transposeBlocks(cipherTextBlocks, KEYSIZE);
@@ -63,30 +62,6 @@ public class Challenge6_BreakRepeatingKeyXOR {
             for (int j = 0; j < cipherTextBlocks.length; j++) {
                 rv[i][j] = cipherTextBlocks[j][i];
             }
-        }
-
-        return rv;
-    }
-
-    public static byte[][] ciphertextBlocks(byte[] cypherTextBytes, int KEYSIZE) {
-        int cypherTextLength = cypherTextBytes.length;
-
-        int i = 0;
-        int start = 0;
-        int end = 0;
-
-        List<byte[]> cipherTextBlocks = new ArrayList<>();
-        while (end < cypherTextLength) {
-            start = i * KEYSIZE;
-            end = KEYSIZE + i * KEYSIZE;
-            byte[] KEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, start, end);
-            cipherTextBlocks.add(KEYSIZEWorthOfBytes);
-            i++;
-        }
-
-        byte[][] rv = new byte[cipherTextBlocks.size()][5];
-        for (int j = 0; j < cipherTextBlocks.size(); j++) {
-            rv[j] = cipherTextBlocks.get(j);
         }
 
         return rv;
