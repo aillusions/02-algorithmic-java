@@ -3,6 +3,7 @@ package com.zalizniak;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class Base64Test {
@@ -30,7 +31,11 @@ public class Base64Test {
         return encodeString(in.getBytes());
     }
 
+    public static byte[] decode(String in) {
+        return Base64.getDecoder().decode(in);
+    }
+
     public static String decodeString(String in) {
-        return new String(Base64.getDecoder().decode(in));
+        return new String(Base64.getDecoder().decode(in), StandardCharsets.UTF_16);
     }
 }
