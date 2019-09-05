@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class BitwiseTest {
@@ -26,6 +27,8 @@ public class BitwiseTest {
         ByteBuffer reverseBuffer = ByteBuffer.wrap(reverseBytes);
 
         System.out.println(((int) origChar) + " == " + Arrays.toString(bytes) + "  <->  " + Arrays.toString(reverseBytes) + " == " + ((int) reverseBuffer.getChar()));
+
+        System.out.println((int) origChar + " -> " + Arrays.toString(integerToBytes(origChar)));
     }
 
     @Test
@@ -35,6 +38,21 @@ public class BitwiseTest {
         System.out.println(1 + " -> " + Arrays.toString(intToBytes(1)));
         System.out.println(0 + " -> " + Arrays.toString(intToBytes(0)));
         System.out.println(Integer.MIN_VALUE + " -> " + Arrays.toString(intToBytes(Integer.MIN_VALUE)));
+
+        System.out.println(10 + " -> " + Arrays.toString(integerToBytes(10)));
+    }
+
+    @Test
+    public void stringToBytes() {
+        System.out.println("" + " -> " + Arrays.toString("".getBytes(StandardCharsets.UTF_8)));
+        System.out.println(" " + " -> " + Arrays.toString(" ".getBytes(StandardCharsets.UTF_8)));
+        System.out.println("1" + " -> " + Arrays.toString("1".getBytes(StandardCharsets.UTF_8)));
+
+        System.out.println("a" + " -> " + Arrays.toString("a".getBytes(StandardCharsets.UTF_8)));
+        System.out.println("aa" + " -> " + Arrays.toString("aa".getBytes(StandardCharsets.UTF_8)));
+        System.out.println("aaa" + " -> " + Arrays.toString("aaa".getBytes(StandardCharsets.UTF_8)));
+        System.out.println("aaa" + 'я' + " -> " + Arrays.toString(("aaa" + 'я').getBytes(StandardCharsets.UTF_8)));
+        System.out.println("aaa" + ((char) 126) + " -> " + Arrays.toString(("aaa" + ((char) 126)).getBytes(StandardCharsets.UTF_8)));
     }
 
     public static byte[] intToBytes(int value) {
