@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class Challenge6_BreakRepeatingKeyXOR {
 
-    private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
     public static final String UTF_8 = "UTF-8";
     public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
@@ -51,6 +50,8 @@ public class Challenge6_BreakRepeatingKeyXOR {
         System.out.println();
         System.out.println();
         System.out.println();
+
+        Assert.assertEquals(EXPECTED_KEY, key);
 
         //System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, key));
     }
@@ -115,7 +116,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
                 rv = KEYSIZE;
             }
 
-            System.out.println(KEYSIZE + " -> " + normalizedDistance);
+            // System.out.println(KEYSIZE + " -> " + normalizedDistance);
         }
 
         return rv;

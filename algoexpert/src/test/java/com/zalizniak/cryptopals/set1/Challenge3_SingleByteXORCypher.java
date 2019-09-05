@@ -44,8 +44,6 @@ import java.util.Map;
  */
 public class Challenge3_SingleByteXORCypher {
 
-    private static final char[] CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
-
     private static final Map<Character, Double> ENGLISH_FREQ = new HashMap<>();
 
     static {
@@ -103,7 +101,7 @@ public class Challenge3_SingleByteXORCypher {
         double minChi = Double.MAX_VALUE;
         String rv = "";
 
-        for (char aChar : CHARS) {
+        for (char aChar = 0; aChar < Byte.MAX_VALUE; aChar++) {
             String variant = singleCharacterXor(XORed, aChar);
             double chi = getEnglishScore(variant);
             if (chi < minChi) {
@@ -120,15 +118,19 @@ public class Challenge3_SingleByteXORCypher {
     public static char singleByteXORCipher(String XORed) {
         double minChi = Double.MAX_VALUE;
         char rv = 0;
+        String string = "";
 
-        for (char aChar : CHARS) {
+        for (char aChar = 0; aChar < Byte.MAX_VALUE; aChar++) {
             String variant = singleCharacterXor(XORed, aChar);
             double chi = getEnglishScore(variant);
             if (chi < minChi) {
                 minChi = chi;
                 rv = aChar;
+                string = variant;
             }
         }
+
+        System.out.println(rv + " --> " + minChi + " - " + string);
 
         return rv;
     }
