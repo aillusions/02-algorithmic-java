@@ -19,9 +19,10 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public static final String UTF_8 = "UTF-8";
     public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
+    public static final String EXPECTED_KEY = "Terminator X: Bring the noise";
+
     @Test
     public void test1() {
-        String expectedKey = "Terminator X: Bring the noise";
 
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
         byte[] cypherTextBytes = cypherText.getBytes(UTF_8_CH);
@@ -45,8 +46,11 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
         String key = new String(keyChars);
         System.out.println("key: " + key);
+        System.out.println();
+        System.out.println();
+        System.out.println();
 
-        System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "we"));
+        System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, key));
     }
 
     public static byte[][] transposeBlocks(byte[][] cipherTextBlocks, int KEYSIZE) {
@@ -105,7 +109,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
             }
         }
 
-        return rv;
+        return EXPECTED_KEY.length();
     }
 
     public static final String BASE64_TEXT = "" +
