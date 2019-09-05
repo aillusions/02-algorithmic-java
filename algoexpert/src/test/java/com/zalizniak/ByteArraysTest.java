@@ -123,7 +123,7 @@ public class ByteArraysTest {
         for (int i = 0; i < a.length; i++) {
             byte[] row = a[i];
             for (int j = 0; j < row.length; j++) {
-                sb.append(String.format("%5d ", a[i][j]));
+                sb.append(String.format("%3d ", a[i][j]));
             }
             sb.append("\n");
         }
