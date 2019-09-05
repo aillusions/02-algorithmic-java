@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * https://cryptopals.com/sets/1/challenges/7
+ * <p>
+ * Electronic Codebook or ECB
  */
 public class Challenge7_AESinECB {
 
@@ -20,13 +22,28 @@ public class Challenge7_AESinECB {
     }
 
     public static String decrypt(String encrypted, String key) {
+        return new String(decryptECB(Base64Test.decode(encrypted), key.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+    }
+
+    public static byte[] encryptECB(byte[] plainText, byte[] key) {
         try {
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
+            SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+
+            return cipher.doFinal(plainText);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static byte[] decryptECB(byte[] encrypted, byte[] key) {
+        try {
+            SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
 
-            byte[] plainText = cipher.doFinal(Base64Test.decode(encrypted));
-            return new String(plainText, StandardCharsets.UTF_8);
+            return cipher.doFinal(encrypted);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
