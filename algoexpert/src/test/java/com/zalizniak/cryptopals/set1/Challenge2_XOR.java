@@ -37,6 +37,10 @@ public class Challenge2_XOR {
     }
 
     public static byte[] fixedXOR(byte[] inA, byte[] inB) {
+        if (inA.length != inB.length) {
+            throw new RuntimeException("Invalid args: sizes of arrays for xor expected to be the same: " + inA.length + " != " + inB.length);
+        }
+
         byte[] rv = new byte[inA.length];
         for (int i = 0; i < inA.length; i++) {
             rv[i] = (byte) (inA[i] ^ inB[i]);

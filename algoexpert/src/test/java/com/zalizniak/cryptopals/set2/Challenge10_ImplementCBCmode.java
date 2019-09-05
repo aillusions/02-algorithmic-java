@@ -38,6 +38,7 @@ public class Challenge10_ImplementCBCmode {
     @Test
     public void testEncrypt() {
         System.out.println(Arrays.toString(encryptCBC("test".getBytes(StandardCharsets.UTF_8), KEY)));
+        System.out.println(Arrays.toString(encryptCBC("test-test-test-test-test-test-test-test-test-test-test-test".getBytes(StandardCharsets.UTF_8), KEY)));
     }
 
     public static byte[] encryptCBC(byte[] plainText, byte[] key) {
