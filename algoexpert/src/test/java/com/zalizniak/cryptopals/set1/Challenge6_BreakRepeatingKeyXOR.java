@@ -2,6 +2,7 @@ package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
 import com.zalizniak.BitwiseTest;
+import com.zalizniak.ByteArraysTest;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
@@ -19,6 +20,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public static final String UTF_8 = "UTF-8";
     public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
+    // Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
     @Test
     public void test1() {
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
@@ -26,25 +28,35 @@ public class Challenge6_BreakRepeatingKeyXOR {
         int cypherTextLength = cypherTextBytes.length;
         System.out.println("cypherTextLength: " + cypherTextLength);
 
-        //Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
-
         int KEYSIZE = probableKeySize(cypherTextBytes);
         System.out.println("probableKeySize: " + KEYSIZE);
+
+        byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
+        System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
+    }
+
+    public static byte[][] ciphertextBlocks(byte[] cypherTextBytes, int KEYSIZE) {
+        int cypherTextLength = cypherTextBytes.length;
 
         int i = 0;
         int start = 0;
         int end = 0;
 
-        List<byte[]> ciphertextBlocks = new ArrayList<>();
+        List<byte[]> cipherTextBlocks = new ArrayList<>();
         while (end < cypherTextLength) {
             start = i * KEYSIZE;
             end = KEYSIZE + i * KEYSIZE;
             byte[] KEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, start, end);
-            ciphertextBlocks.add(KEYSIZEWorthOfBytes);
+            cipherTextBlocks.add(KEYSIZEWorthOfBytes);
             i++;
         }
 
-        System.out.println("ciphertextBlocks: " + ciphertextBlocks.size());
+        byte[][] rv = new byte[cipherTextBlocks.size()][5];
+        for (int j = 0; j < cipherTextBlocks.size(); j++) {
+            rv[j] = cipherTextBlocks.get(j);
+        }
+
+        return rv;
     }
 
     /**

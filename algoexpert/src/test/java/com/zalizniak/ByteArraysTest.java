@@ -118,4 +118,17 @@ public class ByteArraysTest {
         };
     }
 
+    public static String printGrid(byte[][] a) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < a.length; i++) {
+            byte[] row = a[i];
+            for (int j = 0; j < row.length; j++) {
+                sb.append(String.format("%5d ", a[i][j]));
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
 }
