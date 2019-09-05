@@ -2,6 +2,7 @@ package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
 import com.zalizniak.BitwiseTest;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
@@ -31,6 +32,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
         int KEYSIZE = probableKeySize(cypherTextBytes);
         System.out.println("probableKeySize: " + KEYSIZE);
+        Assert.assertEquals(EXPECTED_KEY.length(), probableKeySize(cypherTextBytes));
 
         byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
         //System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
@@ -50,7 +52,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
         System.out.println();
         System.out.println();
 
-        System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, key));
+        //System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, key));
     }
 
     public static byte[][] transposeBlocks(byte[][] cipherTextBlocks, int KEYSIZE) {
@@ -109,7 +111,7 @@ public class Challenge6_BreakRepeatingKeyXOR {
             }
         }
 
-        return EXPECTED_KEY.length();
+        return rv;
     }
 
     public static final String BASE64_TEXT = "" +
