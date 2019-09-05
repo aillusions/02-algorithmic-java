@@ -1,9 +1,11 @@
 package com.zalizniak.cryptopals.set2;
 
+import com.zalizniak.Base64Test;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Cipher Block Chaining (CBC)
@@ -19,6 +21,9 @@ public class Challenge10_ImplementCBCmode {
 
     @Test
     public void test() {
+        byte[] key = KEY.getBytes(StandardCharsets.UTF_8);
+        byte[] cypherText = Base64Test.decode(BASE64_TEXT);
+
 
     }
 
