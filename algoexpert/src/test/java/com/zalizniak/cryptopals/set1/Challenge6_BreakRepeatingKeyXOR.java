@@ -1,9 +1,6 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
-import com.zalizniak.BitwiseTest;
-import com.zalizniak.medium.levenshtein_distance.MyLevenshteinDistance;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
@@ -19,60 +16,10 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
     @Test
-    public void testEditDistance() {
-        String strA = "this is a test";
-        String strB = "wokka wokka!!!";
-
-        Assert.assertEquals(37, editDistanceSlow(strA, strB));
-        Assert.assertEquals(37, editDistanceFast(strA, strB));
-    }
-
-    @Test
     public void test1() {
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
         Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
         System.out.println(cypherText);
-    }
-
-    /**
-     * The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.
-     * In other words, it is the number of substitutions required to transform one string into another.
-     */
-    public int editDistanceFast(String str1, String str2) {
-        byte[] bytes1 = str1.getBytes(UTF_8_CH);
-        byte[] bytes2 = str2.getBytes(UTF_8_CH);
-
-        int rv = 0;
-        for (int i = 0; i < bytes1.length; i++) {
-            byte byte1 = bytes1[i];
-            byte byte2 = bytes2[i];
-            byte xorred = (byte) (byte1 ^ byte2);
-
-            while (xorred != 0) {
-                rv += xorred & 1;
-                xorred >>= 1;
-            }
-        }
-
-        return rv;
-    }
-
-    public int editDistanceSlow(String str1, String str2) {
-        String binaryString1 = BitwiseTest.convertToBinary(str1, UTF_8);
-        String binaryString2 = BitwiseTest.convertToBinary(str2, UTF_8);
-        System.out.println(str1 + " -> " + binaryString1);
-        System.out.println(str2 + " -> " + binaryString2);
-
-        return new MyLevenshteinDistance().getDistance(binaryString1, binaryString2);
-    }
-
-    public static String xor(String strA, String strB) {
-        char[] rv = new char[strA.length()];
-        for (int i = 0; i < strA.length(); i++) {
-            rv[i] = (char) (strA.charAt(i) ^ strB.charAt(i));
-        }
-
-        return new String(rv);
     }
 
     public static final String BASE64_TEXT = "" +
