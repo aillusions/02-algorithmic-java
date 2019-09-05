@@ -2,7 +2,6 @@ package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
 import com.zalizniak.BitwiseTest;
-import com.zalizniak.ByteArraysTest;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
@@ -20,7 +19,6 @@ public class Challenge6_BreakRepeatingKeyXOR {
     public static final String UTF_8 = "UTF-8";
     public static final Charset UTF_8_CH = StandardCharsets.UTF_8;
 
-    // Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, "x");
     @Test
     public void test1() {
         String cypherText = Base64Test.decodeString(BASE64_TEXT);
@@ -32,10 +30,21 @@ public class Challenge6_BreakRepeatingKeyXOR {
         System.out.println("probableKeySize: " + KEYSIZE);
 
         byte[][] cipherTextBlocks = ciphertextBlocks(cypherTextBytes, KEYSIZE);
-        System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
+        //System.out.println("ciphertextBlocks: \n" + ByteArraysTest.printGrid(cipherTextBlocks));
 
         byte[][] transposedBlocks = transposeBlocks(cipherTextBlocks, KEYSIZE);
-        System.out.println("transposedBlocks: \n" + ByteArraysTest.printGrid(transposedBlocks));
+        //System.out.println("transposedBlocks: \n" + ByteArraysTest.printGrid(transposedBlocks));
+
+        char[] keyChars = new char[KEYSIZE];
+        for (int i = 0; i < transposedBlocks.length; i++) {
+            byte[] transposedBlock = transposedBlocks[i];
+            keyChars[i] = Challenge3_SingleByteXORCypher.singleByteXORCipher(new String(transposedBlock, UTF_8_CH));
+        }
+
+        String key = new String(keyChars);
+        System.out.println("key: " + key);
+
+        System.out.println(Challenge5_RepeatingKeyXOR.repeatingKeyXOR(cypherText, key));
     }
 
     public static byte[][] transposeBlocks(byte[][] cipherTextBlocks, int KEYSIZE) {

@@ -117,6 +117,22 @@ public class Challenge3_SingleByteXORCypher {
         return rv;
     }
 
+    public static char singleByteXORCipher(String XORed) {
+        double minChi = Double.MAX_VALUE;
+        char rv = 0;
+
+        for (char aChar : CHARS) {
+            String variant = singleCharacterXor(XORed, aChar);
+            double chi = getEnglishScore(variant);
+            if (chi < minChi) {
+                minChi = chi;
+                rv = aChar;
+            }
+        }
+
+        return rv;
+    }
+
     public static String singleCharacterXor(String hex, char character) {
         char[] rv = new char[hex.length()];
         for (int i = 0; i < rv.length; i++) {
