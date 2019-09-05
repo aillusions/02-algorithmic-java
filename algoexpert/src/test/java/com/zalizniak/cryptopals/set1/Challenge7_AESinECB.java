@@ -1,6 +1,7 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.crypto.Cipher;
@@ -14,15 +15,15 @@ import java.nio.charset.StandardCharsets;
  */
 public class Challenge7_AESinECB {
 
+    public static final int BLOCK_SIZE_BYTES = 16;
+
     private static String KEY = "YELLOW SUBMARINE";
 
     @Test
     public void test1() {
-        System.out.println(decrypt(BASE64_TEXT, KEY));
-    }
-
-    public static String decrypt(String encrypted, String key) {
-        return new String(decryptECB(Base64Test.decode(encrypted), key.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+        byte[] key = KEY.getBytes(StandardCharsets.UTF_8);
+        System.out.println(new String(decryptECB(Base64Test.decode(BASE64_TEXT), key), StandardCharsets.UTF_8));
+        Assert.assertEquals("ABC-DEF", new String(decryptECB(encryptECB("ABC-DEF".getBytes(StandardCharsets.UTF_8), key), key), StandardCharsets.UTF_8));
     }
 
     public static byte[] encryptECB(byte[] plainText, byte[] key) {

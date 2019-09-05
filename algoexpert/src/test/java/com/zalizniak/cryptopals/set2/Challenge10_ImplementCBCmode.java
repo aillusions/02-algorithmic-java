@@ -10,13 +10,17 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class Challenge10_ImplementCBCmode {
 
+    // The first plaintext block, which has no associated previous ciphertext block,
+    // is added to a "fake 0th ciphertext block"
+    // called the initialization vector, or IV.
+    public static final byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    public static final String KEY = "YELLOW SUBMARINE";
+
     @Test
     public void test() {
 
     }
-
-
-
 
     public static final String BASE64_TEXT = "" +
             "CRIwqt4+szDbqkNY+I0qbNXPg1XLaCM5etQ5Bt9DRFV/xIN2k8Go7jtArLIy" +
