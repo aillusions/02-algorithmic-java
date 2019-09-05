@@ -1,6 +1,7 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
+import com.zalizniak.BitwiseTest;
 import com.zalizniak.medium.levenshtein_distance.MyLevenshteinDistance;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +15,10 @@ public class Challenge6_BreakRepeatingKeyXOR {
 
     @Test
     public void testEditDistance() {
-        Assert.assertEquals(37, editDistance("this is a test", "wokka wokka!!!"));
+        String strA = "this is a test";
+        String strB = "wokka wokka!!!";
+
+        Assert.assertEquals(37, editDistance(strA, strB));
     }
 
     @Test
@@ -28,7 +32,21 @@ public class Challenge6_BreakRepeatingKeyXOR {
      * The Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different. In other words, it is the number of substitutions required to transform one string into another.
      */
     public int editDistance(String str1, String str2) {
-        return new MyLevenshteinDistance().getDistance(str1, str2);
+        String binaryString1 = BitwiseTest.convertToBinary(str1, "UTF-8");
+        String binaryString2 = BitwiseTest.convertToBinary(str2, "UTF-8");
+        System.out.println(str1 + " -> " + binaryString1);
+        System.out.println(str2 + " -> " + binaryString2);
+
+        return new MyLevenshteinDistance().getDistance(binaryString1, binaryString2);
+    }
+
+    public static String xor(String strA, String strB) {
+        char[] rv = new char[strA.length()];
+        for (int i = 0; i < strA.length(); i++) {
+            rv[i] = (char) (strA.charAt(i) ^ strB.charAt(i));
+        }
+
+        return new String(rv);
     }
 
     public static final String BASE64_TEXT = "" +

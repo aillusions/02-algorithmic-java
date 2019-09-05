@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -36,7 +35,7 @@ public class BitwiseTest {
         Assert.assertEquals("10101011", convertToBinary("T", "UTF-8"));
     }
 
-    public String convertToBinary(String input, String encoding) throws UnsupportedEncodingException {
+    public static String convertToBinary(String input, String encoding) {
 
         byte[] encoded_input = Charset.forName(encoding)
                 .encode(input)
