@@ -4,6 +4,7 @@ import com.zalizniak.Base64Test;
 import com.zalizniak.ByteArraysTest;
 import com.zalizniak.cryptopals.set1.Challenge2_XOR;
 import com.zalizniak.cryptopals.set1.Challenge7_AESinECB;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.charset.StandardCharsets;
@@ -23,11 +24,17 @@ public class Challenge10_ImplementCBCmode {
     public static final byte[] KEY = KEY_TEXT.getBytes(StandardCharsets.UTF_8);
 
     @Test
-    public void testDecrypt() {
+    public void testDecryptAssignment() {
         byte[] cypherText = Base64Test.decode(BASE64_TEXT);
         byte[] plainText = decryptCBC(cypherText, KEY);
         System.out.println(new String(plainText, StandardCharsets.UTF_8));
     }
+
+    @Test
+    public void testDecrypt() {
+        Assert.assertEquals("test", new String(decryptCBC(encryptCBC("test".getBytes(StandardCharsets.UTF_8), KEY), KEY), StandardCharsets.UTF_8));
+    }
+
 
     @Test
     public void testEncrypt() {
@@ -39,7 +46,8 @@ public class Challenge10_ImplementCBCmode {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
         // System.out.println(ByteArraysTest.printGrid(blocks));
 
-        byte[] rv = new byte[cypherText.length]; // TODO refine also remove pad bytes
+        int paddingLength = 0;
+        byte[] rvCandidate = new byte[cypherText.length]; // TODO refine also remove pad bytes
 
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
@@ -48,8 +56,38 @@ public class Challenge10_ImplementCBCmode {
             byte[] plainBlock = Challenge2_XOR.fixedXOR(previousBlock, prePlainBlock);
             previousBlock = cypherBlock;
 
-            System.arraycopy(plainBlock, 0, rv, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
+            System.arraycopy(plainBlock, 0, rvCandidate, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
+
+            // detect padding length
+            if (i == blocks.length - 1) {
+                byte lastByte = plainBlock[Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - 1];
+                if (lastByte < Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
+                    boolean paddingDetected = false;
+                    int startFromIdx = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - 1;
+                    int endByIdx = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - lastByte;
+                    for (int j = startFromIdx; j >= endByIdx; j--) {
+                        if (plainBlock[j] != lastByte) {
+                            paddingDetected = false;
+                            break;
+                        } else {
+                            paddingDetected = true;
+                        }
+                    }
+                    if (paddingDetected) {
+                        paddingLength = lastByte;
+                    }
+                }
+            }
         }
+
+        byte[] rv;
+        if (paddingLength > 0) {
+            rv = new byte[cypherText.length - paddingLength];
+            System.arraycopy(rvCandidate, 0, rv, 0, rv.length);
+        } else {
+            rv = rvCandidate;
+        }
+
 
         return rv;
     }
@@ -70,7 +108,7 @@ public class Challenge10_ImplementCBCmode {
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
             byte[] block = blocks[i];
-            block = Challenge9_PKCS7padding.padBlock(block, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+            //block = Challenge9_PKCS7padding.padBlock(block, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
             block = Challenge2_XOR.fixedXOR(previousBlock, block);
             byte[] cypherBlock = Challenge7_AESinECB.encryptECB(block, key);
             previousBlock = cypherBlock;

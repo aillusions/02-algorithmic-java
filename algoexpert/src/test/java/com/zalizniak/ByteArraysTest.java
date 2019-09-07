@@ -15,19 +15,35 @@ import java.util.List;
 public class ByteArraysTest {
 
 
-    public static byte[][] splitOnBlocks(byte[] cypherTextBytes, int KEYSIZE) {
+    public static byte[][] splitOnBlocks(byte[] cypherTextBytes, int rowSize) {
         int cypherTextLength = cypherTextBytes.length;
 
         int i = 0;
-        int start = 0;
-        int end = 0;
+
 
         List<byte[]> cipherTextBlocks = new ArrayList<>();
-        while (end < cypherTextLength) {
-            start = i * KEYSIZE;
-            end = KEYSIZE + i * KEYSIZE;
-            byte[] KEYSIZEWorthOfBytes = Arrays.copyOfRange(cypherTextBytes, start, end);
-            cipherTextBlocks.add(KEYSIZEWorthOfBytes);
+        while (i * rowSize < cypherTextLength) {
+            int start = i * rowSize;
+            int dataLength;
+
+            if (cypherTextLength - start >= rowSize) {
+                dataLength = rowSize;
+            } else {
+                dataLength = cypherTextLength - start;
+            }
+
+            byte[] row = new byte[rowSize];
+            System.arraycopy(cypherTextBytes, start, row, 0, dataLength);
+
+            if (dataLength < rowSize) {
+                byte paddingValue = (byte) (rowSize - dataLength);
+                for (int j = dataLength; j < rowSize; j++) {
+                    row[j] = paddingValue;
+                }
+            }
+
+            cipherTextBlocks.add(row);
+
             i++;
         }
 
