@@ -1,10 +1,14 @@
 package com.zalizniak.cryptopals.set2;
 
+import com.zalizniak.ByteArraysTest;
 import com.zalizniak.cryptopals.set1.Challenge7_AESinECB;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * https://cryptopals.com/sets/2/challenges/11
@@ -24,10 +28,29 @@ public class Challenge11_ECBCBCDetectionOracle {
 
     @Test
     public void test() {
-        for (int i = 0; i < 10; i++) {
-            RandomEncrypt encryption = randomEncrypt(new byte[]{1, 2, 3, 4});
-            System.out.println(encryption.cbc);
+        byte[] plainText = new byte[5 * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES];
+        for (int i = 0; i < plainText.length; i++) {
+            plainText[i] = 'a';
         }
+
+        for (int i = 0; i < 100; i++) {
+            RandomEncrypt encryption = randomEncrypt(plainText);
+            System.out.println(encryption.ecb);
+            Assert.assertEquals(encryption.ecb, guessECB(encryption.cypherText));
+        }
+    }
+
+    public static boolean guessECB(byte[] cypherText) {
+        byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        Set<String> blocksSet = new HashSet<>();
+
+        for (int i = 0; i < blocks.length; i++) {
+            byte[] block = blocks[i];
+            String blockStr = new String(block, StandardCharsets.UTF_8);
+            blocksSet.add(blockStr);
+        }
+
+        return blocksSet.size() < blocks.length;
     }
 
     public static RandomEncrypt randomEncrypt(byte[] text) {
@@ -42,9 +65,9 @@ public class Challenge11_ECBCBCDetectionOracle {
 
         if (randomBoolean()) {
             byte[] iv = randomByteArray(Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-            return new RandomEncrypt(Challenge10_ImplementCBCmode.encryptCBC(iv, textToEncrypt, key), true);
+            return new RandomEncrypt(Challenge10_ImplementCBCmode.encryptCBC(iv, textToEncrypt, key), false);
         } else {
-            return new RandomEncrypt(Challenge7_AESinECB.encryptECB(textToEncrypt, key), false);
+            return new RandomEncrypt(Challenge7_AESinECB.encryptECB(textToEncrypt, key), true);
         }
     }
 
@@ -64,12 +87,12 @@ public class Challenge11_ECBCBCDetectionOracle {
     }
 
     public static class RandomEncrypt {
-        public byte[] rv;
-        public boolean cbc;
+        public byte[] cypherText;
+        public boolean ecb;
 
-        public RandomEncrypt(byte[] rv, boolean cbc) {
-            this.rv = rv;
-            this.cbc = cbc;
+        public RandomEncrypt(byte[] cypherText, boolean ecb) {
+            this.cypherText = cypherText;
+            this.ecb = ecb;
         }
     }
 
