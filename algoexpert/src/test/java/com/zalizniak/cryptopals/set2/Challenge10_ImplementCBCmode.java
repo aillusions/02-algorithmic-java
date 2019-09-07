@@ -95,16 +95,8 @@ public class Challenge10_ImplementCBCmode {
     }
 
     public static byte[] encryptCBC(byte[] iv, byte[] plainText, byte[] key) {
-        int responseSize;
-        if (plainText.length > Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
-            responseSize = plainText.length + (plainText.length % Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        } else {
-            responseSize = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES;
-        }
-
-        byte[] rv = new byte[responseSize];
-
         byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        byte[] rv = new byte[blocks.length * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES];
 
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {

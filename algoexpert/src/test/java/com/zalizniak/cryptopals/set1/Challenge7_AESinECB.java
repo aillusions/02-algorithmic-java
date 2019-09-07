@@ -34,6 +34,13 @@ public class Challenge7_AESinECB {
         Assert.assertEquals("ABC-DEF", new String(myDecryptedText, StandardCharsets.UTF_8));
     }
 
+    @Test
+    public void test3() {
+        byte[] myCypherText = encryptECB("ABCEABCEABCEABCEABCE".getBytes(StandardCharsets.UTF_8), KEY);
+        byte[] myDecryptedText = decryptECB(myCypherText, KEY);
+        Assert.assertEquals("ABCEABCEABCEABCEABCE", new String(myDecryptedText, StandardCharsets.UTF_8));
+    }
+
     public static byte[] decryptECB(byte[] cypherText, byte[] key) {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
 
@@ -80,16 +87,8 @@ public class Challenge7_AESinECB {
     }
 
     public static byte[] encryptECB(byte[] plainText, byte[] key) {
-        int responseSize;
-        if (plainText.length > Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
-            responseSize = plainText.length + (plainText.length % Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        } else {
-            responseSize = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES;
-        }
-
-        byte[] rv = new byte[responseSize];
-
         byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        byte[] rv = new byte[blocks.length * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES];
 
         for (int i = 0; i < blocks.length; i++) {
             byte[] block = blocks[i];
