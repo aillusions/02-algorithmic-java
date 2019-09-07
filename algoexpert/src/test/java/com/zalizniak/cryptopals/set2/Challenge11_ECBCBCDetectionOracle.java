@@ -11,26 +11,44 @@ import java.util.Random;
  */
 public class Challenge11_ECBCBCDetectionOracle {
 
+    private static final Random RANDOM = new Random();
 
     @Test
     public void test() {
-
+        for (int i = 0; i < 10; i++) {
+            System.out.println(randomEncrypt(new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9}).cbc);
+        }
     }
 
-    public static byte[] randomEncrypt(byte[] text) {
-        byte[] key = randomKey();
+    public static RandomEncrypt randomEncrypt(byte[] text) {
+        byte[] key = randomByteArray(Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
 
-        byte[] rv = Challenge10_ImplementCBCmode.encryptCBC(text, key);
-
-        return rv;
+        if (randomBoolean()) {
+            byte[] iv = randomByteArray(Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+            return new RandomEncrypt(Challenge10_ImplementCBCmode.encryptCBC(iv, text, key), true);
+        } else {
+            return new RandomEncrypt(Challenge7_AESinECB.encryptECB(text, key), false);
+        }
     }
 
-    public static byte[] randomKey() {
-        Random rnd = new Random();
-        byte[] key = new byte[Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES];
-        rnd.nextBytes(key);
+    public static boolean randomBoolean() {
+        return RANDOM.nextBoolean();
+    }
+
+    public static byte[] randomByteArray(int size) {
+        byte[] key = new byte[size];
+        RANDOM.nextBytes(key);
         return key;
     }
 
+    public static class RandomEncrypt {
+        public byte[] rv;
+        public boolean cbc;
+
+        public RandomEncrypt(byte[] rv, boolean cbc) {
+            this.rv = rv;
+            this.cbc = cbc;
+        }
+    }
 
 }

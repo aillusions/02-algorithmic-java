@@ -38,11 +38,11 @@ public class Challenge7_AESinECB {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
 
         int paddingLength = 0;
-        byte[] rvCandidate = new byte[cypherText.length]; // TODO refine also remove pad bytes
+        byte[] rvCandidate = new byte[cypherText.length];
 
         for (int i = 0; i < blocks.length; i++) {
             byte[] cypherBlock = blocks[i];
-            byte[] plainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, KEY);
+            byte[] plainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, key);
 
             System.arraycopy(plainBlock, 0, rvCandidate, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
 

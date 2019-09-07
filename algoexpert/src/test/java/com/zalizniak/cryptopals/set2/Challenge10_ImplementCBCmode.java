@@ -18,7 +18,7 @@ public class Challenge10_ImplementCBCmode {
     // The first plaintext block, which has no associated previous ciphertext block,
     // is added to a "fake 0th ciphertext block"
     // called the initialization vector, or IV.
-    public static final byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public static final byte[] IV = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     public static final String KEY_TEXT = "YELLOW SUBMARINE";
     public static final byte[] KEY = KEY_TEXT.getBytes(StandardCharsets.UTF_8);
@@ -48,10 +48,10 @@ public class Challenge10_ImplementCBCmode {
         int paddingLength = 0;
         byte[] rvCandidate = new byte[cypherText.length]; // TODO refine also remove pad bytes
 
-        byte[] previousBlock = iv;
+        byte[] previousBlock = IV;
         for (int i = 0; i < blocks.length; i++) {
             byte[] cypherBlock = blocks[i];
-            byte[] prePlainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, KEY);
+            byte[] prePlainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, key);
             byte[] plainBlock = Challenge2_XOR.fixedXOR(previousBlock, prePlainBlock);
             previousBlock = cypherBlock;
 
@@ -91,6 +91,10 @@ public class Challenge10_ImplementCBCmode {
     }
 
     public static byte[] encryptCBC(byte[] plainText, byte[] key) {
+        return encryptCBC(IV, plainText, key);
+    }
+
+    public static byte[] encryptCBC(byte[] iv, byte[] plainText, byte[] key) {
         int responseSize;
         if (plainText.length > Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
             responseSize = plainText.length + (plainText.length % Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
