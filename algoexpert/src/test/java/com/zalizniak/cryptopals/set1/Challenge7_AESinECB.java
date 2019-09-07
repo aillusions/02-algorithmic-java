@@ -1,6 +1,7 @@
 package com.zalizniak.cryptopals.set1;
 
 import com.zalizniak.Base64Test;
+import com.zalizniak.ByteArraysTest;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,25 +18,94 @@ public class Challenge7_AESinECB {
 
     public static final int AES_BLOCK_SIZE_BYTES = 16;
 
-    private static String KEY = "YELLOW SUBMARINE";
+    private static final String KEY_TEXT = "YELLOW SUBMARINE";
+    private static final byte[] KEY = KEY_TEXT.getBytes(StandardCharsets.UTF_8);
 
     @Test
     public void test1() {
-        byte[] key = KEY.getBytes(StandardCharsets.UTF_8);
         byte[] cypherText = Base64Test.decode(BASE64_TEXT);
-        System.out.println(new String(decryptECB(cypherText, key), StandardCharsets.UTF_8));
+        System.out.println(new String(decryptECB(cypherText, KEY), StandardCharsets.UTF_8));
+    }
 
-        // TODO fixme
-        // byte[] myCypherText = encryptECB("ABC-DEF".getBytes(StandardCharsets.UTF_8), key);
-        // byte[] myDecryptedText = decryptECB(myCypherText, key);
-        // Assert.assertEquals("ABC-DEF", new String(myDecryptedText, StandardCharsets.UTF_8));
+    @Test
+    public void test2() {
+        byte[] myCypherText = encryptECB("ABC-DEF".getBytes(StandardCharsets.UTF_8), KEY);
+        byte[] myDecryptedText = decryptECB(myCypherText, KEY);
+        Assert.assertEquals("ABC-DEF", new String(myDecryptedText, StandardCharsets.UTF_8));
+    }
+
+    public static byte[] decryptECB(byte[] cypherText, byte[] key) {
+        byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+
+        int paddingLength = 0;
+        byte[] rvCandidate = new byte[cypherText.length]; // TODO refine also remove pad bytes
+
+        for (int i = 0; i < blocks.length; i++) {
+            byte[] cypherBlock = blocks[i];
+            byte[] plainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, KEY);
+
+            System.arraycopy(plainBlock, 0, rvCandidate, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
+
+            if (i == blocks.length - 1) {
+                byte lastByte = plainBlock[Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - 1];
+                if (lastByte < Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
+                    boolean paddingDetected = false;
+                    int startFromIdx = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - 1;
+                    int endByIdx = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - lastByte;
+                    for (int j = startFromIdx; j >= endByIdx; j--) {
+                        if (plainBlock[j] != lastByte) {
+                            paddingDetected = false;
+                            break;
+                        } else {
+                            paddingDetected = true;
+                        }
+                    }
+                    if (paddingDetected) {
+                        paddingLength = lastByte;
+                    }
+                }
+            }
+        }
+
+        byte[] rv;
+        if (paddingLength > 0) {
+            rv = new byte[cypherText.length - paddingLength];
+            System.arraycopy(rvCandidate, 0, rv, 0, rv.length);
+        } else {
+            rv = rvCandidate;
+        }
+
+
+        return rv;
     }
 
     public static byte[] encryptECB(byte[] plainText, byte[] key) {
+        int responseSize;
+        if (plainText.length > Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
+            responseSize = plainText.length + (plainText.length % Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+        } else {
+            responseSize = Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES;
+        }
+
+        byte[] rv = new byte[responseSize];
+
+        byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
+
+        for (int i = 0; i < blocks.length; i++) {
+            byte[] block = blocks[i];
+            byte[] cypherBlock = Challenge7_AESinECB.encryptECBNoPad(block, key);
+
+            System.arraycopy(cypherBlock, 0, rv, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, block.length);
+        }
+
+        return rv;
+    }
+
+    public static byte[] encryptECBNoPad(byte[] plainText, byte[] key) {
         try {
-            SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
+            SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-            cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec);
 
             return cipher.doFinal(plainText);
         } catch (Exception ex) {
@@ -43,11 +113,11 @@ public class Challenge7_AESinECB {
         }
     }
 
-    public static byte[] decryptECB(byte[] encrypted, byte[] key) {
+    public static byte[] decryptECBNoPad(byte[] encrypted, byte[] key) {
         try {
-            SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
+            SecretKeySpec keySpec = new SecretKeySpec(key, "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+            cipher.init(Cipher.DECRYPT_MODE, keySpec);
 
             return cipher.doFinal(encrypted);
         } catch (Exception ex) {

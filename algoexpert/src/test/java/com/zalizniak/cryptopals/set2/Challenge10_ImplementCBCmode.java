@@ -44,7 +44,6 @@ public class Challenge10_ImplementCBCmode {
 
     public static byte[] decryptCBC(byte[] cypherText, byte[] key) {
         byte[][] blocks = ByteArraysTest.splitOnBlocks(cypherText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        // System.out.println(ByteArraysTest.printGrid(blocks));
 
         int paddingLength = 0;
         byte[] rvCandidate = new byte[cypherText.length]; // TODO refine also remove pad bytes
@@ -52,13 +51,12 @@ public class Challenge10_ImplementCBCmode {
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
             byte[] cypherBlock = blocks[i];
-            byte[] prePlainBlock = Challenge7_AESinECB.decryptECB(cypherBlock, KEY);
+            byte[] prePlainBlock = Challenge7_AESinECB.decryptECBNoPad(cypherBlock, KEY);
             byte[] plainBlock = Challenge2_XOR.fixedXOR(previousBlock, prePlainBlock);
             previousBlock = cypherBlock;
 
             System.arraycopy(plainBlock, 0, rvCandidate, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, plainBlock.length);
 
-            // detect padding length
             if (i == blocks.length - 1) {
                 byte lastByte = plainBlock[Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES - 1];
                 if (lastByte < Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES) {
@@ -103,14 +101,12 @@ public class Challenge10_ImplementCBCmode {
         byte[] rv = new byte[responseSize];
 
         byte[][] blocks = ByteArraysTest.splitOnBlocks(plainText, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
-        // System.out.println(ByteArraysTest.printGrid(blocks));
 
         byte[] previousBlock = iv;
         for (int i = 0; i < blocks.length; i++) {
             byte[] block = blocks[i];
-            //block = Challenge9_PKCS7padding.padBlock(block, Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES);
             block = Challenge2_XOR.fixedXOR(previousBlock, block);
-            byte[] cypherBlock = Challenge7_AESinECB.encryptECB(block, key);
+            byte[] cypherBlock = Challenge7_AESinECB.encryptECBNoPad(block, key);
             previousBlock = cypherBlock;
 
             System.arraycopy(cypherBlock, 0, rv, i * Challenge7_AESinECB.AES_BLOCK_SIZE_BYTES, block.length);
