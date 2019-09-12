@@ -23,7 +23,6 @@ public class BitwiseTest {
     }
 
 
-
     public static int editDistanceSlow(String str1, String str2) {
         String binaryString1 = convertToBinary(str1, Challenge6_BreakRepeatingKeyXOR.UTF_8);
         String binaryString2 = convertToBinary(str2, Challenge6_BreakRepeatingKeyXOR.UTF_8);
@@ -136,5 +135,40 @@ public class BitwiseTest {
                 .mapToObj(e -> Integer.toBinaryString(e ^ 255))
                 .map(e -> String.format("%1$" + Byte.SIZE + "s", e).replace(" ", "0"))
                 .collect(Collectors.joining(" "));
+    }
+
+    @Test
+    public void testNegative() {
+        for (int i = -10; i < 10; i++) {
+            System.out.println(i + " -> " + Integer.toBinaryString(i));
+        }
+    }
+
+    @Test
+    public void testOr() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("5 | " + i + " (" + Integer.toBinaryString(5) + " | " + Integer.toBinaryString(i) + ") -> " + (i | 5));
+        }
+    }
+
+    @Test
+    public void testAnd() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("5 & " + i + " (" + Integer.toBinaryString(5) + " & " + Integer.toBinaryString(i) + ") -> " + (i & 5));
+        }
+    }
+
+    @Test
+    public void testXor() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("5 ^ " + i + " (" + Integer.toBinaryString(5) + " ^ " + Integer.toBinaryString(i) + ") -> " + (i ^ 5));
+        }
+    }
+
+    @Test
+    public void testComplement() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("~" + i + " ( ~" + Integer.toBinaryString(i) + " -> " + Integer.toBinaryString(~i) + ") -> " + (~i));
+        }
     }
 }
